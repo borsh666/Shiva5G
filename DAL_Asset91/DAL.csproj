@@ -1,0 +1,2145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FB4697DB-8423-46BC-8C8B-82022B9266DA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.Web, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.Web.12.2.1100\lib\net40\Oracle.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ACTIVEATTRIB.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACTIVEELEMENTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACTIVEFLAGS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACTIVEOBJECTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACTIVEPOLYGONS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACTIVEWFS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADMINWEBVIEW.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AICAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AMCRECEIVERTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AMCTRANSMITPOWER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANTENNADEVICE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANTENNAPATTERN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANTENNAPORT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATTRIBUTETYPES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AUX_TABLESPACES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BACKTOBACKANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BAND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BCF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BCFTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BSICSCHEMA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CABIN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARLAYAICAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARLAYDATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARRIEDTRAFFICDETAIL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARRIEDTRAFFICTOTAL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARRIERAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARRIERFEED.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARRIERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CELLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CELLAYCARLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CELLAYDATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CELLEQUIPMENT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CELLEXCEPT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CHANNEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CIBER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CIOBJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CIOBJENTRY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CIXLAT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CLDANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPOUNDARRAYEXP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPOUNDARRAYTERM.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONFIGURATION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONTACTPERSON.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COORDSYS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COVCLASS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COVSCHEMA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COVTHRESH.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CWCELLTOSOURCEVECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAL.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAL.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBVERSION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFACTIVEATTRIB.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFACTIVEELEMENTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFACTIVEFLAGS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFACTIVEOBJECTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFACTIVEPOLYGONS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFACTIVEWFS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFANTENNADEVICE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFANTENNAPATTERN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFANTENNAPORT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFBACKTOBACKANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFBAND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFBCF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFBCFTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFBSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFBTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCABIN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCARLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCARLAYAICAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCARLAYDATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCARRIEDTRAFFICDETAIL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCARRIEDTRAFFICTOTAL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCARRIERAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCARRIERFEED.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCARRIERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCELLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCELLAYCARLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCELLAYDATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCELLEQUIPMENT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCELLEXCEPT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCHANNEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCIOBJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCIOBJENTRY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCLDANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFCWCELLTOSOURCEVECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFDISTRIBUTION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFFILTERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFFLAGVALUES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGENERICNBR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGENERICNBR_032014.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGENREPEATER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGENREPEATERFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGRIDCANDIDATES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGRIDCONFIG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGRIDCONFIGCELLS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGROUPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFGSMCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFHDRDLKPARAMS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFHEXAGONGRIDS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFIS95CARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINKAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINKATTACH.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINKENDANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINKENDFEED.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINKTERMEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINKTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINKUDH.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLINKUDPROF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGATTACHMENT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGCONNECTION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGCONNROUTE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGCONNRTHOP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGCONNTRAFFIC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGICALANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGICALOPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGIS95BSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGIS95CAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGIS95CLSITE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGIS95CLUSTER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGIS95FEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGIS95MSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGIS95SECCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGIS95SECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGLTECAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGLTECELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGLTECELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGLTECELLCARMBSFN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGLTEFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGMME.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGNETWORK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGNODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGNODEBTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGNODETRAFFIC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGPLMN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGRNC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGSAEGW.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGUMTSCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGUMTSCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGUMTSCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGUMTSFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIFICAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIFICELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIFICELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIFIFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIMAXCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIMAXCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIMAXCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIMAXFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIMAXMOBCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIMAXMOBCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIMAXMOBCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLOGWIMAXMOBFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLTECARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLTECARRIERMBSFN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLTEFRAMES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLTEFREQBANDS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLTEMUGLOOKUP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLTEMUGLOOKUPOVERRIDE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFLTEPREAMMAXCELLRANGE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFMASTHEADAMP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFMODULATIONTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFMSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFMULTIPATHCHANNELMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFMUNODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFMWANTENNATYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPATTERN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPATTERNGROUP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPHYANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPHYANTENNAPORT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPMPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPMPHUB.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPMPHUBLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPMPSECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPREDICTIONMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPRLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPRLLINK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPRLREF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFPTPLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFRADIOAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFRADIOEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFRADIOMASK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFREFLECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFREPEATER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFREPEATERCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFRULES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFSECTORANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFSITEADDRESS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFSPLITTER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFSPURLINK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFSPURREF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFSRVCELLBITPRIOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFSRVCELLPRIOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTERMMOBSPEED.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTERMTYCELLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTERMTYCLUTTER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTERMTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTERMTYPEPOINT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTERMTYPOLYGON.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTERMTYVECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGBITRATE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGCARRIERADJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGRESTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGSERVBIT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGSERVBITCARREINF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGSERVICE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGSERVICEMBSFN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGSHOG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTGTERMSERV.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFTOWER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFUMTSCODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFUMTSCODESCHEMA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFVHMASK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFWIFICARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFWIMAXCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFWIMAXCARRIERADJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFWIMAXMOBCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIFFWIMAXMOBCARRIERADJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DISTRIBUTION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ELS_ERRORLOG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENT_ACTIVELOGON_DATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENT_EVENTLOG_DATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENT_HOTFIXSCRIPT_DATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENVTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENVTYPECLUTTER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EQUIPSUPPLIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EXTERNALHTTPDATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FAXNUMBER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIELDSTABLE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FILTERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FLAGASSOCIATIONS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FLAGGROUPPERMISSIONS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FLAGGROUPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FLAGS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FLAGVALUES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FOLDERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FREQBAND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FREQCARRIERCONV.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FREQUENCYDIV.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GENERICNBR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GENERICNBR_032014.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GENREPEATER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GENREPEATERFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GRAPH.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GRAPHLIST.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GRIDCANDIDATES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GRIDCONFIG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GRIDCONFIGCELLS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GROUPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GSMCARATTENUATION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GSMCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HDRDLKPARAMS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HEXAGONGRIDS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HSDPARATE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDENTIFIERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDSEQUENCES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INTERFWEIGHTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INTF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INTFWEIGHTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IS95CARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKATTACH.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKENDANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKENDFEED.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKLOSVALUES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKTERMEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKUDH.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINKUDPROF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGATTACHMENT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGCONNECTION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGCONNECTION_AS32786.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGCONNROUTE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGCONNRTHOP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGCONNTRAFFIC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGICALANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGICALOPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIS95BSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIS95CAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIS95CLSITE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIS95CLUSTER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIS95FEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIS95MSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIS95SECCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIS95SECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGLTECAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGLTECELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGLTECELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGLTECELLCARMBSFN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGLTEFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGMME.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGNETWORK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGNODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGNODEBTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGNODETRAFFIC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGNODETYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGPLMN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGRNC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGSAEGW.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGUMTSCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGUMTSCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGUMTSCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGUMTSFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIFICAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIFICELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIFICELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIFIFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIMAXCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIMAXCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIMAXCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIMAXFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIMAXMOBCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIMAXMOBCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIMAXMOBCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGWIMAXMOBFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTECARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTECARRIERMBSFN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTECELLID.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTECELLIDSCHEMA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTEEICICABSPATTERN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTEFRAMES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTEFREQBANDS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTEMUGLOOKUP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTEMUGLOOKUPOVERRIDE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTEPREAMMAXCELLRANGE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTERACHRSICFG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTERSIINDICES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTERSISCHEMA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MAPNAMES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MASTHEADAMP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MIMOGAINLOOKUP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MODULATIONTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MULTIPATHCHANNELMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MUNODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWANTENNATYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NEIGHBOURLIMITS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NETTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PATTERN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PATTERNGROUP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PHONENUMBER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PHYANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PHYANTENNAPORT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PMPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PMPHUB.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PMPHUBLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PMPSECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PNINDEXSCHEMA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PREDICTIONMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRIORGROUPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRIORGROUPUSER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRIORUSER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRIORUSERLICCONFIG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRIORUSERPRIVEX.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRIORUSERPRIVEXTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRIORUSERRIGHTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRIORUSERTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRLLINK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRLREF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PROJECT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PROJECTREGION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PTPLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RADIOAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RADIOEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RADIOMASK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REFLECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REF_COLUMNS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REPEATER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REPEATERCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REPORTGRPPERMISSION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REPORTTEMPLATE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REPORTXSLT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RULES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RULETYPES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SCHEMAMANAGERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SCRIPTEVENTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SCRIPTSTORAGE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SECTORANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SHAREDLINKTEMPRANGE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SITEADDRESS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SITEADDRESS_GEOM.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPLITTER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPURLINK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPURREF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRVCELLBITPRIOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRVCELLPRIOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="STEV.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TERMMOBSPEED.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TERMTYCELLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TERMTYCLUTTER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TERMTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TERMTYPEPOINT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TERMTYPOLYGON.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TERMTYVECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGBITRATE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGCARRIERADJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGCLUTPATHLOSS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGRESTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGSERVBIT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGSERVBITCARREINF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGSERVICE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGSERVICEMBSFN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGSHOG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGTERMSERV.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TIMESLOTMAP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TOWER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMTSCODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMTSCODESCHEMA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_510_CARLAYDATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_510_CARRIERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_510_CLDANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_600_ANTENNAPATTERN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_600_MWMASK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_600_PROPCLUTTER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_600_PROPMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_ACTIVEATTRIB.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_ACTIVEELEMENTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_ACTIVEOBJECTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_BSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_CELLSITES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_CHANNEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_DISTRIBUTION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_FLAGASSOCIATIONS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_FLAGVALUES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_GENERICNBR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_GENREPEATER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_IDENTIFIERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LINK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGATTACHMENT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGCONNECTION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGIS95ANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGIS95BS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGIS95BSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGIS95FEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGIS95MSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGLMUMC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGNODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGNODEB.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGNODELMU.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGNODETRAFFIC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGNODETYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGRNC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGUMTSANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGUMTSCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_LOGUMTSFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_MIMOGAINLOOKUP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_MODULATIONTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_MSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_MWANTENNATYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_PMPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_PRIORGROUPSRM.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_PRIORGROUPUSERRM.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_PRIORUSERPRIVEX.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_PRIORUSERPRIVEXRM.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_PRIORUSERPRIVEXTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_PRIORUSERRIGHTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_PRIORUSERRM.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_RADIOEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_REPEATER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_SCRIPTEVENTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_SIMTRAF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_TERMTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_TGBITRATE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_620_TGCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_700_AMPSBTSROUTE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_700_CIOBJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_700_GENERICNBR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_700_GSMBTSROUTE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_700_RADIOEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_700_REPORTGRPPERMISSION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_700_REPORTXSLT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_700_TGSERVICE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_AMPSBTSROUTE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_ANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_ANTENNAPATTERN.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_BACKTOBACKANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_BSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_CARLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_CARRIERAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_CELLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_CELLSITES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_CIOBJENTRY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_COORDSYS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_COORD_TMP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_FLAGASSOCIATIONS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_FLAGGROUPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_FLAGS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_FLAGVALUES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_GENERICNBR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_GSMBTSROUTE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_GSMCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_IDENTIFIERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LINKAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LINKENDANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LOGCONNROUTE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LOGCONNRTHOP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LOGIS95ANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LOGLTEANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LOGNODETYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LOGUMTSANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LOGWIMAXANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_LOGWIMAXMOBANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_MSC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_PREDICTIONMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_PRIORGROUPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_PRIORUSERPRIVEXT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_PRIORUSERPRIVEXTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_PRIORUSERRIGHTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_PRIORUSERTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_PROJECTREGION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_RADIOAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_RADIOEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_REFLECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_SECTORANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_SITEADDRESS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_800_TERMTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_801_PREDICTIONMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_810_LINK_RENAME.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_810_LOGNODE_RENAME.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_810_PMPHUBLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_810_UMTSCODESCHEMA_RENAME.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_81_PMPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_81_PREDICTIONMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_81_PRIORGROUPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_81_PRIORUSER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_81_PTPLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_81_RADIOEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90005_LTEFREQBAND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90008_DIFFLTEFREQBAND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90008_LTEFREQBAND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_ANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_ANTENNAPORT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_CARRIERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_COVSCHEMA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_GENERICNBR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_GRIDCANDIDATES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_GRIDCONFIG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_GRIDCONFIGCELLS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_GROUPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_GSMBTSROUTE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGIS95ANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGIS95CAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGIS95FEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGIS95SECCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGLTEANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGLTECAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGLTECELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGNODETYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGUMTSANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGUMTSCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGUMTSCELLRATE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGUMTSFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIFIANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIFICAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIFICELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIMAXANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIMAXCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIMAXCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIMAXFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIMAXMOBANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIMAXMOBCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIMAXMOBCELLCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LOGWIMAXMOBFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_LTEFREQBANDS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_PMPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_PREDICTIONMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_PRIORUSER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_PRIORUSERLICCONFIG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_PRIORUSERRIGHTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_RADIOEQUIP.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_SRVCELLPRIOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_TERMRATE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_TERMTYCELLAY.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_TERMTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_90_TGSERVICE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_ACTIVEATTRIB.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_ACTIVEELEMENTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_ACTIVEFLAGS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_ACTIVEOBJECTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_ANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_BACKTOBACKANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_BCF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_CARRIEDTRAFFICTOTAL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_CARRIERAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_CELLSITES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_CLDANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_DELETED_CTT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_DUPLICATE_CTT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_EXTERNALHTTPDATA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_FLAGASSOCIATIONS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_FLAGVALUES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_GENREPEATER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_GENREPEATERFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_GRIDCONFIG.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_GRIDCONFIGCELLS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_GSMCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_IDENTIFIERS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LINK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LINKAMCTHRESHOLD.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LINKENDANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGATTACHMENT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGCONNECTION.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGICALOPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGIS95ANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGIS95BS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGIS95CAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGIS95CLSITE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGIS95FEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGIS95SECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGLTEANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGLTECAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGLTEFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGNODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGNODEB.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGNODETRAFFIC.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGNODETYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGUMTSANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGUMTSCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGUMTSFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIFIANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIFICAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIFIFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIMAXANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIMAXCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIMAXFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIMAXMOBANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIMAXMOBCAR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIMAXMOBFEEDER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIMAXMOBNODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LOGWIMAXNODE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_LTEFRAMES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_NEIGHBOURLIMITS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PMPCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PMPHUBLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PREDICTIONMODEL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PRIORGROUPS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PRIORUSER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PRIORUSERPRIVEX.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PRIORUSERPRIVEXTYPE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PRLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PROJECT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_PTPLINKEND.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_REFLECTOR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_REPEATERCELL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_RULES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_SCRIPTEVENTS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_SECTORANTENNA.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_SIMTRAF.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_91_WFSMAPPINGS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_ATTACHMENTS_521.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_HMASK_521.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_TGCLUTPATHLOSS_502.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UPG_VMASK_521.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USERLINKTEMPRANGE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VECATTR.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VECBOUNDS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VECFILE.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VECPROJECT.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VHMASK.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WFSMAPPINGS.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WFSSERVICES.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WIFICARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WIMAXCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WIMAXCARRIERADJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WIMAXMOBCARRIER.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WIMAXMOBCARRIERADJ.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="DAL.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DAL.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL.edmx.diagram">
+      <DependentUpon>DAL.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DAL.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DAL.edmx</DependentUpon>
+      <LastGenOutput>DAL.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DAL.edmx</DependentUpon>
+      <LastGenOutput>DAL.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

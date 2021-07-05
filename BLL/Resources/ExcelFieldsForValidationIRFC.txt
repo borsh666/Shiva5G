@@ -1,0 +1,20 @@
+Port occupancy
+900
+1800
+2100
+1800&2100
+Free
+N/A
+Telenor
+Mtel
+Telenor&Mtel
+15
+@
+Collocation party
+Telenor
+Mtel
+Telenor&Mtel
+Bulsatcom
+N/A
+15
+@

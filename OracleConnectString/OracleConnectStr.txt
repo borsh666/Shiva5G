@@ -1,0 +1,6 @@
+<add name="Entities" connectionString="metadata=res://*/DAL.csdl|res://*/DAL.ssdl|res://*/DAL.msl;provider=Oracle.ManagedDataAccess.Client;provider connection string='DATA SOURCE=entproddb.ad.btk.bg:1521/ENT91PR;PASSWORD=p123456;PERSIST SECURITY INFO=True;USER ID=&quot;STEFAN.VELINOV&quot;'" providerName="System.Data.EntityClient"/>
+
+
+ <add name="Entities" connectionString="metadata=res://*/DAL.csdl|res://*/DAL.ssdl|res://*/DAL.msl;provider=Oracle.ManagedDataAccess.Client;provider connection string='DATA SOURCE=10.55.141.75:1521/ENT91T;PASSWORD=p123456;PERSIST SECURITY INFO=True;USER ID=&quot;STEFAN.VELINOV&quot;'" providerName="System.Data.EntityClient" />
+  
+ 

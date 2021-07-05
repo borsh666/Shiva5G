@@ -1,0 +1,994 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HWIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="UCELLSETUP_SRAN">
+          <Key>
+            <PropertyRef Name="TIMESTAMP" />
+            <PropertyRef Name="BSCName" />
+            <PropertyRef Name="NodeBName" />
+            <PropertyRef Name="CellName" />
+            <PropertyRef Name="CellID" />
+            <PropertyRef Name="LocalCellID" />
+          </Key>
+          <Property Name="TIMESTAMP" Type="datetime" Nullable="false" />
+          <Property Name="BSCName" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="LogicalRNCID" Type="nchar" MaxLength="25" />
+          <Property Name="NodeBName" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="CellName" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="CellID" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="LocalCellID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DownlinkUARFCN" Type="varchar" MaxLength="55" />
+          <Property Name="DLPrimaryScramblingCode" Type="varchar" MaxLength="55" />
+          <Property Name="TimeOffset" Type="varchar" MaxLength="55" />
+          <Property Name="LocationAreaCode" Type="varchar" MaxLength="55" />
+          <Property Name="ServiceAreaCode" Type="varchar" MaxLength="55" />
+          <Property Name="RoutingAreaCode" Type="varchar" MaxLength="55" />
+          <Property Name="MaxTransmitPowerofCell" Type="varchar" MaxLength="55" />
+          <Property Name="PCPICHTransmitPower" Type="varchar" MaxLength="55" />
+          <Property Name="CellHSDPAstate" Type="varchar" MaxLength="55" />
+          <Property Name="CellHSUPAstate" Type="varchar" MaxLength="55" />
+          <Property Name="SubrackNo" Type="varchar" MaxLength="55" />
+          <Property Name="SlotNo" Type="varchar" MaxLength="55" />
+          <Property Name="SubsystemNo" Type="varchar" MaxLength="55" />
+          <Property Name="BandIndicator" Type="varchar" MaxLength="55" />
+          <Property Name="CnOperatorGroupIndex" Type="varchar" MaxLength="55" />
+          <Property Name="ULFrequencyInd" Type="varchar" MaxLength="55" />
+          <Property Name="UplinkUARFCN" Type="varchar" MaxLength="55" />
+          <Property Name="NumofContinuousinSyncInd" Type="varchar" MaxLength="55" />
+          <Property Name="NumofContinuousOutofSyncInd" Type="varchar" MaxLength="55" />
+          <Property Name="RadioLinkFailureTimerLength" Type="varchar" MaxLength="55" />
+          <Property Name="DLPowerControlMode1" Type="varchar" MaxLength="55" />
+          <Property Name="TXDiversityIndication" Type="varchar" MaxLength="55" />
+          <Property Name="ServicePriorityGroupIdentity" Type="varchar" MaxLength="55" />
+          <Property Name="NodeBName2" Type="varchar" MaxLength="55" />
+          <Property Name="RACConfigurationIndication" Type="varchar" MaxLength="55" />
+          <Property Name="STTDSupportIndicator" Type="varchar" MaxLength="55" />
+          <Property Name="CP1SupportIndicator" Type="varchar" MaxLength="55" />
+          <Property Name="ClosedLoopTimeAdjustMode" Type="varchar" MaxLength="55" />
+          <Property Name="DPCHTxDiversityModeforOtherUser" Type="varchar" MaxLength="55" />
+          <Property Name="FDPCHTxDiversityModeforOtherUser" Type="varchar" MaxLength="55" />
+          <Property Name="DPCHTxDiversityModeforMIMOUser" Type="varchar" MaxLength="55" />
+          <Property Name="FDPCHTxDiversityModeforMIMOUser" Type="varchar" MaxLength="55" />
+          <Property Name="TxDiversityModeforDC_HSDPAUser" Type="varchar" MaxLength="55" />
+          <Property Name="CellOrientedCellIndividualOffset" Type="varchar" MaxLength="55" />
+          <Property Name="CellVPLimitIndicator" Type="varchar" MaxLength="55" />
+          <Property Name="DSSCellFlag" Type="varchar" MaxLength="55" />
+          <Property Name="MaximumTXPowerinSmallDSSCoverage" Type="varchar" MaxLength="55" />
+          <Property Name="CommonChannelBandwidthOperatorIndex" Type="varchar" MaxLength="55" />
+          <Property Name="HierarchyIDofTerminalType" Type="varchar" MaxLength="55" />
+          <Property Name="HeterogeneousCellFlag" Type="varchar" MaxLength="55" />
+          <Property Name="SelfPlanningFlag" Type="varchar" MaxLength="55" />
+          <Property Name="Remark" Type="varchar" MaxLength="55" />
+          <Property Name="Validationindication" Type="varchar" MaxLength="55" />
+          <Property Name="Celladministrativestate" Type="varchar" MaxLength="55" />
+          <Property Name="MrSwitch" Type="varchar" MaxLength="55" />
+          <Property Name="URAID" Type="varchar" MaxLength="55" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HWI.CM2G.GBTS_power' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GBTS_power">
+          <Key>
+            <PropertyRef Name="timestamp" />
+          </Key>
+          <Property Name="timestamp" Type="datetime" Nullable="false" />
+          <Property Name="BSC_Name" Type="varchar" MaxLength="255" />
+          <Property Name="BTS_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_CI" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Index" Type="varchar" MaxLength="255" />
+          <Property Name="TRX_Group_ID" Type="varchar" MaxLength="255" />
+          <Property Name="TRX_ID" Type="varchar" MaxLength="255" />
+          <Property Name="Power_Level" Type="varchar" MaxLength="255" />
+          <Property Name="GBTS_Power_Type_w" Type="varchar" MaxLength="255" />
+          <Property Name="eGBTS_Power_Type_01dBm" Type="varchar" MaxLength="255" />
+          <Property Name="TRX_Priority" Type="varchar" MaxLength="255" />
+          <Property Name="Administrative_State" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="GTRX_Info">
+          <Key>
+            <PropertyRef Name="timestamp" />
+            <PropertyRef Name="BSC_Name" />
+            <PropertyRef Name="BTS_Index" />
+            <PropertyRef Name="BTS_Name" />
+            <PropertyRef Name="Cell_ID" />
+            <PropertyRef Name="Cell_Name" />
+            <PropertyRef Name="TRX_ID" />
+            <PropertyRef Name="TRX_No" />
+            <PropertyRef Name="TRX_Group_ID" />
+            <PropertyRef Name="Location_area_code" />
+          </Key>
+          <Property Name="timestamp" Type="datetime" Nullable="false" />
+          <Property Name="BSC_Name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="BTS_Index" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="BTS_Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cell_ID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Cell_Name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TRX_ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="TRX_No" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="TRX_Group_ID" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Mobile_network_code" Type="varchar" MaxLength="255" />
+          <Property Name="Mobile_country_code" Type="varchar" MaxLength="255" />
+          <Property Name="Location_area_code" Type="int" Nullable="false" />
+          <Property Name="Cell_CI" Type="varchar" MaxLength="255" />
+          <Property Name="Frequency" Type="varchar" MaxLength="255" />
+          <Property Name="Is_Main_BCCH_TRX" Type="varchar" MaxLength="255" />
+          <Property Name="Active_Status" Type="varchar" MaxLength="255" />
+          <Property Name="Cabinet_No" Type="varchar" MaxLength="255" />
+          <Property Name="Subrack_No" Type="varchar" MaxLength="255" />
+          <Property Name="Slot_No" Type="varchar" MaxLength="255" />
+          <Property Name="Board_type" Type="varchar" MaxLength="255" />
+          <Property Name="RXU_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Product_Number" Type="varchar" MaxLength="255" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Power_Level" Type="varchar" MaxLength="255" />
+          <Property Name="Power_Type" Type="varchar" MaxLength="255" />
+          <Property Name="Receive_Mode" Type="varchar" MaxLength="255" />
+          <Property Name="Send_Mode" Type="varchar" MaxLength="255" />
+          <Property Name="Hop_Type" Type="varchar" MaxLength="255" />
+          <Property Name="Shut_Down_Enabled" Type="varchar" MaxLength="255" />
+          <Property Name="TCH_Rate_Adjust_Allow" Type="varchar" MaxLength="255" />
+          <Property Name="BTS_Type" Type="varchar" MaxLength="255" />
+          <Property Name="Separate_Mode" Type="varchar" MaxLength="255" />
+          <Property Name="Antenna_Pass_No" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LCELL">
+          <Key>
+            <PropertyRef Name="timestamp" />
+            <PropertyRef Name="NE_Name" />
+            <PropertyRef Name="Local_Cell_ID" />
+            <PropertyRef Name="Cell_Name" />
+          </Key>
+          <Property Name="timestamp" Type="datetime" Nullable="false" />
+          <Property Name="NE_Name" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="Local_Cell_ID" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cell_Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Csg_indicator" Type="varchar" MaxLength="255" />
+          <Property Name="Uplink_cyclic_prefix_length" Type="varchar" MaxLength="255" />
+          <Property Name="Downlink_cyclic_prefix_length" Type="varchar" MaxLength="255" />
+          <Property Name="Frequency_band" Type="varchar" MaxLength="255" />
+          <Property Name="Uplink_EARFCN_indication" Type="varchar" MaxLength="255" />
+          <Property Name="Uplink_EARFCN" Type="varchar" MaxLength="255" />
+          <Property Name="Downlink_EARFCN" Type="varchar" MaxLength="255" />
+          <Property Name="Uplink_bandwidth" Type="varchar" MaxLength="255" />
+          <Property Name="Downlink_bandwidth" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_ID" Type="varchar" MaxLength="255" />
+          <Property Name="Physical_cell_ID" Type="varchar" MaxLength="255" />
+          <Property Name="Additional_spectrum_emission" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_active_state" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_admin_state" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_middle_block_timer_min" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_FDD_TDD_indication" Type="varchar" MaxLength="255" />
+          <Property Name="Subframe_assignment" Type="varchar" MaxLength="255" />
+          <Property Name="Special_subframe_patterns" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_specific_offset_dB" Type="varchar" MaxLength="255" />
+          <Property Name="Frequency_offset_dB" Type="varchar" MaxLength="255" />
+          <Property Name="Root_sequence_index" Type="varchar" MaxLength="255" />
+          <Property Name="High_speed_flag" Type="varchar" MaxLength="255" />
+          <Property Name="Preamble_format" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_radius_m" Type="varchar" MaxLength="255" />
+          <Property Name="Customized_bandwidth_configure_indicator" Type="varchar" MaxLength="255" />
+          <Property Name="Customized_uplink_bandwidth_01MHz" Type="varchar" MaxLength="255" />
+          <Property Name="Customized_downlink_bandwidth_01MHz" Type="varchar" MaxLength="255" />
+          <Property Name="Emergency_Area_Id_indicator" Type="varchar" MaxLength="255" />
+          <Property Name="Emergency_Area_ID" Type="varchar" MaxLength="255" />
+          <Property Name="Ue_max_power_allowed_configure_indicator" Type="varchar" MaxLength="255" />
+          <Property Name="Max_transmit_power_allowed_dBm" Type="varchar" MaxLength="255" />
+          <Property Name="Flag_of_Multi_RRU_Cell" Type="varchar" MaxLength="255" />
+          <Property Name="Mode_of_Multi_RRU_Cell" Type="varchar" MaxLength="255" />
+          <Property Name="CPRI_Compression" Type="varchar" MaxLength="255" />
+          <Property Name="Physical_Cell_Number_of_SFN_Cell" Type="varchar" MaxLength="255" />
+          <Property Name="Air_Cell_Flag" Type="varchar" MaxLength="255" />
+          <Property Name="CRS_Port_Number" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_transmission_and_reception_mode" Type="varchar" MaxLength="255" />
+          <Property Name="User_label" Type="varchar" MaxLength="255" />
+          <Property Name="Work_mode" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Standby_Mode" Type="varchar" MaxLength="255" />
+          <Property Name="CRS_Antenna_Port_Mapping" Type="varchar" MaxLength="255" />
+          <Property Name="CPRI_Ethernet_Compression_Ratio" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Slave_Band" Type="varchar" MaxLength="255" />
+          <Property Name="CN_Operator_Sharing_Group_ID" Type="varchar" MaxLength="255" />
+          <Property Name="CSI_Reference_Signals_Period" Type="varchar" MaxLength="255" />
+          <Property Name="Intra_Frequency_RAN_Sharing_Indication" Type="varchar" MaxLength="255" />
+          <Property Name="IntraFreq_ANR_Indication" Type="varchar" MaxLength="255" />
+          <Property Name="SSP6_DwPTS_Mode" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Scale_Indication" Type="varchar" MaxLength="255" />
+          <Property Name="ANR_Frequency_Priority" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Radius_Start_Location_m" Type="varchar" MaxLength="255" />
+          <Property Name="Reference_signal_power_01dBm" Type="varchar" MaxLength="255" />
+          <Property Name="PB" Type="varchar" MaxLength="255" />
+          <Property Name="PA_for_even_power_distribution_dB" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_reselection_priority" Type="varchar" MaxLength="255" />
+          <Property Name="Local_tracking_area_ID" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HWI.CM5G.MNSD_5G_Dump' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MNSD_5G_Dump">
+          <Key>
+            <PropertyRef Name="timestamp" />
+            <PropertyRef Name="NE_Name" />
+            <PropertyRef Name="NR_DU_Cell_ID" />
+          </Key>
+          <Property Name="timestamp" Type="datetime" Nullable="false" />
+          <Property Name="NE_Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="NR_DU_Cell_ID" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="NR_DU_Cell_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Duplex_Mode" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_ID" Type="varchar" MaxLength="255" />
+          <Property Name="Physical_Cell_ID" Type="varchar" MaxLength="255" />
+          <Property Name="Frequency_Band" Type="varchar" MaxLength="255" />
+          <Property Name="Uplink_NARFCN" Type="varchar" MaxLength="255" />
+          <Property Name="Downlink_NARFCN" Type="varchar" MaxLength="255" />
+          <Property Name="Uplink_Bandwidth" Type="varchar" MaxLength="255" />
+          <Property Name="Downlink_Bandwidth" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Radius_m" Type="varchar" MaxLength="255" />
+          <Property Name="Subcarrier_Spacing_KHz" Type="varchar" MaxLength="255" />
+          <Property Name="Cyclic_Prefix_Length" Type="varchar" MaxLength="255" />
+          <Property Name="Slot_Assignment" Type="varchar" MaxLength="255" />
+          <Property Name="Slot_Structure" Type="varchar" MaxLength="255" />
+          <Property Name="RAN_Notification_Area_ID" Type="varchar" MaxLength="255" />
+          <Property Name="LampSite_Cell_Flag" Type="varchar" MaxLength="255" />
+          <Property Name="Tracking_Area_ID" Type="varchar" MaxLength="255" />
+          <Property Name="TA_Offset" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Administration_State" Type="varchar" MaxLength="255" />
+          <Property Name="SSB_Frequency_Position_Describe_Method" Type="varchar" MaxLength="255" />
+          <Property Name="SSB_Frequency_Position" Type="varchar" MaxLength="255" />
+          <Property Name="SSB_Period_ms" Type="varchar" MaxLength="255" />
+          <Property Name="SIB1_Period_ms" Type="varchar" MaxLength="255" />
+          <Property Name="Logical_Root_Sequence_Index" Type="varchar" MaxLength="255" />
+          <Property Name="PRACH_Frequency_Start_Position" Type="varchar" MaxLength="255" />
+          <Property Name="NR_DU_Cell_TRP_ID" Type="varchar" MaxLength="255" />
+          <Property Name="NR_DU_Cell_ID2" Type="varchar" MaxLength="255" />
+          <Property Name="Transmit_and_Receive_Mode" Type="varchar" MaxLength="255" />
+          <Property Name="Baseband_Equipment_ID" Type="varchar" MaxLength="255" />
+          <Property Name="Max_Transmit_Power_0_1dBm" Type="varchar" MaxLength="255" />
+          <Property Name="CPRI_Compression" Type="varchar" MaxLength="255" />
+          <Property Name="Baseband_Resource_Mutual_Aid_Switch" Type="varchar" MaxLength="255" />
+          <Property Name="Branch_CPRI_Compression" Type="varchar" MaxLength="255" />
+          <Property Name="NR_DU_Cell_TRP_ID2" Type="varchar" MaxLength="255" />
+          <Property Name="Coverage_Scenario" Type="varchar" MaxLength="255" />
+          <Property Name="Tilt_degree" Type="varchar" MaxLength="255" />
+          <Property Name="Azimuth_degree" Type="varchar" MaxLength="255" />
+          <Property Name="Max_SSB_Power_Offset_dB" Type="varchar" MaxLength="255" />
+          <Property Name="Scenario_Beam_Algorithm_Switch" Type="varchar" MaxLength="255" />
+          <Property Name="Cell_Activate_State" Type="varchar" MaxLength="255" />
+          <Property Name="Tracking_Area_Code" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HWI.CMSR.RRUsPerNodes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RRUsPerNodes">
+          <Key>
+            <PropertyRef Name="TIMESTAMP" />
+          </Key>
+          <Property Name="TIMESTAMP" Type="datetime" Nullable="false" />
+          <Property Name="SITE" Type="nvarchar" MaxLength="25" />
+          <Property Name="LocalCellId" Type="int" />
+          <Property Name="CellName" Type="int" />
+          <Property Name="RRU_type" Type="nvarchar" MaxLength="25" />
+          <Property Name="RRU_Serial_Number" Type="nvarchar" MaxLength="55" />
+          <Property Name="TECH" Type="nvarchar" MaxLength="55" />
+          <Property Name="BAND" Type="int" />
+          <Property Name="subrack" Type="int" />
+          <Property Name="Manufacturer_Data" Type="nvarchar" MaxLength="1024" />
+          <Property Name="j_tech" Type="nvarchar" MaxLength="55" />
+          <Property Name="j_band" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HWI.CMSR.RRUsPerNodes_5G_included' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RRUsPerNodes_5G_included">
+          <Key>
+            <PropertyRef Name="TIMESTAMP" />
+          </Key>
+          <Property Name="TIMESTAMP" Type="datetime" Nullable="false" />
+          <Property Name="SITE" Type="nvarchar" MaxLength="25" />
+          <Property Name="LocalCellId" Type="nvarchar" MaxLength="25" />
+          <Property Name="CellName" Type="nvarchar" MaxLength="25" />
+          <Property Name="RRU_type" Type="nvarchar" MaxLength="25" />
+          <Property Name="RRU_Serial_Number" Type="nvarchar" MaxLength="55" />
+          <Property Name="TECH" Type="nvarchar" MaxLength="55" />
+          <Property Name="BAND" Type="nvarchar" MaxLength="25" />
+          <Property Name="subrack" Type="nvarchar" MaxLength="25" />
+          <Property Name="Manufacturer_Data" Type="nvarchar" MaxLength="1024" />
+          <Property Name="j_tech" Type="nvarchar" MaxLength="55" />
+          <Property Name="j_band" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityContainer Name="HWIModelStoreContainer">
+          <EntitySet Name="UCELLSETUP_SRAN" EntityType="Self.UCELLSETUP_SRAN" Schema="CM" store:Type="Tables" />
+          <EntitySet Name="GTRX_Info" EntityType="Self.GTRX_Info" Schema="CM2G" store:Type="Tables" />
+          <EntitySet Name="LCELL" EntityType="Self.LCELL" Schema="CM4G" store:Type="Tables" />
+          <EntitySet Name="GBTS_power" EntityType="Self.GBTS_power" store:Type="Tables" store:Schema="CM2G">
+            <DefiningQuery>SELECT 
+    [GBTS_power].[timestamp] AS [timestamp], 
+    [GBTS_power].[BSC_Name] AS [BSC_Name], 
+    [GBTS_power].[BTS_Name] AS [BTS_Name], 
+    [GBTS_power].[Cell_Name] AS [Cell_Name], 
+    [GBTS_power].[Cell_CI] AS [Cell_CI], 
+    [GBTS_power].[Cell_Index] AS [Cell_Index], 
+    [GBTS_power].[TRX_Group_ID] AS [TRX_Group_ID], 
+    [GBTS_power].[TRX_ID] AS [TRX_ID], 
+    [GBTS_power].[Power_Level] AS [Power_Level], 
+    [GBTS_power].[GBTS_Power_Type_w] AS [GBTS_Power_Type_w], 
+    [GBTS_power].[eGBTS_Power_Type_01dBm] AS [eGBTS_Power_Type_01dBm], 
+    [GBTS_power].[TRX_Priority] AS [TRX_Priority], 
+    [GBTS_power].[Administrative_State] AS [Administrative_State]
+    FROM [CM2G].[GBTS_power] AS [GBTS_power]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MNSD_5G_Dump" EntityType="Self.MNSD_5G_Dump" store:Type="Tables" store:Schema="CM5G">
+            <DefiningQuery>SELECT 
+    [MNSD_5G_Dump].[timestamp] AS [timestamp], 
+    [MNSD_5G_Dump].[NE_Name] AS [NE_Name], 
+    [MNSD_5G_Dump].[NR_DU_Cell_ID] AS [NR_DU_Cell_ID], 
+    [MNSD_5G_Dump].[NR_DU_Cell_Name] AS [NR_DU_Cell_Name], 
+    [MNSD_5G_Dump].[Duplex_Mode] AS [Duplex_Mode], 
+    [MNSD_5G_Dump].[Cell_ID] AS [Cell_ID], 
+    [MNSD_5G_Dump].[Physical_Cell_ID] AS [Physical_Cell_ID], 
+    [MNSD_5G_Dump].[Frequency_Band] AS [Frequency_Band], 
+    [MNSD_5G_Dump].[Uplink_NARFCN] AS [Uplink_NARFCN], 
+    [MNSD_5G_Dump].[Downlink_NARFCN] AS [Downlink_NARFCN], 
+    [MNSD_5G_Dump].[Uplink_Bandwidth] AS [Uplink_Bandwidth], 
+    [MNSD_5G_Dump].[Downlink_Bandwidth] AS [Downlink_Bandwidth], 
+    [MNSD_5G_Dump].[Cell_Radius_m] AS [Cell_Radius_m], 
+    [MNSD_5G_Dump].[Subcarrier_Spacing_KHz] AS [Subcarrier_Spacing_KHz], 
+    [MNSD_5G_Dump].[Cyclic_Prefix_Length] AS [Cyclic_Prefix_Length], 
+    [MNSD_5G_Dump].[Slot_Assignment] AS [Slot_Assignment], 
+    [MNSD_5G_Dump].[Slot_Structure] AS [Slot_Structure], 
+    [MNSD_5G_Dump].[RAN_Notification_Area_ID] AS [RAN_Notification_Area_ID], 
+    [MNSD_5G_Dump].[LampSite_Cell_Flag] AS [LampSite_Cell_Flag], 
+    [MNSD_5G_Dump].[Tracking_Area_ID] AS [Tracking_Area_ID], 
+    [MNSD_5G_Dump].[TA_Offset] AS [TA_Offset], 
+    [MNSD_5G_Dump].[Cell_Administration_State] AS [Cell_Administration_State], 
+    [MNSD_5G_Dump].[SSB_Frequency_Position_Describe_Method] AS [SSB_Frequency_Position_Describe_Method], 
+    [MNSD_5G_Dump].[SSB_Frequency_Position] AS [SSB_Frequency_Position], 
+    [MNSD_5G_Dump].[SSB_Period_ms] AS [SSB_Period_ms], 
+    [MNSD_5G_Dump].[SIB1_Period_ms] AS [SIB1_Period_ms], 
+    [MNSD_5G_Dump].[Logical_Root_Sequence_Index] AS [Logical_Root_Sequence_Index], 
+    [MNSD_5G_Dump].[PRACH_Frequency_Start_Position] AS [PRACH_Frequency_Start_Position], 
+    [MNSD_5G_Dump].[NR_DU_Cell_TRP_ID] AS [NR_DU_Cell_TRP_ID], 
+    [MNSD_5G_Dump].[NR_DU_Cell_ID2] AS [NR_DU_Cell_ID2], 
+    [MNSD_5G_Dump].[Transmit_and_Receive_Mode] AS [Transmit_and_Receive_Mode], 
+    [MNSD_5G_Dump].[Baseband_Equipment_ID] AS [Baseband_Equipment_ID], 
+    [MNSD_5G_Dump].[Max_Transmit_Power_0_1dBm] AS [Max_Transmit_Power_0_1dBm], 
+    [MNSD_5G_Dump].[CPRI_Compression] AS [CPRI_Compression], 
+    [MNSD_5G_Dump].[Baseband_Resource_Mutual_Aid_Switch] AS [Baseband_Resource_Mutual_Aid_Switch], 
+    [MNSD_5G_Dump].[Branch_CPRI_Compression] AS [Branch_CPRI_Compression], 
+    [MNSD_5G_Dump].[NR_DU_Cell_TRP_ID2] AS [NR_DU_Cell_TRP_ID2], 
+    [MNSD_5G_Dump].[Coverage_Scenario] AS [Coverage_Scenario], 
+    [MNSD_5G_Dump].[Tilt_degree] AS [Tilt_degree], 
+    [MNSD_5G_Dump].[Azimuth_degree] AS [Azimuth_degree], 
+    [MNSD_5G_Dump].[Max_SSB_Power_Offset_dB] AS [Max_SSB_Power_Offset_dB], 
+    [MNSD_5G_Dump].[Scenario_Beam_Algorithm_Switch] AS [Scenario_Beam_Algorithm_Switch], 
+    [MNSD_5G_Dump].[Cell_Activate_State] AS [Cell_Activate_State], 
+    [MNSD_5G_Dump].[Tracking_Area_Code] AS [Tracking_Area_Code]
+    FROM [CM5G].[MNSD_5G_Dump] AS [MNSD_5G_Dump]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RRUsPerNodes" EntityType="Self.RRUsPerNodes" store:Type="Tables" store:Schema="CMSR">
+            <DefiningQuery>SELECT 
+    [RRUsPerNodes].[TIMESTAMP] AS [TIMESTAMP], 
+    [RRUsPerNodes].[SITE] AS [SITE], 
+    [RRUsPerNodes].[LocalCellId] AS [LocalCellId], 
+    [RRUsPerNodes].[CellName] AS [CellName], 
+    [RRUsPerNodes].[RRU_type] AS [RRU_type], 
+    [RRUsPerNodes].[RRU_Serial_Number] AS [RRU_Serial_Number], 
+    [RRUsPerNodes].[TECH] AS [TECH], 
+    [RRUsPerNodes].[BAND] AS [BAND], 
+    [RRUsPerNodes].[subrack] AS [subrack], 
+    [RRUsPerNodes].[Manufacturer_Data] AS [Manufacturer_Data], 
+    [RRUsPerNodes].[j_tech] AS [j_tech], 
+    [RRUsPerNodes].[j_band] AS [j_band]
+    FROM [CMSR].[RRUsPerNodes] AS [RRUsPerNodes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RRUsPerNodes_5G_included" EntityType="Self.RRUsPerNodes_5G_included" store:Type="Tables" store:Schema="CMSR">
+            <DefiningQuery>SELECT 
+    [RRUsPerNodes_5G_included].[TIMESTAMP] AS [TIMESTAMP], 
+    [RRUsPerNodes_5G_included].[SITE] AS [SITE], 
+    [RRUsPerNodes_5G_included].[LocalCellId] AS [LocalCellId], 
+    [RRUsPerNodes_5G_included].[CellName] AS [CellName], 
+    [RRUsPerNodes_5G_included].[RRU_type] AS [RRU_type], 
+    [RRUsPerNodes_5G_included].[RRU_Serial_Number] AS [RRU_Serial_Number], 
+    [RRUsPerNodes_5G_included].[TECH] AS [TECH], 
+    [RRUsPerNodes_5G_included].[BAND] AS [BAND], 
+    [RRUsPerNodes_5G_included].[subrack] AS [subrack], 
+    [RRUsPerNodes_5G_included].[Manufacturer_Data] AS [Manufacturer_Data], 
+    [RRUsPerNodes_5G_included].[j_tech] AS [j_tech], 
+    [RRUsPerNodes_5G_included].[j_band] AS [j_band]
+    FROM [CMSR].[RRUsPerNodes_5G_included] AS [RRUsPerNodes_5G_included]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HWIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UCELLSETUP_SRAN">
+          <Key>
+            <PropertyRef Name="TIMESTAMP" />
+            <PropertyRef Name="BSCName" />
+            <PropertyRef Name="NodeBName" />
+            <PropertyRef Name="CellName" />
+            <PropertyRef Name="CellID" />
+            <PropertyRef Name="LocalCellID" />
+          </Key>
+          <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BSCName" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LogicalRNCID" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="NodeBName" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CellName" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CellID" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocalCellID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DownlinkUARFCN" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="DLPrimaryScramblingCode" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="TimeOffset" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="LocationAreaCode" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceAreaCode" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="RoutingAreaCode" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="MaxTransmitPowerofCell" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="PCPICHTransmitPower" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="CellHSDPAstate" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="CellHSUPAstate" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="SubrackNo" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="SlotNo" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="SubsystemNo" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="BandIndicator" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="CnOperatorGroupIndex" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="ULFrequencyInd" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="UplinkUARFCN" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="NumofContinuousinSyncInd" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="NumofContinuousOutofSyncInd" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="RadioLinkFailureTimerLength" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="DLPowerControlMode1" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="TXDiversityIndication" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="ServicePriorityGroupIdentity" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="NodeBName2" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="RACConfigurationIndication" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="STTDSupportIndicator" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="CP1SupportIndicator" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="ClosedLoopTimeAdjustMode" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="DPCHTxDiversityModeforOtherUser" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="FDPCHTxDiversityModeforOtherUser" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="DPCHTxDiversityModeforMIMOUser" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="FDPCHTxDiversityModeforMIMOUser" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="TxDiversityModeforDC_HSDPAUser" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="CellOrientedCellIndividualOffset" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="CellVPLimitIndicator" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="DSSCellFlag" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="MaximumTXPowerinSmallDSSCoverage" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="CommonChannelBandwidthOperatorIndex" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="HierarchyIDofTerminalType" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="HeterogeneousCellFlag" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="SelfPlanningFlag" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="Validationindication" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="Celladministrativestate" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="MrSwitch" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="URAID" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LCELL">
+          <Key>
+            <PropertyRef Name="timestamp" />
+            <PropertyRef Name="NE_Name" />
+            <PropertyRef Name="Local_Cell_ID" />
+            <PropertyRef Name="Cell_Name" />
+          </Key>
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NE_Name" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Local_Cell_ID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cell_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Csg_indicator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Uplink_cyclic_prefix_length" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Downlink_cyclic_prefix_length" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Frequency_band" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Uplink_EARFCN_indication" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Uplink_EARFCN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Downlink_EARFCN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Uplink_bandwidth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Downlink_bandwidth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Physical_cell_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Additional_spectrum_emission" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_active_state" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_admin_state" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_middle_block_timer_min" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_FDD_TDD_indication" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subframe_assignment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Special_subframe_patterns" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_specific_offset_dB" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Frequency_offset_dB" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Root_sequence_index" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="High_speed_flag" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Preamble_format" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_radius_m" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Customized_bandwidth_configure_indicator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Customized_uplink_bandwidth_01MHz" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Customized_downlink_bandwidth_01MHz" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Emergency_Area_Id_indicator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Emergency_Area_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Ue_max_power_allowed_configure_indicator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Max_transmit_power_allowed_dBm" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Flag_of_Multi_RRU_Cell" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Mode_of_Multi_RRU_Cell" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CPRI_Compression" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Physical_Cell_Number_of_SFN_Cell" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Air_Cell_Flag" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CRS_Port_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_transmission_and_reception_mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="User_label" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Work_mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Standby_Mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CRS_Antenna_Port_Mapping" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CPRI_Ethernet_Compression_Ratio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Slave_Band" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CN_Operator_Sharing_Group_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CSI_Reference_Signals_Period" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Intra_Frequency_RAN_Sharing_Indication" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IntraFreq_ANR_Indication" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SSP6_DwPTS_Mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Scale_Indication" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ANR_Frequency_Priority" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Radius_Start_Location_m" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Reference_signal_power_01dBm" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PB" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PA_for_even_power_distribution_dB" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_reselection_priority" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Local_tracking_area_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GBTS_power">
+          <Key>
+            <PropertyRef Name="timestamp" />
+          </Key>
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BSC_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BTS_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_CI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Index" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TRX_Group_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TRX_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Power_Level" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GBTS_Power_Type_w" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="eGBTS_Power_Type_01dBm" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TRX_Priority" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Administrative_State" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RRUsPerNode">
+          <Key>
+            <PropertyRef Name="TIMESTAMP" />
+          </Key>
+          <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SITE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LocalCellId" Type="Int32" />
+          <Property Name="CellName" Type="Int32" />
+          <Property Name="RRU_type" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RRU_Serial_Number" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="TECH" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="BAND" Type="Int32" />
+          <Property Name="subrack" Type="Int32" />
+          <Property Name="Manufacturer_Data" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="j_tech" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="j_band" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RRUsPerNodes_5G_included">
+          <Key>
+            <PropertyRef Name="TIMESTAMP" />
+          </Key>
+          <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SITE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LocalCellId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CellName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RRU_type" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RRU_Serial_Number" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="TECH" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="BAND" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="subrack" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer_Data" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="j_tech" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="j_band" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="HWI_DB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UCELLSETUP_SRAN" EntityType="Self.UCELLSETUP_SRAN" />
+          <EntitySet Name="LCELLs" EntityType="Self.LCELL" />
+          <EntitySet Name="GBTS_power" EntityType="Self.GBTS_power" />
+          <EntitySet Name="RRUsPerNodes" EntityType="Self.RRUsPerNode" />
+          <EntitySet Name="RRUsPerNodes_5G_included" EntityType="Self.RRUsPerNodes_5G_included" />
+          <EntitySet Name="GTRX_Info" EntityType="HWIModel.GTRX_Info" />
+          <EntitySet Name="MNSD_5G_Dump" EntityType="HWIModel.MNSD_5G_Dump" />
+        </EntityContainer>
+        <EntityType Name="GTRX_Info">
+          <Key>
+            <PropertyRef Name="timestamp" />
+            <PropertyRef Name="BSC_Name" />
+            <PropertyRef Name="BTS_Index" />
+            <PropertyRef Name="BTS_Name" />
+            <PropertyRef Name="Cell_ID" />
+            <PropertyRef Name="Cell_Name" />
+            <PropertyRef Name="TRX_ID" />
+            <PropertyRef Name="TRX_No" />
+            <PropertyRef Name="TRX_Group_ID" />
+            <PropertyRef Name="Location_area_code" />
+          </Key>
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BSC_Name" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BTS_Index" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BTS_Name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Name" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TRX_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TRX_No" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TRX_Group_ID" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile_network_code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile_country_code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Location_area_code" Type="Int32" Nullable="false" />
+          <Property Name="Cell_CI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Frequency" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Main_BCCH_TRX" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Active_Status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cabinet_No" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subrack_No" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Slot_No" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Board_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RXU_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Product_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Power_Level" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Power_Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Receive_Mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Send_Mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Hop_Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Shut_Down_Enabled" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TCH_Rate_Adjust_Allow" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BTS_Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Separate_Mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Antenna_Pass_No" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MNSD_5G_Dump">
+          <Key>
+            <PropertyRef Name="timestamp" />
+            <PropertyRef Name="NE_Name" />
+            <PropertyRef Name="NR_DU_Cell_ID" />
+          </Key>
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NE_Name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="NR_DU_Cell_ID" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="NR_DU_Cell_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Duplex_Mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Physical_Cell_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Frequency_Band" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Uplink_NARFCN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Downlink_NARFCN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Uplink_Bandwidth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Downlink_Bandwidth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Radius_m" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subcarrier_Spacing_KHz" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cyclic_Prefix_Length" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Slot_Assignment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Slot_Structure" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RAN_Notification_Area_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LampSite_Cell_Flag" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tracking_Area_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TA_Offset" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Administration_State" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SSB_Frequency_Position_Describe_Method" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SSB_Frequency_Position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SSB_Period_ms" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SIB1_Period_ms" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Logical_Root_Sequence_Index" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PRACH_Frequency_Start_Position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NR_DU_Cell_TRP_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NR_DU_Cell_ID2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Transmit_and_Receive_Mode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Baseband_Equipment_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Max_Transmit_Power_0_1dBm" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CPRI_Compression" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Baseband_Resource_Mutual_Aid_Switch" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Branch_CPRI_Compression" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NR_DU_Cell_TRP_ID2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Coverage_Scenario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tilt_degree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Azimuth_degree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Max_SSB_Power_Offset_dB" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Scenario_Beam_Algorithm_Switch" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cell_Activate_State" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tracking_Area_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HWIModelStoreContainer" CdmEntityContainer="HWI_DB">
+          <EntitySetMapping Name="UCELLSETUP_SRAN">
+            <EntityTypeMapping TypeName="HWIModel.UCELLSETUP_SRAN">
+              <MappingFragment StoreEntitySet="UCELLSETUP_SRAN">
+                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+                <ScalarProperty Name="BSCName" ColumnName="BSCName" />
+                <ScalarProperty Name="LogicalRNCID" ColumnName="LogicalRNCID" />
+                <ScalarProperty Name="NodeBName" ColumnName="NodeBName" />
+                <ScalarProperty Name="CellName" ColumnName="CellName" />
+                <ScalarProperty Name="CellID" ColumnName="CellID" />
+                <ScalarProperty Name="LocalCellID" ColumnName="LocalCellID" />
+                <ScalarProperty Name="DownlinkUARFCN" ColumnName="DownlinkUARFCN" />
+                <ScalarProperty Name="DLPrimaryScramblingCode" ColumnName="DLPrimaryScramblingCode" />
+                <ScalarProperty Name="TimeOffset" ColumnName="TimeOffset" />
+                <ScalarProperty Name="LocationAreaCode" ColumnName="LocationAreaCode" />
+                <ScalarProperty Name="ServiceAreaCode" ColumnName="ServiceAreaCode" />
+                <ScalarProperty Name="RoutingAreaCode" ColumnName="RoutingAreaCode" />
+                <ScalarProperty Name="MaxTransmitPowerofCell" ColumnName="MaxTransmitPowerofCell" />
+                <ScalarProperty Name="PCPICHTransmitPower" ColumnName="PCPICHTransmitPower" />
+                <ScalarProperty Name="CellHSDPAstate" ColumnName="CellHSDPAstate" />
+                <ScalarProperty Name="CellHSUPAstate" ColumnName="CellHSUPAstate" />
+                <ScalarProperty Name="SubrackNo" ColumnName="SubrackNo" />
+                <ScalarProperty Name="SlotNo" ColumnName="SlotNo" />
+                <ScalarProperty Name="SubsystemNo" ColumnName="SubsystemNo" />
+                <ScalarProperty Name="BandIndicator" ColumnName="BandIndicator" />
+                <ScalarProperty Name="CnOperatorGroupIndex" ColumnName="CnOperatorGroupIndex" />
+                <ScalarProperty Name="ULFrequencyInd" ColumnName="ULFrequencyInd" />
+                <ScalarProperty Name="UplinkUARFCN" ColumnName="UplinkUARFCN" />
+                <ScalarProperty Name="NumofContinuousinSyncInd" ColumnName="NumofContinuousinSyncInd" />
+                <ScalarProperty Name="NumofContinuousOutofSyncInd" ColumnName="NumofContinuousOutofSyncInd" />
+                <ScalarProperty Name="RadioLinkFailureTimerLength" ColumnName="RadioLinkFailureTimerLength" />
+                <ScalarProperty Name="DLPowerControlMode1" ColumnName="DLPowerControlMode1" />
+                <ScalarProperty Name="TXDiversityIndication" ColumnName="TXDiversityIndication" />
+                <ScalarProperty Name="ServicePriorityGroupIdentity" ColumnName="ServicePriorityGroupIdentity" />
+                <ScalarProperty Name="NodeBName2" ColumnName="NodeBName2" />
+                <ScalarProperty Name="RACConfigurationIndication" ColumnName="RACConfigurationIndication" />
+                <ScalarProperty Name="STTDSupportIndicator" ColumnName="STTDSupportIndicator" />
+                <ScalarProperty Name="CP1SupportIndicator" ColumnName="CP1SupportIndicator" />
+                <ScalarProperty Name="ClosedLoopTimeAdjustMode" ColumnName="ClosedLoopTimeAdjustMode" />
+                <ScalarProperty Name="DPCHTxDiversityModeforOtherUser" ColumnName="DPCHTxDiversityModeforOtherUser" />
+                <ScalarProperty Name="FDPCHTxDiversityModeforOtherUser" ColumnName="FDPCHTxDiversityModeforOtherUser" />
+                <ScalarProperty Name="DPCHTxDiversityModeforMIMOUser" ColumnName="DPCHTxDiversityModeforMIMOUser" />
+                <ScalarProperty Name="FDPCHTxDiversityModeforMIMOUser" ColumnName="FDPCHTxDiversityModeforMIMOUser" />
+                <ScalarProperty Name="TxDiversityModeforDC_HSDPAUser" ColumnName="TxDiversityModeforDC_HSDPAUser" />
+                <ScalarProperty Name="CellOrientedCellIndividualOffset" ColumnName="CellOrientedCellIndividualOffset" />
+                <ScalarProperty Name="CellVPLimitIndicator" ColumnName="CellVPLimitIndicator" />
+                <ScalarProperty Name="DSSCellFlag" ColumnName="DSSCellFlag" />
+                <ScalarProperty Name="MaximumTXPowerinSmallDSSCoverage" ColumnName="MaximumTXPowerinSmallDSSCoverage" />
+                <ScalarProperty Name="CommonChannelBandwidthOperatorIndex" ColumnName="CommonChannelBandwidthOperatorIndex" />
+                <ScalarProperty Name="HierarchyIDofTerminalType" ColumnName="HierarchyIDofTerminalType" />
+                <ScalarProperty Name="HeterogeneousCellFlag" ColumnName="HeterogeneousCellFlag" />
+                <ScalarProperty Name="SelfPlanningFlag" ColumnName="SelfPlanningFlag" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Validationindication" ColumnName="Validationindication" />
+                <ScalarProperty Name="Celladministrativestate" ColumnName="Celladministrativestate" />
+                <ScalarProperty Name="MrSwitch" ColumnName="MrSwitch" />
+                <ScalarProperty Name="URAID" ColumnName="URAID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LCELLs">
+            <EntityTypeMapping TypeName="HWIModel.LCELL">
+              <MappingFragment StoreEntitySet="LCELL">
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="NE_Name" ColumnName="NE_Name" />
+                <ScalarProperty Name="Local_Cell_ID" ColumnName="Local_Cell_ID" />
+                <ScalarProperty Name="Cell_Name" ColumnName="Cell_Name" />
+                <ScalarProperty Name="Csg_indicator" ColumnName="Csg_indicator" />
+                <ScalarProperty Name="Uplink_cyclic_prefix_length" ColumnName="Uplink_cyclic_prefix_length" />
+                <ScalarProperty Name="Downlink_cyclic_prefix_length" ColumnName="Downlink_cyclic_prefix_length" />
+                <ScalarProperty Name="Frequency_band" ColumnName="Frequency_band" />
+                <ScalarProperty Name="Uplink_EARFCN_indication" ColumnName="Uplink_EARFCN_indication" />
+                <ScalarProperty Name="Uplink_EARFCN" ColumnName="Uplink_EARFCN" />
+                <ScalarProperty Name="Downlink_EARFCN" ColumnName="Downlink_EARFCN" />
+                <ScalarProperty Name="Uplink_bandwidth" ColumnName="Uplink_bandwidth" />
+                <ScalarProperty Name="Downlink_bandwidth" ColumnName="Downlink_bandwidth" />
+                <ScalarProperty Name="Cell_ID" ColumnName="Cell_ID" />
+                <ScalarProperty Name="Physical_cell_ID" ColumnName="Physical_cell_ID" />
+                <ScalarProperty Name="Additional_spectrum_emission" ColumnName="Additional_spectrum_emission" />
+                <ScalarProperty Name="Cell_active_state" ColumnName="Cell_active_state" />
+                <ScalarProperty Name="Cell_admin_state" ColumnName="Cell_admin_state" />
+                <ScalarProperty Name="Cell_middle_block_timer_min" ColumnName="Cell_middle_block_timer_min" />
+                <ScalarProperty Name="Cell_FDD_TDD_indication" ColumnName="Cell_FDD_TDD_indication" />
+                <ScalarProperty Name="Subframe_assignment" ColumnName="Subframe_assignment" />
+                <ScalarProperty Name="Special_subframe_patterns" ColumnName="Special_subframe_patterns" />
+                <ScalarProperty Name="Cell_specific_offset_dB" ColumnName="Cell_specific_offset_dB" />
+                <ScalarProperty Name="Frequency_offset_dB" ColumnName="Frequency_offset_dB" />
+                <ScalarProperty Name="Root_sequence_index" ColumnName="Root_sequence_index" />
+                <ScalarProperty Name="High_speed_flag" ColumnName="High_speed_flag" />
+                <ScalarProperty Name="Preamble_format" ColumnName="Preamble_format" />
+                <ScalarProperty Name="Cell_radius_m" ColumnName="Cell_radius_m" />
+                <ScalarProperty Name="Customized_bandwidth_configure_indicator" ColumnName="Customized_bandwidth_configure_indicator" />
+                <ScalarProperty Name="Customized_uplink_bandwidth_01MHz" ColumnName="Customized_uplink_bandwidth_01MHz" />
+                <ScalarProperty Name="Customized_downlink_bandwidth_01MHz" ColumnName="Customized_downlink_bandwidth_01MHz" />
+                <ScalarProperty Name="Emergency_Area_Id_indicator" ColumnName="Emergency_Area_Id_indicator" />
+                <ScalarProperty Name="Emergency_Area_ID" ColumnName="Emergency_Area_ID" />
+                <ScalarProperty Name="Ue_max_power_allowed_configure_indicator" ColumnName="Ue_max_power_allowed_configure_indicator" />
+                <ScalarProperty Name="Max_transmit_power_allowed_dBm" ColumnName="Max_transmit_power_allowed_dBm" />
+                <ScalarProperty Name="Flag_of_Multi_RRU_Cell" ColumnName="Flag_of_Multi_RRU_Cell" />
+                <ScalarProperty Name="Mode_of_Multi_RRU_Cell" ColumnName="Mode_of_Multi_RRU_Cell" />
+                <ScalarProperty Name="CPRI_Compression" ColumnName="CPRI_Compression" />
+                <ScalarProperty Name="Physical_Cell_Number_of_SFN_Cell" ColumnName="Physical_Cell_Number_of_SFN_Cell" />
+                <ScalarProperty Name="Air_Cell_Flag" ColumnName="Air_Cell_Flag" />
+                <ScalarProperty Name="CRS_Port_Number" ColumnName="CRS_Port_Number" />
+                <ScalarProperty Name="Cell_transmission_and_reception_mode" ColumnName="Cell_transmission_and_reception_mode" />
+                <ScalarProperty Name="User_label" ColumnName="User_label" />
+                <ScalarProperty Name="Work_mode" ColumnName="Work_mode" />
+                <ScalarProperty Name="Cell_Standby_Mode" ColumnName="Cell_Standby_Mode" />
+                <ScalarProperty Name="CRS_Antenna_Port_Mapping" ColumnName="CRS_Antenna_Port_Mapping" />
+                <ScalarProperty Name="CPRI_Ethernet_Compression_Ratio" ColumnName="CPRI_Ethernet_Compression_Ratio" />
+                <ScalarProperty Name="Cell_Slave_Band" ColumnName="Cell_Slave_Band" />
+                <ScalarProperty Name="CN_Operator_Sharing_Group_ID" ColumnName="CN_Operator_Sharing_Group_ID" />
+                <ScalarProperty Name="CSI_Reference_Signals_Period" ColumnName="CSI_Reference_Signals_Period" />
+                <ScalarProperty Name="Intra_Frequency_RAN_Sharing_Indication" ColumnName="Intra_Frequency_RAN_Sharing_Indication" />
+                <ScalarProperty Name="IntraFreq_ANR_Indication" ColumnName="IntraFreq_ANR_Indication" />
+                <ScalarProperty Name="SSP6_DwPTS_Mode" ColumnName="SSP6_DwPTS_Mode" />
+                <ScalarProperty Name="Cell_Scale_Indication" ColumnName="Cell_Scale_Indication" />
+                <ScalarProperty Name="ANR_Frequency_Priority" ColumnName="ANR_Frequency_Priority" />
+                <ScalarProperty Name="Cell_Radius_Start_Location_m" ColumnName="Cell_Radius_Start_Location_m" />
+                <ScalarProperty Name="Reference_signal_power_01dBm" ColumnName="Reference_signal_power_01dBm" />
+                <ScalarProperty Name="PB" ColumnName="PB" />
+                <ScalarProperty Name="PA_for_even_power_distribution_dB" ColumnName="PA_for_even_power_distribution_dB" />
+                <ScalarProperty Name="Cell_reselection_priority" ColumnName="Cell_reselection_priority" />
+                <ScalarProperty Name="Local_tracking_area_ID" ColumnName="Local_tracking_area_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GBTS_power">
+            <EntityTypeMapping TypeName="HWIModel.GBTS_power">
+              <MappingFragment StoreEntitySet="GBTS_power">
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="BSC_Name" ColumnName="BSC_Name" />
+                <ScalarProperty Name="BTS_Name" ColumnName="BTS_Name" />
+                <ScalarProperty Name="Cell_Name" ColumnName="Cell_Name" />
+                <ScalarProperty Name="Cell_CI" ColumnName="Cell_CI" />
+                <ScalarProperty Name="Cell_Index" ColumnName="Cell_Index" />
+                <ScalarProperty Name="TRX_Group_ID" ColumnName="TRX_Group_ID" />
+                <ScalarProperty Name="TRX_ID" ColumnName="TRX_ID" />
+                <ScalarProperty Name="Power_Level" ColumnName="Power_Level" />
+                <ScalarProperty Name="GBTS_Power_Type_w" ColumnName="GBTS_Power_Type_w" />
+                <ScalarProperty Name="eGBTS_Power_Type_01dBm" ColumnName="eGBTS_Power_Type_01dBm" />
+                <ScalarProperty Name="TRX_Priority" ColumnName="TRX_Priority" />
+                <ScalarProperty Name="Administrative_State" ColumnName="Administrative_State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRUsPerNodes">
+            <EntityTypeMapping TypeName="HWIModel.RRUsPerNode">
+              <MappingFragment StoreEntitySet="RRUsPerNodes">
+                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+                <ScalarProperty Name="SITE" ColumnName="SITE" />
+                <ScalarProperty Name="LocalCellId" ColumnName="LocalCellId" />
+                <ScalarProperty Name="CellName" ColumnName="CellName" />
+                <ScalarProperty Name="RRU_type" ColumnName="RRU_type" />
+                <ScalarProperty Name="RRU_Serial_Number" ColumnName="RRU_Serial_Number" />
+                <ScalarProperty Name="TECH" ColumnName="TECH" />
+                <ScalarProperty Name="BAND" ColumnName="BAND" />
+                <ScalarProperty Name="subrack" ColumnName="subrack" />
+                <ScalarProperty Name="Manufacturer_Data" ColumnName="Manufacturer_Data" />
+                <ScalarProperty Name="j_tech" ColumnName="j_tech" />
+                <ScalarProperty Name="j_band" ColumnName="j_band" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRUsPerNodes_5G_included">
+            <EntityTypeMapping TypeName="HWIModel.RRUsPerNodes_5G_included">
+              <MappingFragment StoreEntitySet="RRUsPerNodes_5G_included">
+                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+                <ScalarProperty Name="SITE" ColumnName="SITE" />
+                <ScalarProperty Name="LocalCellId" ColumnName="LocalCellId" />
+                <ScalarProperty Name="CellName" ColumnName="CellName" />
+                <ScalarProperty Name="RRU_type" ColumnName="RRU_type" />
+                <ScalarProperty Name="RRU_Serial_Number" ColumnName="RRU_Serial_Number" />
+                <ScalarProperty Name="TECH" ColumnName="TECH" />
+                <ScalarProperty Name="BAND" ColumnName="BAND" />
+                <ScalarProperty Name="subrack" ColumnName="subrack" />
+                <ScalarProperty Name="Manufacturer_Data" ColumnName="Manufacturer_Data" />
+                <ScalarProperty Name="j_tech" ColumnName="j_tech" />
+                <ScalarProperty Name="j_band" ColumnName="j_band" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GTRX_Info">
+            <EntityTypeMapping TypeName="HWIModel.GTRX_Info">
+              <MappingFragment StoreEntitySet="GTRX_Info">
+                <ScalarProperty Name="Antenna_Pass_No" ColumnName="Antenna_Pass_No" />
+                <ScalarProperty Name="Separate_Mode" ColumnName="Separate_Mode" />
+                <ScalarProperty Name="BTS_Type" ColumnName="BTS_Type" />
+                <ScalarProperty Name="TCH_Rate_Adjust_Allow" ColumnName="TCH_Rate_Adjust_Allow" />
+                <ScalarProperty Name="Shut_Down_Enabled" ColumnName="Shut_Down_Enabled" />
+                <ScalarProperty Name="Hop_Type" ColumnName="Hop_Type" />
+                <ScalarProperty Name="Send_Mode" ColumnName="Send_Mode" />
+                <ScalarProperty Name="Receive_Mode" ColumnName="Receive_Mode" />
+                <ScalarProperty Name="Power_Type" ColumnName="Power_Type" />
+                <ScalarProperty Name="Power_Level" ColumnName="Power_Level" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Product_Number" ColumnName="Product_Number" />
+                <ScalarProperty Name="RXU_Name" ColumnName="RXU_Name" />
+                <ScalarProperty Name="Board_type" ColumnName="Board_type" />
+                <ScalarProperty Name="Slot_No" ColumnName="Slot_No" />
+                <ScalarProperty Name="Subrack_No" ColumnName="Subrack_No" />
+                <ScalarProperty Name="Cabinet_No" ColumnName="Cabinet_No" />
+                <ScalarProperty Name="Active_Status" ColumnName="Active_Status" />
+                <ScalarProperty Name="Is_Main_BCCH_TRX" ColumnName="Is_Main_BCCH_TRX" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="Cell_CI" ColumnName="Cell_CI" />
+                <ScalarProperty Name="Location_area_code" ColumnName="Location_area_code" />
+                <ScalarProperty Name="Mobile_country_code" ColumnName="Mobile_country_code" />
+                <ScalarProperty Name="Mobile_network_code" ColumnName="Mobile_network_code" />
+                <ScalarProperty Name="TRX_Group_ID" ColumnName="TRX_Group_ID" />
+                <ScalarProperty Name="TRX_No" ColumnName="TRX_No" />
+                <ScalarProperty Name="TRX_ID" ColumnName="TRX_ID" />
+                <ScalarProperty Name="Cell_Name" ColumnName="Cell_Name" />
+                <ScalarProperty Name="Cell_ID" ColumnName="Cell_ID" />
+                <ScalarProperty Name="BTS_Name" ColumnName="BTS_Name" />
+                <ScalarProperty Name="BTS_Index" ColumnName="BTS_Index" />
+                <ScalarProperty Name="BSC_Name" ColumnName="BSC_Name" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MNSD_5G_Dump">
+            <EntityTypeMapping TypeName="HWIModel.MNSD_5G_Dump">
+              <MappingFragment StoreEntitySet="MNSD_5G_Dump">
+                <ScalarProperty Name="Tracking_Area_Code" ColumnName="Tracking_Area_Code" />
+                <ScalarProperty Name="Cell_Activate_State" ColumnName="Cell_Activate_State" />
+                <ScalarProperty Name="Scenario_Beam_Algorithm_Switch" ColumnName="Scenario_Beam_Algorithm_Switch" />
+                <ScalarProperty Name="Max_SSB_Power_Offset_dB" ColumnName="Max_SSB_Power_Offset_dB" />
+                <ScalarProperty Name="Azimuth_degree" ColumnName="Azimuth_degree" />
+                <ScalarProperty Name="Tilt_degree" ColumnName="Tilt_degree" />
+                <ScalarProperty Name="Coverage_Scenario" ColumnName="Coverage_Scenario" />
+                <ScalarProperty Name="NR_DU_Cell_TRP_ID2" ColumnName="NR_DU_Cell_TRP_ID2" />
+                <ScalarProperty Name="Branch_CPRI_Compression" ColumnName="Branch_CPRI_Compression" />
+                <ScalarProperty Name="Baseband_Resource_Mutual_Aid_Switch" ColumnName="Baseband_Resource_Mutual_Aid_Switch" />
+                <ScalarProperty Name="CPRI_Compression" ColumnName="CPRI_Compression" />
+                <ScalarProperty Name="Max_Transmit_Power_0_1dBm" ColumnName="Max_Transmit_Power_0_1dBm" />
+                <ScalarProperty Name="Baseband_Equipment_ID" ColumnName="Baseband_Equipment_ID" />
+                <ScalarProperty Name="Transmit_and_Receive_Mode" ColumnName="Transmit_and_Receive_Mode" />
+                <ScalarProperty Name="NR_DU_Cell_ID2" ColumnName="NR_DU_Cell_ID2" />
+                <ScalarProperty Name="NR_DU_Cell_TRP_ID" ColumnName="NR_DU_Cell_TRP_ID" />
+                <ScalarProperty Name="PRACH_Frequency_Start_Position" ColumnName="PRACH_Frequency_Start_Position" />
+                <ScalarProperty Name="Logical_Root_Sequence_Index" ColumnName="Logical_Root_Sequence_Index" />
+                <ScalarProperty Name="SIB1_Period_ms" ColumnName="SIB1_Period_ms" />
+                <ScalarProperty Name="SSB_Period_ms" ColumnName="SSB_Period_ms" />
+                <ScalarProperty Name="SSB_Frequency_Position" ColumnName="SSB_Frequency_Position" />
+                <ScalarProperty Name="SSB_Frequency_Position_Describe_Method" ColumnName="SSB_Frequency_Position_Describe_Method" />
+                <ScalarProperty Name="Cell_Administration_State" ColumnName="Cell_Administration_State" />
+                <ScalarProperty Name="TA_Offset" ColumnName="TA_Offset" />
+                <ScalarProperty Name="Tracking_Area_ID" ColumnName="Tracking_Area_ID" />
+                <ScalarProperty Name="LampSite_Cell_Flag" ColumnName="LampSite_Cell_Flag" />
+                <ScalarProperty Name="RAN_Notification_Area_ID" ColumnName="RAN_Notification_Area_ID" />
+                <ScalarProperty Name="Slot_Structure" ColumnName="Slot_Structure" />
+                <ScalarProperty Name="Slot_Assignment" ColumnName="Slot_Assignment" />
+                <ScalarProperty Name="Cyclic_Prefix_Length" ColumnName="Cyclic_Prefix_Length" />
+                <ScalarProperty Name="Subcarrier_Spacing_KHz" ColumnName="Subcarrier_Spacing_KHz" />
+                <ScalarProperty Name="Cell_Radius_m" ColumnName="Cell_Radius_m" />
+                <ScalarProperty Name="Downlink_Bandwidth" ColumnName="Downlink_Bandwidth" />
+                <ScalarProperty Name="Uplink_Bandwidth" ColumnName="Uplink_Bandwidth" />
+                <ScalarProperty Name="Downlink_NARFCN" ColumnName="Downlink_NARFCN" />
+                <ScalarProperty Name="Uplink_NARFCN" ColumnName="Uplink_NARFCN" />
+                <ScalarProperty Name="Frequency_Band" ColumnName="Frequency_Band" />
+                <ScalarProperty Name="Physical_Cell_ID" ColumnName="Physical_Cell_ID" />
+                <ScalarProperty Name="Cell_ID" ColumnName="Cell_ID" />
+                <ScalarProperty Name="Duplex_Mode" ColumnName="Duplex_Mode" />
+                <ScalarProperty Name="NR_DU_Cell_Name" ColumnName="NR_DU_Cell_Name" />
+                <ScalarProperty Name="NR_DU_Cell_ID" ColumnName="NR_DU_Cell_ID" />
+                <ScalarProperty Name="NE_Name" ColumnName="NE_Name" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
