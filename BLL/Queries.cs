@@ -25,580 +25,580 @@ namespace BLL
             hwi_db.Database.CommandTimeout = 160;
         }
 
-        private List<ViewModelTechnology> GetPorts2G()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var ports = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
-                                select 												
-                                    a.IDNAME as CellName,b.GSMID as CellID,la.PORTS as PortNumber,												
-                                    replace(replace( k1.IDNAME, 'GSM',''),'_Default','') as Band												
-                                FROM network_planning.GSMCELL b												
-                                INNER JOIN network_planning.LOGCELL a ON b.PROJECTNO = a.PROJECTNO AND a.LOGCELLPK = b.LOGCELLfK 												
-                                INNER JOIN network_planning.munode c ON a.PROJECTNO = c.PROJECTNO AND a.LOGNODEFK = c.LOGNODEPK												
-                                INNER JOIN network_planning.LOGNODE cn ON c.PROJECTNO = cn.PROJECTNO AND c.LOGNODEpK = cn.LOGNODEPK 												
-                                INNER JOIN network_planning.SITEADDRESS d ON cn.projectno = d.projectno AND cn.addressfk = d.addresskey												
-                                INNER JOIN network_planning.CELLAYDATA g ON a.projectno = g.projectno AND a.LOGCELLpK = g.CELLkey												
-                                INNER JOIN network_planning.LOGCELLFEEDER k ON a.projectno = k.projectno AND a.LOGCELLPK = k.logcellfk and g.CELLAYKEY=k.GSM1CELLLAYERFK  												
-                                INNER JOIN network_planning.CELLAY k1 ON k1.projectno = g.projectno AND k1.cellaykey = g.cellaykey												
-                                inner join logicalantenna la on la.PROJECTno = k.PROJECTno and la.LOGANTENNAPK = k.LOGANTENNAFK 												
-                                join network_planning.FLAGVALUES z ON c.projectno = z.projectno AND c.LOGNODEPK = z.objectkey												
-                                INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY												
-                                INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY												
+        //private List<ViewModelTechnology> GetPorts2G()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var ports = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
+        //                        select 												
+        //                            a.IDNAME as CellName,b.GSMID as CellID,la.PORTS as PortNumber,												
+        //                            replace(replace( k1.IDNAME, 'GSM',''),'_Default','') as Band												
+        //                        FROM network_planning.GSMCELL b												
+        //                        INNER JOIN network_planning.LOGCELL a ON b.PROJECTNO = a.PROJECTNO AND a.LOGCELLPK = b.LOGCELLfK 												
+        //                        INNER JOIN network_planning.munode c ON a.PROJECTNO = c.PROJECTNO AND a.LOGNODEFK = c.LOGNODEPK												
+        //                        INNER JOIN network_planning.LOGNODE cn ON c.PROJECTNO = cn.PROJECTNO AND c.LOGNODEpK = cn.LOGNODEPK 												
+        //                        INNER JOIN network_planning.SITEADDRESS d ON cn.projectno = d.projectno AND cn.addressfk = d.addresskey												
+        //                        INNER JOIN network_planning.CELLAYDATA g ON a.projectno = g.projectno AND a.LOGCELLpK = g.CELLkey												
+        //                        INNER JOIN network_planning.LOGCELLFEEDER k ON a.projectno = k.projectno AND a.LOGCELLPK = k.logcellfk and g.CELLAYKEY=k.GSM1CELLLAYERFK  												
+        //                        INNER JOIN network_planning.CELLAY k1 ON k1.projectno = g.projectno AND k1.cellaykey = g.cellaykey												
+        //                        inner join logicalantenna la on la.PROJECTno = k.PROJECTno and la.LOGANTENNAPK = k.LOGANTENNAFK 												
+        //                        join network_planning.FLAGVALUES z ON c.projectno = z.projectno AND c.LOGNODEPK = z.objectkey												
+        //                        INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY												
+        //                        INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY												
 												
-                                where(x.flaggroupid = 'Candidate')												
-                                AND(y.flagid = 'Accepted')												
-                                AND(a.PROJECTNO = 1) AND(b.GSMID > 0)
-                                and d.idname like '%{siteID}%'").ToList();
-                return ports;
-            }
+        //                        where(x.flaggroupid = 'Candidate')												
+        //                        AND(y.flagid = 'Accepted')												
+        //                        AND(a.PROJECTNO = 1) AND(b.GSMID > 0)
+        //                        and d.idname like '%{siteID}%'").ToList();
+        //        return ports;
+        //    }
 
-        }
+        //}
 
-        private List<ViewModelTechnology> GetPorts3G()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var ports = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
-                                select  
-                                    b1.umtscellid as CellID, c2.IDNAME AS CellName, la.PORTS as PortNumber
+        //private List<ViewModelTechnology> GetPorts3G()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var ports = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
+        //                        select  
+        //                            b1.umtscellid as CellID, c2.IDNAME AS CellName, la.PORTS as PortNumber
 
-                                from  network_planning.LOGUMTSCELL b1 
-                                INNER JOIN network_planning.LOGCELL c2 ON b1.PROJECTNO = c2.PROJECTNO AND b1.LOGCELLFK = c2.LOGCELLPK 
-                                INNER JOIN network_planning.LOGNODE c1 ON c2.PROJECTNO = c1.PROJECTNO AND c2.LOGNODEFK = c1.LOGNODEPK 
-                                INNER JOIN network_planning.LOGUMTSCELLCAR ucc ON b1.PROJECTNO = ucc.PROJECTNO AND b1.LOGCELLFK = ucc.LOGCELLFK 
-                                INNER JOIN network_planning.LOGUMTSCAR uc ON ucc.projectno = uc.projectno AND ucc.CARRIERFK = uc.UMTSCARPK 
-                                INNER JOIN network_planning.TGCARRIER ut ON uc.projectno = ut.projectno AND uc.tgcarrierfk = ut.carrierkey 
-                                INNER JOIN network_planning.SITEADDRESS h ON c1.projectno = h.projectno AND c1.addressfk = h.addresskey 
-                                INNER JOIN network_planning.LOGCONNECTION d1 ON c1.PROJECTNO = d1.PROJECTNO AND c1.LOGNODEPK = d1.LOGNODEBFK 
-                                INNER JOIN network_planning.LOGRNC e1 ON d1.PROJECTNO = e1.PROJECTNO AND d1.lognodeafk = e1.lognodepk 
-                                INNER JOIN network_planning.LOGcellFEEDER f ON b1.PROJECTNO = f.projectno AND b1.LOGCELLFK = f.LOGCELLFK 
-                                INNER join logicalantenna la on la.PROJECTno=f.PROJECTno and la.LOGANTENNAPK =f.LOGANTENNAFK
+        //                        from  network_planning.LOGUMTSCELL b1 
+        //                        INNER JOIN network_planning.LOGCELL c2 ON b1.PROJECTNO = c2.PROJECTNO AND b1.LOGCELLFK = c2.LOGCELLPK 
+        //                        INNER JOIN network_planning.LOGNODE c1 ON c2.PROJECTNO = c1.PROJECTNO AND c2.LOGNODEFK = c1.LOGNODEPK 
+        //                        INNER JOIN network_planning.LOGUMTSCELLCAR ucc ON b1.PROJECTNO = ucc.PROJECTNO AND b1.LOGCELLFK = ucc.LOGCELLFK 
+        //                        INNER JOIN network_planning.LOGUMTSCAR uc ON ucc.projectno = uc.projectno AND ucc.CARRIERFK = uc.UMTSCARPK 
+        //                        INNER JOIN network_planning.TGCARRIER ut ON uc.projectno = ut.projectno AND uc.tgcarrierfk = ut.carrierkey 
+        //                        INNER JOIN network_planning.SITEADDRESS h ON c1.projectno = h.projectno AND c1.addressfk = h.addresskey 
+        //                        INNER JOIN network_planning.LOGCONNECTION d1 ON c1.PROJECTNO = d1.PROJECTNO AND c1.LOGNODEPK = d1.LOGNODEBFK 
+        //                        INNER JOIN network_planning.LOGRNC e1 ON d1.PROJECTNO = e1.PROJECTNO AND d1.lognodeafk = e1.lognodepk 
+        //                        INNER JOIN network_planning.LOGcellFEEDER f ON b1.PROJECTNO = f.projectno AND b1.LOGCELLFK = f.LOGCELLFK 
+        //                        INNER join logicalantenna la on la.PROJECTno=f.PROJECTno and la.LOGANTENNAPK =f.LOGANTENNAFK
 
-                                INNER JOIN network_planning.FLAGVALUES z ON c1.projectno = z.projectno AND c1.lognodepk = z.objectkey 
-                                INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 
-                                INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY
+        //                        INNER JOIN network_planning.FLAGVALUES z ON c1.projectno = z.projectno AND c1.lognodepk = z.objectkey 
+        //                        INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 
+        //                        INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY
 
-                                INNER JOIN network_planning.FLAGVALUES z1 ON c1.projectno = z1.projectno AND c2.logcellpk = z1.objectkey 
-                                INNER JOIN network_planning.FLAGS y1 ON y1.PROJECTNO = z.PROJECTNO AND y1.FLAGGROUPKEY = z1.FLAGGROUPKEY AND y1.FLAGKEY = z1.FLAGKEY 
-                                INNER JOIN network_planning.FLAGGROUPS x1 ON x1.PROJECTNO = y1.PROJECTNO AND x1.FLAGGROUPKEY = y1.FLAGGROUPKEY
+        //                        INNER JOIN network_planning.FLAGVALUES z1 ON c1.projectno = z1.projectno AND c2.logcellpk = z1.objectkey 
+        //                        INNER JOIN network_planning.FLAGS y1 ON y1.PROJECTNO = z.PROJECTNO AND y1.FLAGGROUPKEY = z1.FLAGGROUPKEY AND y1.FLAGKEY = z1.FLAGKEY 
+        //                        INNER JOIN network_planning.FLAGGROUPS x1 ON x1.PROJECTNO = y1.PROJECTNO AND x1.FLAGGROUPKEY = y1.FLAGGROUPKEY
 
-                                where 
-                                (x.flaggroupid = 'Candidate') AND (y.flagid ='Accepted') 
-                                AND (x1.flaggroupid = 'Site Progress') AND (y1.flagid ='On Air') 
-                                AND (b1.PROJECTNO = 1) 
-                                AND c1.idname like '%{siteID}%'").ToList();
+        //                        where 
+        //                        (x.flaggroupid = 'Candidate') AND (y.flagid ='Accepted') 
+        //                        AND (x1.flaggroupid = 'Site Progress') AND (y1.flagid ='On Air') 
+        //                        AND (b1.PROJECTNO = 1) 
+        //                        AND c1.idname like '%{siteID}%'").ToList();
 
-                return ports;
-            }
-        }
+        //        return ports;
+        //    }
+        //}
 
-        private List<ViewModelTechnology> GetPorts4G()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var ports = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
-                                    select 			
-                                        a.cellid as CellID, b4.idname as CellName			
-                                        ,la.PORTS as PortNumber			
+        //private List<ViewModelTechnology> GetPorts4G()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var ports = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
+        //                            select 			
+        //                                a.cellid as CellID, b4.idname as CellName			
+        //                                ,la.PORTS as PortNumber			
 			
-                                    from LOGLTECELL a       			
-                                    INNER JOIN LogLteCellCar a1 ON a1.PROJECTNO =a.PROJECTNO AND a1.LOGCELLFK = a.LOGCELLFK    			
-                                    INNER JOIN logcell b4 ON b4.PROJECTNO =a.PROJECTNO AND b4.LOGCELLPK = a.LOGCELLFK  			
-                                    INNER JOIN LOGNODE b5 ON b4.PROJECTNO = b5.PROJECTNO AND b4.LOGNODEFK = b5.LOGNODEPK			
-                                    INNER JOIN network_planning.LOGcellFEEDER f ON a.PROJECTNO = f.projectno AND a.LOGCELLFK = f.LOGCELLFK			
-                                    inner join logicalantenna la on la.PROJECTno=f.PROJECTno and la.LOGANTENNAPK =f.LOGANTENNAFK			
-                                    inner join network_planning.FLAGVALUES z ON b5.projectno = z.projectno AND b5.lognodepk = z.objectkey 			
-                                    INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 			
-                                    INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY			
+        //                            from LOGLTECELL a       			
+        //                            INNER JOIN LogLteCellCar a1 ON a1.PROJECTNO =a.PROJECTNO AND a1.LOGCELLFK = a.LOGCELLFK    			
+        //                            INNER JOIN logcell b4 ON b4.PROJECTNO =a.PROJECTNO AND b4.LOGCELLPK = a.LOGCELLFK  			
+        //                            INNER JOIN LOGNODE b5 ON b4.PROJECTNO = b5.PROJECTNO AND b4.LOGNODEFK = b5.LOGNODEPK			
+        //                            INNER JOIN network_planning.LOGcellFEEDER f ON a.PROJECTNO = f.projectno AND a.LOGCELLFK = f.LOGCELLFK			
+        //                            inner join logicalantenna la on la.PROJECTno=f.PROJECTno and la.LOGANTENNAPK =f.LOGANTENNAFK			
+        //                            inner join network_planning.FLAGVALUES z ON b5.projectno = z.projectno AND b5.lognodepk = z.objectkey 			
+        //                            INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 			
+        //                            INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY			
 			
-                                    where (x.flaggroupid = 'Candidate')  			
-                                    AND (y.flagid ='Accepted') 			
-                                    AND (a.PROJECTNO = 1) 	
-                                     and b5.idname like '%{siteID}%'			
-			                         ").ToList();
-                return ports;
-            }
+        //                            where (x.flaggroupid = 'Candidate')  			
+        //                            AND (y.flagid ='Accepted') 			
+        //                            AND (a.PROJECTNO = 1) 	
+        //                             and b5.idname like '%{siteID}%'			
+			     //                    ").ToList();
+        //        return ports;
+        //    }
 
-        }
+        //}
 
-        private List<ViewModelTechnology> EtiltAsset2G()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var eTilts = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
-                                select  a.IDNAME as CellName,b.GSMID as CellID,	la.INDEXNO as LOGINDEX,															
+        //private List<ViewModelTechnology> EtiltAsset2G()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var eTilts = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
+        //                        select  a.IDNAME as CellName,b.GSMID as CellID,	la.INDEXNO as LOGINDEX,															
 															
-                                case when la.INHERITMASTERPATTERN = 0 then ap.downtilt															
-                                   when la.INHERITMASTERPATTERN = 1 then ap1.downtilt															
-                                   when la.INHERITMASTERPATTERN = 2 then ap2.downtilt															
-                                   when la.INHERITMASTERPATTERN = 3 then ap3.downtilt															
-                                   when la.INHERITMASTERPATTERN = 4 then ap4.downtilt															
-                                   end AS Etilt															
+        //                        case when la.INHERITMASTERPATTERN = 0 then ap.downtilt															
+        //                           when la.INHERITMASTERPATTERN = 1 then ap1.downtilt															
+        //                           when la.INHERITMASTERPATTERN = 2 then ap2.downtilt															
+        //                           when la.INHERITMASTERPATTERN = 3 then ap3.downtilt															
+        //                           when la.INHERITMASTERPATTERN = 4 then ap4.downtilt															
+        //                           end AS Etilt															
 															
 															
-                                FROM network_planning.GSMCELL b 															
-                                            INNER JOIN  network_planning.LOGCELL a ON b.PROJECTNO = a.PROJECTNO AND a.LOGCELLPK=b.LOGCELLfK 															
-                                            INNER JOIN  network_planning.munode c ON a.PROJECTNO = c.PROJECTNO AND a.LOGNODEFK = c.LOGNODEPK 															
-                                            INNER JOIN  network_planning.LOGNODE cn ON c.PROJECTNO = cn.PROJECTNO AND c.LOGNODEPK = cn.LOGNODEPK 															
-                                            INNER JOIN  network_planning.SITEADDRESS d ON cn.projectno = d.projectno AND cn.addressfk = d.addresskey 															
-                                                INNER JOIN network_planning.CELLAYDATA g ON b.projectno = g.projectno AND b.LOGCELLfK = g.cellkey 															
-                                         --  INNER JOIN network_planning.CARRIERS i ON g.CELLAYDATAPK = i.CELLAYDATAFK AND g.PROJECTNO = i.PROJECTNO 															
-                                           -- INNER JOIN network_planning.CARLAY j ON i.PROJECTNO = j.PROJECTNO AND i.CARLAYKEY = j.CARLAYKEY 															
-                                          INNER JOIN network_planning.LOGCELLFEEDER k ON a.projectno = k.projectno AND a.LOGCELLPK = k.logcellfk and g.CELLAYKEY=k.GSM1CELLLAYERFK 															
+        //                        FROM network_planning.GSMCELL b 															
+        //                                    INNER JOIN  network_planning.LOGCELL a ON b.PROJECTNO = a.PROJECTNO AND a.LOGCELLPK=b.LOGCELLfK 															
+        //                                    INNER JOIN  network_planning.munode c ON a.PROJECTNO = c.PROJECTNO AND a.LOGNODEFK = c.LOGNODEPK 															
+        //                                    INNER JOIN  network_planning.LOGNODE cn ON c.PROJECTNO = cn.PROJECTNO AND c.LOGNODEPK = cn.LOGNODEPK 															
+        //                                    INNER JOIN  network_planning.SITEADDRESS d ON cn.projectno = d.projectno AND cn.addressfk = d.addresskey 															
+        //                                        INNER JOIN network_planning.CELLAYDATA g ON b.projectno = g.projectno AND b.LOGCELLfK = g.cellkey 															
+        //                                 --  INNER JOIN network_planning.CARRIERS i ON g.CELLAYDATAPK = i.CELLAYDATAFK AND g.PROJECTNO = i.PROJECTNO 															
+        //                                   -- INNER JOIN network_planning.CARLAY j ON i.PROJECTNO = j.PROJECTNO AND i.CARLAYKEY = j.CARLAYKEY 															
+        //                                  INNER JOIN network_planning.LOGCELLFEEDER k ON a.projectno = k.projectno AND a.LOGCELLPK = k.logcellfk and g.CELLAYKEY=k.GSM1CELLLAYERFK 															
 															
-                                inner join logicalantenna la on la.PROJECTno=k.PROJECTno and la.LOGANTENNAPK =k.LOGANTENNAFK    -- ?!?!??            															
-                                --inner join network_planning.FEEDER ff  on k.FEEDERKEY = ff.FEEDERKEY     -- on k.PROJECTNO = ff.PROJECTNO --- PROJECT IS WRONG !!!!!!!															
-                                --inner join logicalantenna la on la.PROJECTno=ff.PROJECTno and la.LOGANTENNAPK =ff.FEEDERKEY    -- ?!?!??															
-                                INNER JOIN phyantenna pa ON pa.projectno = la.projectno and pa.PHYANTENNApK = la.PHYANTENNAfk															
+        //                        inner join logicalantenna la on la.PROJECTno=k.PROJECTno and la.LOGANTENNAPK =k.LOGANTENNAFK    -- ?!?!??            															
+        //                        --inner join network_planning.FEEDER ff  on k.FEEDERKEY = ff.FEEDERKEY     -- on k.PROJECTNO = ff.PROJECTNO --- PROJECT IS WRONG !!!!!!!															
+        //                        --inner join logicalantenna la on la.PROJECTno=ff.PROJECTno and la.LOGANTENNAPK =ff.FEEDERKEY    -- ?!?!??															
+        //                        INNER JOIN phyantenna pa ON pa.projectno = la.projectno and pa.PHYANTENNApK = la.PHYANTENNAfk															
 															
-                                inner join antennadevice ad on ad.PROJECTNO = pa.PROJECTNO and ad.DEVICEPK = pa.DEVICEFK 															
-                                INNER JOIN  ANTENNAPATTERN ap ON la.PROJECTno = ap.PROJECTno and la.anttypefk = ap.patternpk   															
-                                inner join ANTENNAPATTERN ap1 on ap1.PROJECTNO = pa.PROJECTNO and ap1.PATTERNPK = pa.MASTERPATTERN1FK															
-                                inner join ANTENNAPATTERN ap2 on ap2.PROJECTNO = pa.PROJECTNO and ap2.PATTERNPK = pa.MASTERPATTERN2FK															
-                                inner join ANTENNAPATTERN ap3 on ap3.PROJECTNO = pa.PROJECTNO and ap3.PATTERNPK = pa.MASTERPATTERN3FK															
-                                inner join ANTENNAPATTERN ap4 on ap4.PROJECTNO = pa.PROJECTNO and ap4.PATTERNPK = pa.MASTERPATTERN4FK															
+        //                        inner join antennadevice ad on ad.PROJECTNO = pa.PROJECTNO and ad.DEVICEPK = pa.DEVICEFK 															
+        //                        INNER JOIN  ANTENNAPATTERN ap ON la.PROJECTno = ap.PROJECTno and la.anttypefk = ap.patternpk   															
+        //                        inner join ANTENNAPATTERN ap1 on ap1.PROJECTNO = pa.PROJECTNO and ap1.PATTERNPK = pa.MASTERPATTERN1FK															
+        //                        inner join ANTENNAPATTERN ap2 on ap2.PROJECTNO = pa.PROJECTNO and ap2.PATTERNPK = pa.MASTERPATTERN2FK															
+        //                        inner join ANTENNAPATTERN ap3 on ap3.PROJECTNO = pa.PROJECTNO and ap3.PATTERNPK = pa.MASTERPATTERN3FK															
+        //                        inner join ANTENNAPATTERN ap4 on ap4.PROJECTNO = pa.PROJECTNO and ap4.PATTERNPK = pa.MASTERPATTERN4FK															
 															
-                                            INNER JOIN  network_planning.FLAGVALUES z ON c.projectno = z.projectno AND c.LOGNODEPK = z.objectkey 															
-                                            INNER JOIN  network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 															
-                                            INNER JOIN  network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY															
+        //                                    INNER JOIN  network_planning.FLAGVALUES z ON c.projectno = z.projectno AND c.LOGNODEPK = z.objectkey 															
+        //                                    INNER JOIN  network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 															
+        //                                    INNER JOIN  network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY															
 															
 														
-                                where(x.flaggroupid = 'Candidate')															
-                                AND(y.flagid = 'Accepted')															
-                                AND(a.PROJECTNO = 1) AND(b.GSMID > 0)
-                                and d.idname like '%{siteID}%'").ToList();
-                return eTilts;
-            }
+        //                        where(x.flaggroupid = 'Candidate')															
+        //                        AND(y.flagid = 'Accepted')															
+        //                        AND(a.PROJECTNO = 1) AND(b.GSMID > 0)
+        //                        and d.idname like '%{siteID}%'").ToList();
+        //        return eTilts;
+        //    }
 
-        }
+        //}
 
-        private List<ViewModelTechnology> EtiltAsset3G()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var eTilts = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
-                        select  
+        //private List<ViewModelTechnology> EtiltAsset3G()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var eTilts = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
+        //                select  
 
-                        b1.umtscellid as CellID, c2.IDNAME AS CellName, la.INDEXNO as LOGINDEX,	
+        //                b1.umtscellid as CellID, c2.IDNAME AS CellName, la.INDEXNO as LOGINDEX,	
 
-                        case when la.INHERITMASTERPATTERN=0 then ap.downtilt
-                        when la.INHERITMASTERPATTERN=1 then ap1.downtilt 
-                        when la.INHERITMASTERPATTERN=2 then ap2.downtilt
-                        when la.INHERITMASTERPATTERN=3 then ap3.downtilt
-                        when la.INHERITMASTERPATTERN=4 then ap4.downtilt
-                        end AS Etilt
+        //                case when la.INHERITMASTERPATTERN=0 then ap.downtilt
+        //                when la.INHERITMASTERPATTERN=1 then ap1.downtilt 
+        //                when la.INHERITMASTERPATTERN=2 then ap2.downtilt
+        //                when la.INHERITMASTERPATTERN=3 then ap3.downtilt
+        //                when la.INHERITMASTERPATTERN=4 then ap4.downtilt
+        //                end AS Etilt
 
-                        from  network_planning.LOGUMTSCELL b1 
-                        INNER JOIN network_planning.LOGCELL c2 ON b1.PROJECTNO = c2.PROJECTNO AND b1.LOGCELLFK = c2.LOGCELLPK 
-                        INNER JOIN network_planning.LOGNODE c1 ON c2.PROJECTNO = c1.PROJECTNO AND c2.LOGNODEFK = c1.LOGNODEPK 
-                        INNER JOIN network_planning.LOGUMTSCELLCAR ucc ON b1.PROJECTNO = ucc.PROJECTNO AND b1.LOGCELLfK = ucc.LOGCELLFK 
-                        INNER JOIN network_planning.LOGUMTSCAR uc ON ucc.projectno = uc.projectno AND ucc.CARRIERFK = uc.UMTSCARPK 
-                        INNER JOIN network_planning.TGCARRIER ut ON uc.projectno = ut.projectno AND uc.tgcarrierfk = ut.carrierkey 
-                        INNER JOIN network_planning.SITEADDRESS h ON c1.projectno = h.projectno AND c1.addressfk = h.addresskey 
-                        INNER JOIN network_planning.LOGCONNECTION d1 ON c1.PROJECTNO = d1.PROJECTNO AND c1.LOGNODEPK = d1.LOGNODEBFK 
-                        INNER JOIN network_planning.LOGRNC e1 ON d1.PROJECTNO = e1.PROJECTNO AND d1.lognodeafk = e1.lognodepk 
-                        INNER JOIN network_planning.LOGcellFEEDER f ON b1.PROJECTNO = f.projectno AND b1.LOGCELLfk = f.logcellfk 
+        //                from  network_planning.LOGUMTSCELL b1 
+        //                INNER JOIN network_planning.LOGCELL c2 ON b1.PROJECTNO = c2.PROJECTNO AND b1.LOGCELLFK = c2.LOGCELLPK 
+        //                INNER JOIN network_planning.LOGNODE c1 ON c2.PROJECTNO = c1.PROJECTNO AND c2.LOGNODEFK = c1.LOGNODEPK 
+        //                INNER JOIN network_planning.LOGUMTSCELLCAR ucc ON b1.PROJECTNO = ucc.PROJECTNO AND b1.LOGCELLfK = ucc.LOGCELLFK 
+        //                INNER JOIN network_planning.LOGUMTSCAR uc ON ucc.projectno = uc.projectno AND ucc.CARRIERFK = uc.UMTSCARPK 
+        //                INNER JOIN network_planning.TGCARRIER ut ON uc.projectno = ut.projectno AND uc.tgcarrierfk = ut.carrierkey 
+        //                INNER JOIN network_planning.SITEADDRESS h ON c1.projectno = h.projectno AND c1.addressfk = h.addresskey 
+        //                INNER JOIN network_planning.LOGCONNECTION d1 ON c1.PROJECTNO = d1.PROJECTNO AND c1.LOGNODEPK = d1.LOGNODEBFK 
+        //                INNER JOIN network_planning.LOGRNC e1 ON d1.PROJECTNO = e1.PROJECTNO AND d1.lognodeafk = e1.lognodepk 
+        //                INNER JOIN network_planning.LOGcellFEEDER f ON b1.PROJECTNO = f.projectno AND b1.LOGCELLfk = f.logcellfk 
 
-                        inner join logicalantenna la on la.PROJECTno=f.PROJECTno and la.LOGANTENNAPK =f.LOGANTENNAFK
-                        inner join phyantenna pa on pa.PROJECTNO = la.PROJECTNO and pa.PHYANTENNAPK = la.PHYANTENNAFK
-                        INNER JOIN  ANTENNAPATTERN ap  on ap.PROJECTNO = la.PROJECTNO and la.anttypefk = ap.patternpk 
-                        inner join ANTENNAPATTERN ap1 on ap1.PROJECTNO = pa.PROJECTNO and ap1.PATTERNPK = pa.MASTERPATTERN1FK
-                        inner join ANTENNAPATTERN ap2 on ap2.PROJECTNO = pa.PROJECTNO and ap2.PATTERNPK = pa.MASTERPATTERN2FK
-                        inner join ANTENNAPATTERN ap3 on ap3.PROJECTNO = pa.PROJECTNO and ap3.PATTERNPK = pa.MASTERPATTERN3FK
-                        inner join ANTENNAPATTERN ap4 on ap4.PROJECTNO = pa.PROJECTNO and ap4.PATTERNPK = pa.MASTERPATTERN4FK
+        //                inner join logicalantenna la on la.PROJECTno=f.PROJECTno and la.LOGANTENNAPK =f.LOGANTENNAFK
+        //                inner join phyantenna pa on pa.PROJECTNO = la.PROJECTNO and pa.PHYANTENNAPK = la.PHYANTENNAFK
+        //                INNER JOIN  ANTENNAPATTERN ap  on ap.PROJECTNO = la.PROJECTNO and la.anttypefk = ap.patternpk 
+        //                inner join ANTENNAPATTERN ap1 on ap1.PROJECTNO = pa.PROJECTNO and ap1.PATTERNPK = pa.MASTERPATTERN1FK
+        //                inner join ANTENNAPATTERN ap2 on ap2.PROJECTNO = pa.PROJECTNO and ap2.PATTERNPK = pa.MASTERPATTERN2FK
+        //                inner join ANTENNAPATTERN ap3 on ap3.PROJECTNO = pa.PROJECTNO and ap3.PATTERNPK = pa.MASTERPATTERN3FK
+        //                inner join ANTENNAPATTERN ap4 on ap4.PROJECTNO = pa.PROJECTNO and ap4.PATTERNPK = pa.MASTERPATTERN4FK
 
-                        INNER JOIN network_planning.FLAGVALUES z ON c1.projectno = z.projectno AND c1.lognodepk = z.objectkey 
-                        INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 
-                        INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY
+        //                INNER JOIN network_planning.FLAGVALUES z ON c1.projectno = z.projectno AND c1.lognodepk = z.objectkey 
+        //                INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 
+        //                INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY
 
-                        INNER JOIN network_planning.FLAGVALUES z1 ON c1.projectno = z1.projectno AND c2.logcellpk = z1.objectkey 
-                        INNER JOIN network_planning.FLAGS y1 ON y1.PROJECTNO = z.PROJECTNO AND y1.FLAGGROUPKEY = z1.FLAGGROUPKEY AND y1.FLAGKEY = z1.FLAGKEY 
-                        INNER JOIN network_planning.FLAGGROUPS x1 ON x1.PROJECTNO = y1.PROJECTNO AND x1.FLAGGROUPKEY = y1.FLAGGROUPKEY
+        //                INNER JOIN network_planning.FLAGVALUES z1 ON c1.projectno = z1.projectno AND c2.logcellpk = z1.objectkey 
+        //                INNER JOIN network_planning.FLAGS y1 ON y1.PROJECTNO = z.PROJECTNO AND y1.FLAGGROUPKEY = z1.FLAGGROUPKEY AND y1.FLAGKEY = z1.FLAGKEY 
+        //                INNER JOIN network_planning.FLAGGROUPS x1 ON x1.PROJECTNO = y1.PROJECTNO AND x1.FLAGGROUPKEY = y1.FLAGGROUPKEY
 
-                        where 
-                        (x.flaggroupid = 'Candidate')  AND (y.flagid ='Accepted') 
-                        AND (x1.flaggroupid = 'Site Progress') AND (y1.flagid ='On Air') 
-                        AND (b1.PROJECTNO = 1) 
-                        and c1.idname like '%{siteID}%'").ToList();
-                return eTilts;
-            }
+        //                where 
+        //                (x.flaggroupid = 'Candidate')  AND (y.flagid ='Accepted') 
+        //                AND (x1.flaggroupid = 'Site Progress') AND (y1.flagid ='On Air') 
+        //                AND (b1.PROJECTNO = 1) 
+        //                and c1.idname like '%{siteID}%'").ToList();
+        //        return eTilts;
+        //    }
 
-        }
+        //}
 
-        private List<ViewModelTechnology> EtiltAsset4G()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var eTilts = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
-                    select 
-                    a.cellid as CellID, b4.idname as CellName,la.INDEXNO as LOGINDEX,	
+        //private List<ViewModelTechnology> EtiltAsset4G()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var eTilts = contextAsset.Database.SqlQuery<ViewModelTechnology>($@"
+        //            select 
+        //            a.cellid as CellID, b4.idname as CellName,la.INDEXNO as LOGINDEX,	
 
-                    case when la.INHERITMASTERPATTERN=0 then ap.downtilt
-                    when la.INHERITMASTERPATTERN=1 then ap1.downtilt 
-                    when la.INHERITMASTERPATTERN=2 then ap2.downtilt
-                    when la.INHERITMASTERPATTERN=3 then ap3.downtilt
-                    when la.INHERITMASTERPATTERN=4 then ap4.downtilt
-                    end AS Etilt
-
-
-                    from LOGLTECELL a       
-                    INNER JOIN LogLteCellCar a1 ON a1.PROJECTNO =a.PROJECTNO AND a1.logcellfk = a.LOGCELLFK    
-                    INNER JOIN logcell b4 ON b4.PROJECTNO =a.PROJECTNO AND b4.LOGCELLPK = a.LOGCELLFK   
-                    INNER JOIN LOGNODE b5 ON b4.PROJECTNO = b5.PROJECTNO AND b4.LOGNODEFK = b5.LOGNODEPK
-                    inner join network_planning.SITEADDRESS h ON b5.projectno = h.projectno AND b5.addressfk = h.addresskey
-                    INNER JOIN network_planning.LOGcellFEEDER f ON a.PROJECTNO = f.projectno AND a.LOGCELLFK = f.LOGCELLFK 
-
-                    inner join logicalantenna la on la.PROJECTno=f.PROJECTno and la.LOGANTENNAPK =f.LOGANTENNAfK
-                    inner join phyantenna pa on pa.PROJECTNO = la.PROJECTNO and pa.PHYANTENNAPK = la.PHYANTENNAFK
-                    INNER JOIN  ANTENNAPATTERN ap  on ap.PROJECTNO = la.PROJECTNO and la.anttypefk = ap.patternpk 
-                    inner join ANTENNAPATTERN ap1 on ap1.PROJECTNO = pa.PROJECTNO and ap1.PATTERNPK = pa.MASTERPATTERN1FK
-                    inner join ANTENNAPATTERN ap2 on ap2.PROJECTNO = pa.PROJECTNO and ap2.PATTERNPK = pa.MASTERPATTERN2FK
-                    inner join ANTENNAPATTERN ap3 on ap3.PROJECTNO = pa.PROJECTNO and ap3.PATTERNPK = pa.MASTERPATTERN3FK
-                    inner join ANTENNAPATTERN ap4 on ap4.PROJECTNO = pa.PROJECTNO and ap4.PATTERNPK = pa.MASTERPATTERN4FK
+        //            case when la.INHERITMASTERPATTERN=0 then ap.downtilt
+        //            when la.INHERITMASTERPATTERN=1 then ap1.downtilt 
+        //            when la.INHERITMASTERPATTERN=2 then ap2.downtilt
+        //            when la.INHERITMASTERPATTERN=3 then ap3.downtilt
+        //            when la.INHERITMASTERPATTERN=4 then ap4.downtilt
+        //            end AS Etilt
 
 
-                    inner join network_planning.FLAGVALUES z ON b5.projectno = z.projectno AND b5.lognodepk = z.objectkey 
-                    INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 
-                    INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY
+        //            from LOGLTECELL a       
+        //            INNER JOIN LogLteCellCar a1 ON a1.PROJECTNO =a.PROJECTNO AND a1.logcellfk = a.LOGCELLFK    
+        //            INNER JOIN logcell b4 ON b4.PROJECTNO =a.PROJECTNO AND b4.LOGCELLPK = a.LOGCELLFK   
+        //            INNER JOIN LOGNODE b5 ON b4.PROJECTNO = b5.PROJECTNO AND b4.LOGNODEFK = b5.LOGNODEPK
+        //            inner join network_planning.SITEADDRESS h ON b5.projectno = h.projectno AND b5.addressfk = h.addresskey
+        //            INNER JOIN network_planning.LOGcellFEEDER f ON a.PROJECTNO = f.projectno AND a.LOGCELLFK = f.LOGCELLFK 
+
+        //            inner join logicalantenna la on la.PROJECTno=f.PROJECTno and la.LOGANTENNAPK =f.LOGANTENNAfK
+        //            inner join phyantenna pa on pa.PROJECTNO = la.PROJECTNO and pa.PHYANTENNAPK = la.PHYANTENNAFK
+        //            INNER JOIN  ANTENNAPATTERN ap  on ap.PROJECTNO = la.PROJECTNO and la.anttypefk = ap.patternpk 
+        //            inner join ANTENNAPATTERN ap1 on ap1.PROJECTNO = pa.PROJECTNO and ap1.PATTERNPK = pa.MASTERPATTERN1FK
+        //            inner join ANTENNAPATTERN ap2 on ap2.PROJECTNO = pa.PROJECTNO and ap2.PATTERNPK = pa.MASTERPATTERN2FK
+        //            inner join ANTENNAPATTERN ap3 on ap3.PROJECTNO = pa.PROJECTNO and ap3.PATTERNPK = pa.MASTERPATTERN3FK
+        //            inner join ANTENNAPATTERN ap4 on ap4.PROJECTNO = pa.PROJECTNO and ap4.PATTERNPK = pa.MASTERPATTERN4FK
 
 
-                    where (x.flaggroupid = 'Candidate')  
-                    AND (y.flagid ='Accepted') 
-                    AND (a.PROJECTNO = 1) 
-                    and b5.idname like '%{siteID}%'").ToList();
-                return eTilts;
-            }
-
-        }
-
-        private List<ViewModelTechnology> Get2GSiteAsset()
-        {
-
-            using (var contextAsset = new Entities())
-            {
-                var outputGSM = (
-                    from gsmCell in contextAsset.GSMCELLs
-                    join logCell in contextAsset.LOGCELLs on
-                        new { prj = gsmCell.PROJECTNO, logCell1 = gsmCell.LOGCELLFK }
-                        equals new { prj = logCell.PROJECTNO, logCell1 = logCell.LOGCELLPK }
-                    join muNode in contextAsset.MUNODEs on
-                        new { prj = logCell.PROJECTNO, logNode1 = logCell.LOGNODEFK }
-                        equals new { prj = muNode.PROJECTNO, logNode1 = muNode.LOGNODEPK }
-                    join logNode in contextAsset.LOGNODEs on
-                        new { prj = muNode.PROJECTNO, LOGNODEPK = muNode.LOGNODEPK }
-                        equals new { prj = logNode.PROJECTNO, LOGNODEPK = logNode.LOGNODEPK }
-                    join siteAddress in contextAsset.SITEADDRESSes on
-                        new { prj = logNode.PROJECTNO, ADDRESS = logNode.ADDRESSFK }
-                        equals new { prj = siteAddress.PROJECTNO, ADDRESS = siteAddress.ADDRESSKEY }
-                    join cellayData in contextAsset.CELLAYDATAs on
-                        new { prj = gsmCell.PROJECTNO, CELL = gsmCell.LOGCELLFK }
-                        equals new { prj = cellayData.PROJECTNO, CELL = cellayData.CELLKEY }
-                    join logcellfeeder in contextAsset.LOGCELLFEEDERs on
-                        new { prj = logCell.PROJECTNO, LOGCELL = logCell.LOGCELLPK, CELLAYKEY = cellayData.CELLAYKEY }
-                        equals new { prj = logcellfeeder.PROJECTNO, LOGCELL = logcellfeeder.LOGCELLFK, CELLAYKEY = logcellfeeder.GSM1CELLLAYERFK }
-                    join feeder in contextAsset.FEEDERs on logcellfeeder.FEEDERFK equals feeder.FEEDERKEY
-                    join logicalantenna in contextAsset.LOGICALANTENNAs on
-                        new { prj = logcellfeeder.PROJECTNO, LOGANTENNA = logcellfeeder.LOGANTENNAFK }
-                        equals new { prj = logicalantenna.PROJECTNO, LOGANTENNA = logicalantenna.LOGANTENNAPK }
-                    join phyantenna in contextAsset.PHYANTENNAs on
-                        new { prj = logicalantenna.PROJECTNO, PHYANTENNA = logicalantenna.PHYANTENNAFK }
-                        equals new { prj = phyantenna.PROJECTNO, PHYANTENNA = phyantenna.PHYANTENNAPK }
-                    join antennaDevice in contextAsset.ANTENNADEVICEs on
-                        new { prj = phyantenna.PROJECTNO, DEVICE = (decimal)phyantenna.DEVICEFK }
-                        equals new { prj = antennaDevice.PROJECTNO, DEVICE = antennaDevice.DEVICEPK }
-                    join logconnection in contextAsset.LOGCONNECTIONs
-                        on new { prj = logNode.PROJECTNO, logconnection = logNode.LOGNODEPK }
-                        equals new { prj = logconnection.PROJECTNO, logconnection = logconnection.LOGNODEBFK }
-                    join bsc in contextAsset.BSCs
-                        on new { prj = logconnection.PROJECTNO, lognode = logconnection.LOGNODEAFK }
-                        equals new { prj = bsc.PROJECTNO, lognode = bsc.LOGNODEPK }
+        //            inner join network_planning.FLAGVALUES z ON b5.projectno = z.projectno AND b5.lognodepk = z.objectkey 
+        //            INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 
+        //            INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY
 
 
-                    join flag in contextAsset.FLAGVALUES on new { logNode.PROJECTNO, flag = logNode.LOGNODEPK } equals new { flag.PROJECTNO, flag = flag.OBJECTKEY }
-                    join flag1 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag1 = gsmCell.LOGCELLFK } equals new { flag1.PROJECTNO, flag1 = flag1.OBJECTKEY }
-                    join flag2 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag2 = gsmCell.LOGCELLFK } equals new { flag2.PROJECTNO, flag2 = flag2.OBJECTKEY }
-                    join flag3 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag3 = gsmCell.LOGCELLFK } equals new { flag3.PROJECTNO, flag3 = flag3.OBJECTKEY }
-                    join flag4 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag4 = gsmCell.LOGCELLFK } equals new { flag4.PROJECTNO, flag4 = flag4.OBJECTKEY }
-                    join flag5 in contextAsset.FLAGVALUES on new { logNode.PROJECTNO, flag5 = logNode.LOGNODEPK } equals new { flag5.PROJECTNO, flag5 = flag5.OBJECTKEY }
-                    join flag6 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag6 = gsmCell.LOGCELLFK } equals new { flag6.PROJECTNO, flag6 = flag6.OBJECTKEY }
+        //            where (x.flaggroupid = 'Candidate')  
+        //            AND (y.flagid ='Accepted') 
+        //            AND (a.PROJECTNO = 1) 
+        //            and b5.idname like '%{siteID}%'").ToList();
+        //        return eTilts;
+        //    }
 
-                    where siteAddress.PROJECTNO == 1 && siteAddress.IDNAME.Contains(siteID)
-                    && flag.FLAGGROUP.FLAGGROUPID == "Candidate" && flag.FLAG.FLAGID == "Accepted"
-                    && flag1.FLAGGROUP.FLAGGROUPID == "TMA"
-                    && flag2.FLAGGROUP.FLAGGROUPID == "RRU type"
-                    && flag3.FLAGGROUP.FLAGGROUPID == "Combiner/Splitter"
-                    && flag4.FLAGGROUP.FLAGGROUPID == "2nd Combiner"
-                    && flag5.FLAGGROUP.FLAGGROUPID == "Co-Location"
-                    && flag6.FLAGGROUP.FLAGGROUPID == "Antenna Mounting"
+        //}
 
+        //private List<ViewModelTechnology> Get2GSiteAsset()
+        //{
 
-
-                    select new ViewModelTechnology
-                    {
-                        Controler = bsc.LOGNODE.IDNAME,
-                        SiteID = siteAddress.IDNAME,
-                        Candidate = siteAddress.IDNAME.Substring(10, 1),
-                        SiteName = logNode.NAME,
-                        SiteAddress = siteAddress.TOWN,
-                        SiteAddress1 = siteAddress.ADDRESS1,
-                        SiteAddress2 = siteAddress.ADDRESS2,
-                        AntennaType = antennaDevice.IDNAME,
-                        PHYINDEX = phyantenna.PHYINDEX,
-                        Azimuth = phyantenna.AZIMUTH,
-                        AGL = phyantenna.HEIGHT,
-                        ARTL = phyantenna.HEIGHTOFFSET,
-                        MECHANICAL_TILT = phyantenna.TILT,
-
-                        //New Add Port binding 13.02.2018
-                        LOGINDEX = logicalantenna.INDEXNO,
-                        PortNumber = logicalantenna.PORTS,
-
-
-                        FEEDERLENGTH = logcellfeeder.FEEDERLEN,
-                        FEEDERTYPE = feeder.IDNAME,
-                        CellName = logCell.IDNAME,
-                        Sector = logCell.IDNAME.Substring(4, 1),
-                        RRU_Type = flag2.FLAG.FLAGID,
-
-                        //12.04.2017 New way of GSM TRX counting. You don’t have to assign carriers anymore.
-                        GSM_TRX = cellayData.CARLAYDATAs.Sum(n => n.TRXREQUIRED),
-                        GSM_Pwr_per_TRX = cellayData.OUTPUTPOWER,
-                        UMTS_TRX = 0,
-                        UMTS_Pwr_per_TRX = 0,
-                        LTE_TRX = 0,
-                        LTE_Pwr_per_TRX = 0,
-                        NR_TRX = 0,
-                        NR_Pwr_per_TRX = 0,
-                        LAYER_TECHNOLOGY = "G",
-                        Band = cellayData.CELLAY.IDNAME.Contains("900") ? "900" : "1800",
-                        TMA = flag1.FLAG.FLAGID,
-                        COMBINER_SPLITTER = flag3.FLAG.FLAGID,
-                        SEC_COMBINER_SPLITTER = flag4.FLAG.FLAGID,
-                        CoLocation = flag5.FLAG.FLAGID,
-                        ANTENNA_MOUNT = flag6.FLAG.FLAGID,
-                        CellID = gsmCell.GSMID,
-
-                    }
-
-                ).Distinct();
-                var tech2G = outputGSM.ToList();
-
-                foreach (var tech in tech2G)
-                {
-                    if (tech.Band == "900")
-                        tech.GSM_TRX = 1;
-                    else if (tech.Band == "1800")
-                        tech.GSM_TRX = 0;
-                }
-
-                return tech2G;
-
-            }
-        }
-
-        private List<ViewModelTechnology> Get3GSiteAsset()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var outputUMTS = (
-
-                  from siteaddress in contextAsset.SITEADDRESSes
-                  from lognode in siteaddress.LOGNODEs
-                  from logcell in lognode.LOGCELLs
-                  from cell in logcell.LOGUMTSCELLs
-                  from logcellfeeder in logcell.LOGCELLFEEDERs
-
-                  join feeder in contextAsset.FEEDERs on logcellfeeder.FEEDERFK equals feeder.FEEDERKEY
-                  join logicalantenna in contextAsset.LOGICALANTENNAs on logcellfeeder.LOGANTENNAFK equals logicalantenna.LOGANTENNAPK
-                  join phyantenna in contextAsset.PHYANTENNAs on logicalantenna.PHYANTENNAFK equals phyantenna.PHYANTENNAPK
-                  join antennaDevice in contextAsset.ANTENNADEVICEs on phyantenna.DEVICEFK equals antennaDevice.DEVICEPK
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var outputGSM = (
+        //            from gsmCell in contextAsset.GSMCELLs
+        //            join logCell in contextAsset.LOGCELLs on
+        //                new { prj = gsmCell.PROJECTNO, logCell1 = gsmCell.LOGCELLFK }
+        //                equals new { prj = logCell.PROJECTNO, logCell1 = logCell.LOGCELLPK }
+        //            join muNode in contextAsset.MUNODEs on
+        //                new { prj = logCell.PROJECTNO, logNode1 = logCell.LOGNODEFK }
+        //                equals new { prj = muNode.PROJECTNO, logNode1 = muNode.LOGNODEPK }
+        //            join logNode in contextAsset.LOGNODEs on
+        //                new { prj = muNode.PROJECTNO, LOGNODEPK = muNode.LOGNODEPK }
+        //                equals new { prj = logNode.PROJECTNO, LOGNODEPK = logNode.LOGNODEPK }
+        //            join siteAddress in contextAsset.SITEADDRESSes on
+        //                new { prj = logNode.PROJECTNO, ADDRESS = logNode.ADDRESSFK }
+        //                equals new { prj = siteAddress.PROJECTNO, ADDRESS = siteAddress.ADDRESSKEY }
+        //            join cellayData in contextAsset.CELLAYDATAs on
+        //                new { prj = gsmCell.PROJECTNO, CELL = gsmCell.LOGCELLFK }
+        //                equals new { prj = cellayData.PROJECTNO, CELL = cellayData.CELLKEY }
+        //            join logcellfeeder in contextAsset.LOGCELLFEEDERs on
+        //                new { prj = logCell.PROJECTNO, LOGCELL = logCell.LOGCELLPK, CELLAYKEY = cellayData.CELLAYKEY }
+        //                equals new { prj = logcellfeeder.PROJECTNO, LOGCELL = logcellfeeder.LOGCELLFK, CELLAYKEY = logcellfeeder.GSM1CELLLAYERFK }
+        //            join feeder in contextAsset.FEEDERs on logcellfeeder.FEEDERFK equals feeder.FEEDERKEY
+        //            join logicalantenna in contextAsset.LOGICALANTENNAs on
+        //                new { prj = logcellfeeder.PROJECTNO, LOGANTENNA = logcellfeeder.LOGANTENNAFK }
+        //                equals new { prj = logicalantenna.PROJECTNO, LOGANTENNA = logicalantenna.LOGANTENNAPK }
+        //            join phyantenna in contextAsset.PHYANTENNAs on
+        //                new { prj = logicalantenna.PROJECTNO, PHYANTENNA = logicalantenna.PHYANTENNAFK }
+        //                equals new { prj = phyantenna.PROJECTNO, PHYANTENNA = phyantenna.PHYANTENNAPK }
+        //            join antennaDevice in contextAsset.ANTENNADEVICEs on
+        //                new { prj = phyantenna.PROJECTNO, DEVICE = (decimal)phyantenna.DEVICEFK }
+        //                equals new { prj = antennaDevice.PROJECTNO, DEVICE = antennaDevice.DEVICEPK }
+        //            join logconnection in contextAsset.LOGCONNECTIONs
+        //                on new { prj = logNode.PROJECTNO, logconnection = logNode.LOGNODEPK }
+        //                equals new { prj = logconnection.PROJECTNO, logconnection = logconnection.LOGNODEBFK }
+        //            join bsc in contextAsset.BSCs
+        //                on new { prj = logconnection.PROJECTNO, lognode = logconnection.LOGNODEAFK }
+        //                equals new { prj = bsc.PROJECTNO, lognode = bsc.LOGNODEPK }
 
 
-                  from cellcar in cell.LOGUMTSCELLCARs
+        //            join flag in contextAsset.FLAGVALUES on new { logNode.PROJECTNO, flag = logNode.LOGNODEPK } equals new { flag.PROJECTNO, flag = flag.OBJECTKEY }
+        //            join flag1 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag1 = gsmCell.LOGCELLFK } equals new { flag1.PROJECTNO, flag1 = flag1.OBJECTKEY }
+        //            join flag2 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag2 = gsmCell.LOGCELLFK } equals new { flag2.PROJECTNO, flag2 = flag2.OBJECTKEY }
+        //            join flag3 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag3 = gsmCell.LOGCELLFK } equals new { flag3.PROJECTNO, flag3 = flag3.OBJECTKEY }
+        //            join flag4 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag4 = gsmCell.LOGCELLFK } equals new { flag4.PROJECTNO, flag4 = flag4.OBJECTKEY }
+        //            join flag5 in contextAsset.FLAGVALUES on new { logNode.PROJECTNO, flag5 = logNode.LOGNODEPK } equals new { flag5.PROJECTNO, flag5 = flag5.OBJECTKEY }
+        //            join flag6 in contextAsset.FLAGVALUES on new { gsmCell.PROJECTNO, flag6 = gsmCell.LOGCELLFK } equals new { flag6.PROJECTNO, flag6 = flag6.OBJECTKEY }
 
-                  join tma in contextAsset.MASTHEADAMPs on logcellfeeder.MHAFK equals tma.MHAKEY into tmaLeftJoin
-                  from tma in tmaLeftJoin.DefaultIfEmpty()
-
-                      //RNC part 
-                  join munode in contextAsset.MUNODEs
-                      on new { prj = logcell.PROJECTNO, lognode = logcell.LOGNODEFK }
-                      equals new { prj = munode.PROJECTNO, lognode = munode.LOGNODEPK }
-
-                  join lognode1 in contextAsset.LOGNODEs
-                  on new { prj = munode.PROJECTNO, lognode = munode.LOGNODE.LOGNODEPK }
-                  equals new { prj = lognode1.PROJECTNO, lognode = lognode1.LOGNODEPK }
-
-                  join logconnection in contextAsset.LOGCONNECTIONs
-                  on new { prj = lognode1.PROJECTNO, logconnection = lognode1.LOGNODEPK }
-                  equals new { prj = logconnection.PROJECTNO, logconnection = logconnection.LOGNODEBFK }
-
-                  join rnc in contextAsset.LOGRNCs
-                  on new { prj = logconnection.PROJECTNO, lognode = logconnection.LOGNODEAFK }
-                  equals new { prj = rnc.PROJECTNO, lognode = rnc.LOGNODEPK }
-                  //RNC part
+        //            where siteAddress.PROJECTNO == 1 && siteAddress.IDNAME.Contains(siteID)
+        //            && flag.FLAGGROUP.FLAGGROUPID == "Candidate" && flag.FLAG.FLAGID == "Accepted"
+        //            && flag1.FLAGGROUP.FLAGGROUPID == "TMA"
+        //            && flag2.FLAGGROUP.FLAGGROUPID == "RRU type"
+        //            && flag3.FLAGGROUP.FLAGGROUPID == "Combiner/Splitter"
+        //            && flag4.FLAGGROUP.FLAGGROUPID == "2nd Combiner"
+        //            && flag5.FLAGGROUP.FLAGGROUPID == "Co-Location"
+        //            && flag6.FLAGGROUP.FLAGGROUPID == "Antenna Mounting"
 
 
-                  join flag in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag = lognode.LOGNODEPK } equals new { flag.PROJECTNO, flag = flag.OBJECTKEY }
-                  join flag1 in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag1 = logcell.LOGCELLPK } equals new { flag1.PROJECTNO, flag1 = flag1.OBJECTKEY }
-                  join flag2 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag2 = cell.LOGCELLFK } equals new { flag2.PROJECTNO, flag2 = flag2.OBJECTKEY }
-                  join flag3 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag3 = cell.LOGCELLFK } equals new { flag3.PROJECTNO, flag3 = flag3.OBJECTKEY }
-                  join flag4 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag4 = cell.LOGCELLFK } equals new { flag4.PROJECTNO, flag4 = flag4.OBJECTKEY }
-                  join flag5 in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag5 = lognode.LOGNODEPK } equals new { flag5.PROJECTNO, flag5 = flag5.OBJECTKEY }
-                  join flag6 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag6 = cell.LOGCELLFK } equals new { flag6.PROJECTNO, flag6 = flag6.OBJECTKEY }
 
-                  where lognode.SITEADDRESS.PROJECTNO == 1 && lognode.SITEADDRESS.IDNAME.Contains(siteID)
-                  && flag.FLAGGROUP.FLAGGROUPID == "Candidate" && flag.FLAG.FLAGID == "Accepted"
-                  && flag1.FLAGGROUP.FLAGGROUPID == "Site Progress" && flag1.FLAG.FLAGID == "On Air"
-                  && flag2.FLAGGROUP.FLAGGROUPID == "RRU type"
-                  && flag3.FLAGGROUP.FLAGGROUPID == "Combiner/Splitter"
-                  && flag4.FLAGGROUP.FLAGGROUPID == "2nd Combiner"
-                  && flag5.FLAGGROUP.FLAGGROUPID == "Co-Location"
-                  && flag6.FLAGGROUP.FLAGGROUPID == "Antenna Mounting"
+        //            select new ViewModelTechnology
+        //            {
+        //                Controler = bsc.LOGNODE.IDNAME,
+        //                SiteID = siteAddress.IDNAME,
+        //                Candidate = siteAddress.IDNAME.Substring(10, 1),
+        //                SiteName = logNode.NAME,
+        //                SiteAddress = siteAddress.TOWN,
+        //                SiteAddress1 = siteAddress.ADDRESS1,
+        //                SiteAddress2 = siteAddress.ADDRESS2,
+        //                AntennaType = antennaDevice.IDNAME,
+        //                PHYINDEX = phyantenna.PHYINDEX,
+        //                Azimuth = phyantenna.AZIMUTH,
+        //                AGL = phyantenna.HEIGHT,
+        //                ARTL = phyantenna.HEIGHTOFFSET,
+        //                MECHANICAL_TILT = phyantenna.TILT,
+
+        //                //New Add Port binding 13.02.2018
+        //                LOGINDEX = logicalantenna.INDEXNO,
+        //                PortNumber = logicalantenna.PORTS,
+
+
+        //                FEEDERLENGTH = logcellfeeder.FEEDERLEN,
+        //                FEEDERTYPE = feeder.IDNAME,
+        //                CellName = logCell.IDNAME,
+        //                Sector = logCell.IDNAME.Substring(4, 1),
+        //                RRU_Type = flag2.FLAG.FLAGID,
+
+        //                //12.04.2017 New way of GSM TRX counting. You don’t have to assign carriers anymore.
+        //                GSM_TRX = cellayData.CARLAYDATAs.Sum(n => n.TRXREQUIRED),
+        //                GSM_Pwr_per_TRX = cellayData.OUTPUTPOWER,
+        //                UMTS_TRX = 0,
+        //                UMTS_Pwr_per_TRX = 0,
+        //                LTE_TRX = 0,
+        //                LTE_Pwr_per_TRX = 0,
+        //                NR_TRX = 0,
+        //                NR_Pwr_per_TRX = 0,
+        //                LAYER_TECHNOLOGY = "G",
+        //                Band = cellayData.CELLAY.IDNAME.Contains("900") ? "900" : "1800",
+        //                TMA = flag1.FLAG.FLAGID,
+        //                COMBINER_SPLITTER = flag3.FLAG.FLAGID,
+        //                SEC_COMBINER_SPLITTER = flag4.FLAG.FLAGID,
+        //                CoLocation = flag5.FLAG.FLAGID,
+        //                ANTENNA_MOUNT = flag6.FLAG.FLAGID,
+        //                CellID = gsmCell.GSMID,
+
+        //            }
+
+        //        ).Distinct();
+        //        var tech2G = outputGSM.ToList();
+
+        //        foreach (var tech in tech2G)
+        //        {
+        //            if (tech.Band == "900")
+        //                tech.GSM_TRX = 1;
+        //            else if (tech.Band == "1800")
+        //                tech.GSM_TRX = 0;
+        //        }
+
+        //        return tech2G;
+
+        //    }
+        //}
+
+        //private List<ViewModelTechnology> Get3GSiteAsset()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var outputUMTS = (
+
+        //          from siteaddress in contextAsset.SITEADDRESSes
+        //          from lognode in siteaddress.LOGNODEs
+        //          from logcell in lognode.LOGCELLs
+        //          from cell in logcell.LOGUMTSCELLs
+        //          from logcellfeeder in logcell.LOGCELLFEEDERs
+
+        //          join feeder in contextAsset.FEEDERs on logcellfeeder.FEEDERFK equals feeder.FEEDERKEY
+        //          join logicalantenna in contextAsset.LOGICALANTENNAs on logcellfeeder.LOGANTENNAFK equals logicalantenna.LOGANTENNAPK
+        //          join phyantenna in contextAsset.PHYANTENNAs on logicalantenna.PHYANTENNAFK equals phyantenna.PHYANTENNAPK
+        //          join antennaDevice in contextAsset.ANTENNADEVICEs on phyantenna.DEVICEFK equals antennaDevice.DEVICEPK
+
+
+        //          from cellcar in cell.LOGUMTSCELLCARs
+
+        //          join tma in contextAsset.MASTHEADAMPs on logcellfeeder.MHAFK equals tma.MHAKEY into tmaLeftJoin
+        //          from tma in tmaLeftJoin.DefaultIfEmpty()
+
+        //              //RNC part 
+        //          join munode in contextAsset.MUNODEs
+        //              on new { prj = logcell.PROJECTNO, lognode = logcell.LOGNODEFK }
+        //              equals new { prj = munode.PROJECTNO, lognode = munode.LOGNODEPK }
+
+        //          join lognode1 in contextAsset.LOGNODEs
+        //          on new { prj = munode.PROJECTNO, lognode = munode.LOGNODE.LOGNODEPK }
+        //          equals new { prj = lognode1.PROJECTNO, lognode = lognode1.LOGNODEPK }
+
+        //          join logconnection in contextAsset.LOGCONNECTIONs
+        //          on new { prj = lognode1.PROJECTNO, logconnection = lognode1.LOGNODEPK }
+        //          equals new { prj = logconnection.PROJECTNO, logconnection = logconnection.LOGNODEBFK }
+
+        //          join rnc in contextAsset.LOGRNCs
+        //          on new { prj = logconnection.PROJECTNO, lognode = logconnection.LOGNODEAFK }
+        //          equals new { prj = rnc.PROJECTNO, lognode = rnc.LOGNODEPK }
+        //          //RNC part
+
+
+        //          join flag in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag = lognode.LOGNODEPK } equals new { flag.PROJECTNO, flag = flag.OBJECTKEY }
+        //          join flag1 in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag1 = logcell.LOGCELLPK } equals new { flag1.PROJECTNO, flag1 = flag1.OBJECTKEY }
+        //          join flag2 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag2 = cell.LOGCELLFK } equals new { flag2.PROJECTNO, flag2 = flag2.OBJECTKEY }
+        //          join flag3 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag3 = cell.LOGCELLFK } equals new { flag3.PROJECTNO, flag3 = flag3.OBJECTKEY }
+        //          join flag4 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag4 = cell.LOGCELLFK } equals new { flag4.PROJECTNO, flag4 = flag4.OBJECTKEY }
+        //          join flag5 in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag5 = lognode.LOGNODEPK } equals new { flag5.PROJECTNO, flag5 = flag5.OBJECTKEY }
+        //          join flag6 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag6 = cell.LOGCELLFK } equals new { flag6.PROJECTNO, flag6 = flag6.OBJECTKEY }
+
+        //          where lognode.SITEADDRESS.PROJECTNO == 1 && lognode.SITEADDRESS.IDNAME.Contains(siteID)
+        //          && flag.FLAGGROUP.FLAGGROUPID == "Candidate" && flag.FLAG.FLAGID == "Accepted"
+        //          && flag1.FLAGGROUP.FLAGGROUPID == "Site Progress" && flag1.FLAG.FLAGID == "On Air"
+        //          && flag2.FLAGGROUP.FLAGGROUPID == "RRU type"
+        //          && flag3.FLAGGROUP.FLAGGROUPID == "Combiner/Splitter"
+        //          && flag4.FLAGGROUP.FLAGGROUPID == "2nd Combiner"
+        //          && flag5.FLAGGROUP.FLAGGROUPID == "Co-Location"
+        //          && flag6.FLAGGROUP.FLAGGROUPID == "Antenna Mounting"
 
                 
-                select new ViewModelTechnology
-                  {
-                      Controler = rnc.LOGNODE.IDNAME,
-                      SiteID = siteaddress.IDNAME,
-                      Candidate = lognode.SITEADDRESS.IDNAME.Substring(10, 1),
-                      SiteName = lognode.NAME,
-                      SiteAddress = siteaddress.TOWN,
-                      SiteAddress1 = siteaddress.ADDRESS1,
-                      SiteAddress2 = siteaddress.ADDRESS2,
-                      AntennaType = antennaDevice.IDNAME,
-                      PHYINDEX = phyantenna.PHYINDEX,
-                      Azimuth = phyantenna.AZIMUTH,
-                      AGL = phyantenna.HEIGHT,
-                      ARTL = phyantenna.HEIGHTOFFSET,
-                      MECHANICAL_TILT = phyantenna.TILT,
+        //        select new ViewModelTechnology
+        //          {
+        //              Controler = rnc.LOGNODE.IDNAME,
+        //              SiteID = siteaddress.IDNAME,
+        //              Candidate = lognode.SITEADDRESS.IDNAME.Substring(10, 1),
+        //              SiteName = lognode.NAME,
+        //              SiteAddress = siteaddress.TOWN,
+        //              SiteAddress1 = siteaddress.ADDRESS1,
+        //              SiteAddress2 = siteaddress.ADDRESS2,
+        //              AntennaType = antennaDevice.IDNAME,
+        //              PHYINDEX = phyantenna.PHYINDEX,
+        //              Azimuth = phyantenna.AZIMUTH,
+        //              AGL = phyantenna.HEIGHT,
+        //              ARTL = phyantenna.HEIGHTOFFSET,
+        //              MECHANICAL_TILT = phyantenna.TILT,
 
-                      //New Add Port binding 13.02.2018
-                      //LOGINDEX = umtsfeeder.LOGICALANTENNA.INDEXNO,
-                      //PortNumber = umtsfeeder.LOGICALANTENNA.PORTS,
+        //              //New Add Port binding 13.02.2018
+        //              //LOGINDEX = umtsfeeder.LOGICALANTENNA.INDEXNO,
+        //              //PortNumber = umtsfeeder.LOGICALANTENNA.PORTS,
 
-                      FEEDERLENGTH = logcellfeeder.FEEDERLEN,
-                      FEEDERTYPE = feeder.IDNAME,
-                      CellName = logcell.IDNAME,
-                      Sector = logcell.IDNAME.Substring(4, 1),
-                      RRU_Type = flag2.FLAG.FLAGID,
-                      GSM_TRX = 0,
-                      GSM_Pwr_per_TRX = 0,
-                      UMTS_TRX = 1,
-                      UMTS_Pwr_per_TRX = cellcar.MAXTXPOWER,
-                      LTE_TRX = 0,
-                      LTE_Pwr_per_TRX = 0,
-                      NR_TRX = 0,
-                      NR_Pwr_per_TRX = 0,
-                      LAYER_TECHNOLOGY = "U",
-                      Band = cellcar.LOGUMTSCAR.TGCARRIER.DOWNLINKCH > 10000 ? "2100" : "900",
-                      TMA = tma.IDNAME,
-                      COMBINER_SPLITTER = flag3.FLAG.FLAGID,
-                      SEC_COMBINER_SPLITTER = flag4.FLAG.FLAGID,
-                      CoLocation = flag5.FLAG.FLAGID,
-                      ANTENNA_MOUNT = flag6.FLAG.FLAGID,
-                      CellID = cell.UMTSCELLID
+        //              FEEDERLENGTH = logcellfeeder.FEEDERLEN,
+        //              FEEDERTYPE = feeder.IDNAME,
+        //              CellName = logcell.IDNAME,
+        //              Sector = logcell.IDNAME.Substring(4, 1),
+        //              RRU_Type = flag2.FLAG.FLAGID,
+        //              GSM_TRX = 0,
+        //              GSM_Pwr_per_TRX = 0,
+        //              UMTS_TRX = 1,
+        //              UMTS_Pwr_per_TRX = cellcar.MAXTXPOWER,
+        //              LTE_TRX = 0,
+        //              LTE_Pwr_per_TRX = 0,
+        //              NR_TRX = 0,
+        //              NR_Pwr_per_TRX = 0,
+        //              LAYER_TECHNOLOGY = "U",
+        //              Band = cellcar.LOGUMTSCAR.TGCARRIER.DOWNLINKCH > 10000 ? "2100" : "900",
+        //              TMA = tma.IDNAME,
+        //              COMBINER_SPLITTER = flag3.FLAG.FLAGID,
+        //              SEC_COMBINER_SPLITTER = flag4.FLAG.FLAGID,
+        //              CoLocation = flag5.FLAG.FLAGID,
+        //              ANTENNA_MOUNT = flag6.FLAG.FLAGID,
+        //              CellID = cell.UMTSCELLID
 
-                  }
+        //          }
 
-                  ).Distinct().ToList();
+        //          ).Distinct().ToList();
 
-                return outputUMTS;
-            }
-        }
+        //        return outputUMTS;
+        //    }
+        //}
 
-        public List<ViewModelTechnology> Get4GSiteAsset()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var outputLTE = (
+        //public List<ViewModelTechnology> Get4GSiteAsset()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var outputLTE = (
 
-                 from siteaddress in contextAsset.SITEADDRESSes
-                 from lognode in siteaddress.LOGNODEs
-                 from logcell in lognode.LOGCELLs
-                 from cell in logcell.LOGLTECELLs
-                 from cellcar in cell.LOGLTECELLCARs
+        //         from siteaddress in contextAsset.SITEADDRESSes
+        //         from lognode in siteaddress.LOGNODEs
+        //         from logcell in lognode.LOGCELLs
+        //         from cell in logcell.LOGLTECELLs
+        //         from cellcar in cell.LOGLTECELLCARs
 
-                 from ltefeeder in logcell.LOGCELLFEEDERs
-                 join feeder in contextAsset.FEEDERs on ltefeeder.FEEDERFK equals feeder.FEEDERKEY
+        //         from ltefeeder in logcell.LOGCELLFEEDERs
+        //         join feeder in contextAsset.FEEDERs on ltefeeder.FEEDERFK equals feeder.FEEDERKEY
 
-                 join antennaDevice in contextAsset.ANTENNADEVICEs on ltefeeder.LOGICALANTENNA.PHYANTENNA.DEVICEFK equals antennaDevice.DEVICEPK
+        //         join antennaDevice in contextAsset.ANTENNADEVICEs on ltefeeder.LOGICALANTENNA.PHYANTENNA.DEVICEFK equals antennaDevice.DEVICEPK
 
-                 join tma in contextAsset.MASTHEADAMPs on ltefeeder.MHAFK equals tma.MHAKEY into tmaLeftJoin
-                 from tma in tmaLeftJoin.DefaultIfEmpty()
-
-
-                 join flag in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag = lognode.LOGNODEPK } equals new { flag.PROJECTNO, flag = flag.OBJECTKEY }
-                 join flag2 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag2 = cell.LOGCELLFK } equals new { flag2.PROJECTNO, flag2 = flag2.OBJECTKEY }
-                 join flag3 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag3 = cell.LOGCELLFK } equals new { flag3.PROJECTNO, flag3 = flag3.OBJECTKEY }
-                 join flag4 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag4 = cell.LOGCELLFK } equals new { flag4.PROJECTNO, flag4 = flag4.OBJECTKEY }
-                 join flag5 in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag5 = lognode.LOGNODEPK } equals new { flag5.PROJECTNO, flag5 = flag5.OBJECTKEY }
-                 join flag6 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag6 = cell.LOGCELLFK } equals new { flag6.PROJECTNO, flag6 = flag6.OBJECTKEY }
-
-                 where lognode.SITEADDRESS.PROJECTNO == 1 && lognode.SITEADDRESS.IDNAME.Contains(siteID)
-                 && flag.FLAGGROUP.FLAGGROUPID == "Candidate" && flag.FLAG.FLAGID == "Accepted"
-                 && flag2.FLAGGROUP.FLAGGROUPID == "RRU type"
-                 && flag3.FLAGGROUP.FLAGGROUPID == "Combiner/Splitter"
-                 && flag4.FLAGGROUP.FLAGGROUPID == "2nd Combiner"
-                 && flag5.FLAGGROUP.FLAGGROUPID == "Co-Location"
-                 && flag6.FLAGGROUP.FLAGGROUPID == "Antenna Mounting"
+        //         join tma in contextAsset.MASTHEADAMPs on ltefeeder.MHAFK equals tma.MHAKEY into tmaLeftJoin
+        //         from tma in tmaLeftJoin.DefaultIfEmpty()
 
 
-                 select new ViewModelTechnology
-                 {
-                     Bandwidth = cellcar.LOGLTECAR.LTECARRIER.BANDWIDTH_MHZ,
-                     Controler = " ",
-                     SiteID = siteaddress.IDNAME,
-                     Candidate = lognode.SITEADDRESS.IDNAME.Substring(10, 1),
-                     SiteName = lognode.NAME,
-                     SiteAddress = siteaddress.TOWN,
-                     SiteAddress1 = siteaddress.ADDRESS1,
-                     SiteAddress2 = siteaddress.ADDRESS2,
-                     AntennaType = antennaDevice.IDNAME,
-                     PHYINDEX = ltefeeder.LOGICALANTENNA.PHYANTENNA.PHYINDEX,
-                     Azimuth = ltefeeder.LOGICALANTENNA.PHYANTENNA.AZIMUTH,
-                     AGL = ltefeeder.LOGICALANTENNA.PHYANTENNA.HEIGHT,
-                     ARTL = ltefeeder.LOGICALANTENNA.PHYANTENNA.HEIGHTOFFSET,
-                     MECHANICAL_TILT = ltefeeder.LOGICALANTENNA.PHYANTENNA.TILT,
+        //         join flag in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag = lognode.LOGNODEPK } equals new { flag.PROJECTNO, flag = flag.OBJECTKEY }
+        //         join flag2 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag2 = cell.LOGCELLFK } equals new { flag2.PROJECTNO, flag2 = flag2.OBJECTKEY }
+        //         join flag3 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag3 = cell.LOGCELLFK } equals new { flag3.PROJECTNO, flag3 = flag3.OBJECTKEY }
+        //         join flag4 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag4 = cell.LOGCELLFK } equals new { flag4.PROJECTNO, flag4 = flag4.OBJECTKEY }
+        //         join flag5 in contextAsset.FLAGVALUES on new { lognode.PROJECTNO, flag5 = lognode.LOGNODEPK } equals new { flag5.PROJECTNO, flag5 = flag5.OBJECTKEY }
+        //         join flag6 in contextAsset.FLAGVALUES on new { cell.PROJECTNO, flag6 = cell.LOGCELLFK } equals new { flag6.PROJECTNO, flag6 = flag6.OBJECTKEY }
 
-                     //New Add Port binding 13.02.2018
-                     LOGINDEX = ltefeeder.LOGICALANTENNA.INDEXNO,
-                     PortNumber = ltefeeder.LOGICALANTENNA.PORTS,
+        //         where lognode.SITEADDRESS.PROJECTNO == 1 && lognode.SITEADDRESS.IDNAME.Contains(siteID)
+        //         && flag.FLAGGROUP.FLAGGROUPID == "Candidate" && flag.FLAG.FLAGID == "Accepted"
+        //         && flag2.FLAGGROUP.FLAGGROUPID == "RRU type"
+        //         && flag3.FLAGGROUP.FLAGGROUPID == "Combiner/Splitter"
+        //         && flag4.FLAGGROUP.FLAGGROUPID == "2nd Combiner"
+        //         && flag5.FLAGGROUP.FLAGGROUPID == "Co-Location"
+        //         && flag6.FLAGGROUP.FLAGGROUPID == "Antenna Mounting"
 
-                     FEEDERLENGTH = ltefeeder.FEEDERLEN,
-                     FEEDERTYPE = feeder.IDNAME,
-                     CellName = logcell.IDNAME,
-                     Sector = logcell.IDNAME.Substring(4, 1),
-                     RRU_Type = flag2.FLAG.FLAGID,
-                     GSM_TRX = 0,
-                     GSM_Pwr_per_TRX = 0,
-                     UMTS_TRX = 0,
-                     UMTS_Pwr_per_TRX = 0,
-                     LTE_TRX = 1,
-                     LTE_Pwr_per_TRX = cellcar.REFERENCESIGNALPPRE,
-                     NR_TRX = 0,
-                     NR_Pwr_per_TRX = 0,
-                     LAYER_TECHNOLOGY = "L",
-                     Band = cellcar.LOGLTECAR.LTECARRIER.IDNAME.Contains("1800") ? "1800" :
-                            cellcar.LOGLTECAR.LTECARRIER.IDNAME.Contains("900") ? "900" :
-                            cellcar.LOGLTECAR.LTECARRIER.IDNAME.Contains("2100") ? "2100" : "2600",
-                     TMA = tma.IDNAME,
-                     COMBINER_SPLITTER = flag3.FLAG.FLAGID,
-                     SEC_COMBINER_SPLITTER = flag4.FLAG.FLAGID,
-                     CoLocation = flag5.FLAG.FLAGID,
-                     ANTENNA_MOUNT = flag6.FLAG.FLAGID,
-                     CellID = cell.CELLID
-                 }
 
-                 ).Distinct().ToList();
+        //         select new ViewModelTechnology
+        //         {
+        //             Bandwidth = cellcar.LOGLTECAR.LTECARRIER.BANDWIDTH_MHZ,
+        //             Controler = " ",
+        //             SiteID = siteaddress.IDNAME,
+        //             Candidate = lognode.SITEADDRESS.IDNAME.Substring(10, 1),
+        //             SiteName = lognode.NAME,
+        //             SiteAddress = siteaddress.TOWN,
+        //             SiteAddress1 = siteaddress.ADDRESS1,
+        //             SiteAddress2 = siteaddress.ADDRESS2,
+        //             AntennaType = antennaDevice.IDNAME,
+        //             PHYINDEX = ltefeeder.LOGICALANTENNA.PHYANTENNA.PHYINDEX,
+        //             Azimuth = ltefeeder.LOGICALANTENNA.PHYANTENNA.AZIMUTH,
+        //             AGL = ltefeeder.LOGICALANTENNA.PHYANTENNA.HEIGHT,
+        //             ARTL = ltefeeder.LOGICALANTENNA.PHYANTENNA.HEIGHTOFFSET,
+        //             MECHANICAL_TILT = ltefeeder.LOGICALANTENNA.PHYANTENNA.TILT,
 
-                foreach (var lte in outputLTE)
-                    if (lte.Bandwidth != null && lte.LTE_Pwr_per_TRX != null)
-                        lte.LTE_Pwr_per_TRX = (decimal?)SupportFunc.ConvertW_dBm((SupportFunc.ConvertdBm_W((double)lte.LTE_Pwr_per_TRX) * 5 * (double)lte.Bandwidth * 12)); 
+        //             //New Add Port binding 13.02.2018
+        //             LOGINDEX = ltefeeder.LOGICALANTENNA.INDEXNO,
+        //             PortNumber = ltefeeder.LOGICALANTENNA.PORTS,
+
+        //             FEEDERLENGTH = ltefeeder.FEEDERLEN,
+        //             FEEDERTYPE = feeder.IDNAME,
+        //             CellName = logcell.IDNAME,
+        //             Sector = logcell.IDNAME.Substring(4, 1),
+        //             RRU_Type = flag2.FLAG.FLAGID,
+        //             GSM_TRX = 0,
+        //             GSM_Pwr_per_TRX = 0,
+        //             UMTS_TRX = 0,
+        //             UMTS_Pwr_per_TRX = 0,
+        //             LTE_TRX = 1,
+        //             LTE_Pwr_per_TRX = cellcar.REFERENCESIGNALPPRE,
+        //             NR_TRX = 0,
+        //             NR_Pwr_per_TRX = 0,
+        //             LAYER_TECHNOLOGY = "L",
+        //             Band = cellcar.LOGLTECAR.LTECARRIER.IDNAME.Contains("1800") ? "1800" :
+        //                    cellcar.LOGLTECAR.LTECARRIER.IDNAME.Contains("900") ? "900" :
+        //                    cellcar.LOGLTECAR.LTECARRIER.IDNAME.Contains("2100") ? "2100" : "2600",
+        //             TMA = tma.IDNAME,
+        //             COMBINER_SPLITTER = flag3.FLAG.FLAGID,
+        //             SEC_COMBINER_SPLITTER = flag4.FLAG.FLAGID,
+        //             CoLocation = flag5.FLAG.FLAGID,
+        //             ANTENNA_MOUNT = flag6.FLAG.FLAGID,
+        //             CellID = cell.CELLID
+        //         }
+
+        //         ).Distinct().ToList();
+
+        //        foreach (var lte in outputLTE)
+        //            if (lte.Bandwidth != null && lte.LTE_Pwr_per_TRX != null)
+        //                lte.LTE_Pwr_per_TRX = (decimal?)SupportFunc.ConvertW_dBm((SupportFunc.ConvertdBm_W((double)lte.LTE_Pwr_per_TRX) * 5 * (double)lte.Bandwidth * 12)); 
              
-                return outputLTE;
-            }
-        }
+        //        return outputLTE;
+        //    }
+        //}
 
         //public List<ViewModelTechnology> Get5GSiteAsset()
         //{
@@ -734,137 +734,186 @@ namespace BLL
 
         //}
 
-        public List<ViewModelTechnology> Get5GSiteAsset_Python()
+        public List<ViewModelTechnology> GetAssetQuerie_Python(string query_path, out string queryStatus)
         {
             var pythonAppPath = @"D:\Projects\SV\Python\OracleEtl\";
             var appName = Path.Combine(pythonAppPath, "oracle_etl.py");
             var outputJsonFileName = Path.Combine(pythonAppPath, "result.json");
             var config_path_file = Path.Combine(pythonAppPath, "config.yml");
-            var query_path = @"D:\Projects\SV\Shiva_5G\BLL\Resources\QueryAsset10_5G.sql.txt";
-
+           
             var args = string.Join(" ", new string[] { query_path, outputJsonFileName, config_path_file, this.siteID });
 
-            var output = SupportFunc.RunFromCmd(appName, args);
+            queryStatus = SupportFunc.RunFromCmd(appName, args);
             var jsonString = File.ReadAllText(outputJsonFileName);
             var lstObj = JsonConvert.DeserializeObject<List<ViewModelTechnology>>(jsonString);
+            
+            return lstObj;
+        }
 
-            foreach (var item in lstObj)
+        public List<ViewModelTechnology> Get2GSiteAsset_Python()
+        {
+            var query_path = @"D:\Projects\SV\Shiva_5G\BLL\Resources\SiteInfoAsset2G.sql.txt";
+
+            var tech2G = GetAssetQuerie_Python(query_path, out string queryStatus).ToList();
+                      
+            foreach (var tech in tech2G)
+            {
+                if (tech.Band == "900")
+                    tech.GSM_TRX = 1;
+                else if (tech.Band == "1800")
+                    tech.GSM_TRX = 0;
+            }
+
+            return tech2G;
+        }
+
+        public List<ViewModelTechnology> Get3GSiteAsset_Python()
+        {
+             var query_path = @"D:\Projects\SV\Shiva_5G\BLL\Resources\SiteInfoAsset3G.sql.txt";
+
+            var tech3G = GetAssetQuerie_Python(query_path, out string queryStatus).ToList();
+
+         
+            return tech3G;
+        }
+
+        public List<ViewModelTechnology> Get4GSiteAsset_Python()
+        {
+            var query_path = @"D:\Projects\SV\Shiva_5G\BLL\Resources\SiteInfoAsset4G.sql.txt";
+            
+            var tech4G = GetAssetQuerie_Python(query_path, out string queryStatus).ToList();
+
+            foreach (var lte in tech4G)
+                if (lte.Bandwidth != null && lte.LTE_Pwr_per_TRX != null)
+                    lte.LTE_Pwr_per_TRX = (decimal?)SupportFunc.ConvertW_dBm((SupportFunc.ConvertdBm_W((double)lte.LTE_Pwr_per_TRX) * 5 * (double)lte.Bandwidth * 12));
+
+            return tech4G;
+        }
+
+        public List<ViewModelTechnology> Get5GSiteAsset_Python()
+        {
+            var query_path = @"D:\Projects\SV\Shiva_5G\BLL\Resources\SiteInfoAsset5G.sql.txt";
+
+            var tech5G = GetAssetQuerie_Python(query_path, out string queryStatus).ToList();
+
+            foreach (var item in tech5G)
             {
                 //DSS
                 if (item.Band == "1800" || item.Band == "2100")
                     item.NR_TRX = 0;
             }
 
-            return lstObj;
-        }
-
-        private List<ViewModelTechnology> CombineAssetSiteInfoAndEtilt(List<ViewModelTechnology> siteInfo, List<ViewModelTechnology> etilts)
-        {
-            if (siteInfo.Count != etilts.Count)
-            {
-
-                var error = $"{Environment.NewLine}Possible error: More than one antenna for one technology.";
-
-                throw new Exception(error);
-            }
-
-            foreach (var cell in siteInfo)
-            {
-                foreach (var etilt in etilts)
-                {
-                    if (cell.CellName == etilt.CellName && cell.CellID == etilt.CellID && cell.LOGINDEX == etilt.LOGINDEX)
-                    {
-                        cell.Etilt = etilt.Etilt;
-                        break;
-                    }
-
-                }
-            }
-            return siteInfo;
-        }
-
-        private List<ViewModelTechnology> CombineAssetSiteInfoAndPorts_2G(List<ViewModelTechnology> siteInfo, List<ViewModelTechnology> ports)
-        {
-            if (siteInfo.Count != ports.Count)
-            {
-
-                var error = $"{Environment.NewLine}Possible error: More than one antenna for one technology.{Environment.NewLine}Asset EF query siteinfo count - {siteInfo.Count} is different than count - {ports.Count} for ports for  {siteInfo.FirstOrDefault().LAYER_TECHNOLOGY}.{Environment.NewLine}";
-
-                foreach (var item in siteInfo)
-                    error += $"CellName = {item.CellName}, Antenna = {item.AntennaType}, Etilt = {item.Etilt}, Feeder = {item.FEEDERTYPE}, Tech = {item.LAYER_TECHNOLOGY}.{Environment.NewLine}";
-
-
-                throw new Exception(error);
-            }
-
-
-            foreach (var cell in siteInfo)
-            {
-                foreach (var port in ports)
-                {
-                    if (port.Band.Contains("900"))
-                        port.Band = "900";
-                    if (port.Band.Contains("1800"))
-                        port.Band = "1800";
-
-
-                    //GSM
-                    if (cell.CellName == port.CellName && cell.CellID == port.CellID && cell.Band == port.Band && cell.LAYER_TECHNOLOGY == "G")
-                    {
-                        if (!string.IsNullOrEmpty(port.PortNumber))
-                            cell.PortNumber = port.PortNumber;
-                        else
-                            cell.PortNumber = "0";
-
-                        break;
-                    }
-
-
-                }
-
-            }
-
-            return siteInfo;
+            return tech5G;
 
         }
 
-        private List<ViewModelTechnology> CombineAssetSiteInfoAndPorts_3G_4G(List<ViewModelTechnology> siteInfo, List<ViewModelTechnology> ports)
-        {
-            if (siteInfo.Count != ports.Count)
-            {
+        //private List<ViewModelTechnology> CombineAssetSiteInfoAndEtilt(List<ViewModelTechnology> siteInfo, List<ViewModelTechnology> etilts)
+        //{
+        //    if (siteInfo.Count != etilts.Count)
+        //    {
 
-                var error = $"{Environment.NewLine}Possible error: More than one antenna for one technology.{Environment.NewLine}Asset EF query siteinfo count - {siteInfo.Count} is different than count - {ports.Count} for ports for  {siteInfo.FirstOrDefault().LAYER_TECHNOLOGY}.{Environment.NewLine}";
+        //        var error = $"{Environment.NewLine}Possible error: More than one antenna for one technology.";
 
-                foreach (var item in siteInfo)
-                    error += $"CellName = {item.CellName}, Antenna = {item.AntennaType}, Etilt = {item.Etilt}, Feeder = {item.FEEDERTYPE}, Tech = {item.LAYER_TECHNOLOGY}.{Environment.NewLine}";
+        //        throw new Exception(error);
+        //    }
+
+        //    foreach (var cell in siteInfo)
+        //    {
+        //        foreach (var etilt in etilts)
+        //        {
+        //            if (cell.CellName == etilt.CellName && cell.CellID == etilt.CellID && cell.LOGINDEX == etilt.LOGINDEX)
+        //            {
+        //                cell.Etilt = etilt.Etilt;
+        //                break;
+        //            }
+
+        //        }
+        //    }
+        //    return siteInfo;
+        //}
+
+        //private List<ViewModelTechnology> CombineAssetSiteInfoAndPorts_2G(List<ViewModelTechnology> siteInfo, List<ViewModelTechnology> ports)
+        //{
+        //    if (siteInfo.Count != ports.Count)
+        //    {
+
+        //        var error = $"{Environment.NewLine}Possible error: More than one antenna for one technology.{Environment.NewLine}Asset EF query siteinfo count - {siteInfo.Count} is different than count - {ports.Count} for ports for  {siteInfo.FirstOrDefault().LAYER_TECHNOLOGY}.{Environment.NewLine}";
+
+        //        foreach (var item in siteInfo)
+        //            error += $"CellName = {item.CellName}, Antenna = {item.AntennaType}, Etilt = {item.Etilt}, Feeder = {item.FEEDERTYPE}, Tech = {item.LAYER_TECHNOLOGY}.{Environment.NewLine}";
 
 
-                throw new Exception(error);
-            }
+        //        throw new Exception(error);
+        //    }
 
 
-            foreach (var cell in siteInfo)
-            {
-                foreach (var port in ports)
-                {
-                    //UMTS and LTE
-                    if (cell.CellName == port.CellName && cell.CellID == port.CellID)
-                    {
-                        if (!string.IsNullOrEmpty(port.PortNumber))
-                            cell.PortNumber = port.PortNumber;
-                        else
-                            cell.PortNumber = "0";
+        //    foreach (var cell in siteInfo)
+        //    {
+        //        foreach (var port in ports)
+        //        {
+        //            if (port.Band.Contains("900"))
+        //                port.Band = "900";
+        //            if (port.Band.Contains("1800"))
+        //                port.Band = "1800";
 
-                        break;
-                    }
 
-                }
+        //            //GSM
+        //            if (cell.CellName == port.CellName && cell.CellID == port.CellID && cell.Band == port.Band && cell.LAYER_TECHNOLOGY == "G")
+        //            {
+        //                if (!string.IsNullOrEmpty(port.PortNumber))
+        //                    cell.PortNumber = port.PortNumber;
+        //                else
+        //                    cell.PortNumber = "0";
 
-            }
+        //                break;
+        //            }
 
-            return siteInfo;
 
-        }
+        //        }
+
+        //    }
+
+        //    return siteInfo;
+
+        //}
+
+        //private List<ViewModelTechnology> CombineAssetSiteInfoAndPorts_3G_4G(List<ViewModelTechnology> siteInfo, List<ViewModelTechnology> ports)
+        //{
+        //    if (siteInfo.Count != ports.Count)
+        //    {
+
+        //        var error = $"{Environment.NewLine}Possible error: More than one antenna for one technology.{Environment.NewLine}Asset EF query siteinfo count - {siteInfo.Count} is different than count - {ports.Count} for ports for  {siteInfo.FirstOrDefault().LAYER_TECHNOLOGY}.{Environment.NewLine}";
+
+        //        foreach (var item in siteInfo)
+        //            error += $"CellName = {item.CellName}, Antenna = {item.AntennaType}, Etilt = {item.Etilt}, Feeder = {item.FEEDERTYPE}, Tech = {item.LAYER_TECHNOLOGY}.{Environment.NewLine}";
+
+
+        //        throw new Exception(error);
+        //    }
+
+
+        //    foreach (var cell in siteInfo)
+        //    {
+        //        foreach (var port in ports)
+        //        {
+        //            //UMTS and LTE
+        //            if (cell.CellName == port.CellName && cell.CellID == port.CellID)
+        //            {
+        //                if (!string.IsNullOrEmpty(port.PortNumber))
+        //                    cell.PortNumber = port.PortNumber;
+        //                else
+        //                    cell.PortNumber = "0";
+
+        //                break;
+        //            }
+
+        //        }
+
+        //    }
+
+        //    return siteInfo;
+
+        //}
 
         private string LteBandMap(string lteBand)
         {
@@ -1248,15 +1297,15 @@ namespace BLL
             }
         }
 
-        public static List<string> GetAllAntennas()
-        {
-            using (var contextAsset = new Entities())
-            {
-                var antennas = contextAsset.ANTENNADEVICEs.Select(n => n.IDNAME).OrderBy(n => n).Distinct().ToList();
+        //public static List<string> GetAllAntennas()
+        //{
+        //    using (var contextAsset = new Entities())
+        //    {
+        //        var antennas = contextAsset.ANTENNADEVICEs.Select(n => n.IDNAME).OrderBy(n => n).Distinct().ToList();
 
-                return antennas;
-            }
-        }
+        //        return antennas;
+        //    }
+        //}
 
         public static List<DTO.Port> GetAllAntennasPortsBands()
         {
@@ -1292,38 +1341,59 @@ namespace BLL
             }
         }
 
+        //public List<ViewModelTechnology> GetAllTechAssetOld()
+        //{
+                        
+        //    try
+        //    {
+        //        var siteInfo2G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => Get2GSiteAsset());
+        //        var siteInfo3G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => Get3GSiteAsset());
+        //        var siteInfo4G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => Get4GSiteAsset());
+        //        var etilt2G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => EtiltAsset2G());
+        //        var etilt3G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => EtiltAsset3G());
+        //        var etilt4G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => EtiltAsset4G());
+        //        var ports2G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => GetPorts2G());
+        //        var ports3G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => GetPorts3G());
+        //        var ports4G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => GetPorts4G());
+
+
+        //        Task.WaitAll(new Task[] { siteInfo2G, siteInfo3G, siteInfo4G, etilt2G, etilt3G, etilt4G, ports2G, ports3G, ports4G });
+
+
+        //        var gsm = CombineAssetSiteInfoAndEtilt(siteInfo2G.Result, etilt2G.Result);
+        //        var umts = CombineAssetSiteInfoAndEtilt(siteInfo3G.Result, etilt3G.Result);
+        //        var lte = CombineAssetSiteInfoAndEtilt(siteInfo4G.Result, etilt4G.Result);
+
+        //        gsm = CombineAssetSiteInfoAndPorts_2G(gsm, ports2G.Result);
+        //        umts = CombineAssetSiteInfoAndPorts_3G_4G(umts, ports3G.Result);
+        //        lte = CombineAssetSiteInfoAndPorts_3G_4G(lte, ports4G.Result);
+
+        //        var nr = Get5GSiteAsset_Python();
+        //        var union = gsm.Union(umts).Union(lte).Union(nr).ToList();
+
+        //        //var union = gsm.Union(umts).Union(lte).ToList();
+
+
+        //        return union;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Method GetAllTechAsset. Error trying to materialise queries from AssetDB. {ex.Message}");
+        //    }
+
+        //}
+
         public List<ViewModelTechnology> GetAllTechAsset()
         {
-            
             try
             {
-                var siteInfo2G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => Get2GSiteAsset());
-                var siteInfo3G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => Get3GSiteAsset());
-                var siteInfo4G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => Get4GSiteAsset());
-                var etilt2G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => EtiltAsset2G());
-                var etilt3G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => EtiltAsset3G());
-                var etilt4G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => EtiltAsset4G());
-                var ports2G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => GetPorts2G());
-                var ports3G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => GetPorts3G());
-                var ports4G = Task<List<ViewModelTechnology>>.Factory.StartNew(() => GetPorts4G());
+                var siteInfo2G = Get2GSiteAsset_Python();
+                var siteInfo3G = Get3GSiteAsset_Python();
+                var siteInfo4G = Get4GSiteAsset_Python();
+                var siteInfo5G = Get5GSiteAsset_Python();
 
-
-                Task.WaitAll(new Task[] { siteInfo2G, siteInfo3G, siteInfo4G, etilt2G, etilt3G, etilt4G, ports2G, ports3G, ports4G });
-
-
-                var gsm = CombineAssetSiteInfoAndEtilt(siteInfo2G.Result, etilt2G.Result);
-                var umts = CombineAssetSiteInfoAndEtilt(siteInfo3G.Result, etilt3G.Result);
-                var lte = CombineAssetSiteInfoAndEtilt(siteInfo4G.Result, etilt4G.Result);
-
-                gsm = CombineAssetSiteInfoAndPorts_2G(gsm, ports2G.Result);
-                umts = CombineAssetSiteInfoAndPorts_3G_4G(umts, ports3G.Result);
-                lte = CombineAssetSiteInfoAndPorts_3G_4G(lte, ports4G.Result);
-
-                var nr = Get5GSiteAsset_Python();
-                var union = gsm.Union(umts).Union(lte).Union(nr).ToList();
-
-                //var union = gsm.Union(umts).Union(lte).ToList();
-
+                var union = siteInfo2G.Union(siteInfo3G).Union(siteInfo4G).Union(siteInfo5G).ToList();
 
                 return union;
 
@@ -1335,31 +1405,31 @@ namespace BLL
 
         }
 
-        public string[] GetDomainInfo()
-        {
-            string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString().Replace("AD\\", "");
-            string[] result = { "", "", "" };
-            PrincipalContext context = new PrincipalContext(ContextType.Domain);
-            try
-            {
-                using (UserPrincipal user = UserPrincipal.FindByIdentity(context, userName))
-                {
-                    DirectoryEntry directoryEntry = user.GetUnderlyingObject() as DirectoryEntry;
-                    object directoryPropertyValueCN = directoryEntry.Properties["cn"].Value;
-                    object directoryPropertyValueMail = directoryEntry.Properties["mail"].Value;
-                    object directoryPropertyValueMobile = directoryEntry.Properties["mobile"].Value;
-                    result[0] = directoryPropertyValueCN.ToString();
-                    result[1] = directoryPropertyValueMail.ToString();
-                    result[2] = directoryPropertyValueMobile.ToString();
+        //public string[] GetDomainInfo()
+        //{
+        //    string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString().Replace("AD\\", "");
+        //    string[] result = { "", "", "" };
+        //    PrincipalContext context = new PrincipalContext(ContextType.Domain);
+        //    try
+        //    {
+        //        using (UserPrincipal user = UserPrincipal.FindByIdentity(context, userName))
+        //        {
+        //            DirectoryEntry directoryEntry = user.GetUnderlyingObject() as DirectoryEntry;
+        //            object directoryPropertyValueCN = directoryEntry.Properties["cn"].Value;
+        //            object directoryPropertyValueMail = directoryEntry.Properties["mail"].Value;
+        //            object directoryPropertyValueMobile = directoryEntry.Properties["mobile"].Value;
+        //            result[0] = directoryPropertyValueCN.ToString();
+        //            result[1] = directoryPropertyValueMail.ToString();
+        //            result[2] = directoryPropertyValueMobile.ToString();
 
-                    return result;
-                }
-            }
-            catch (Exception)
-            {
-                return result;
-            }
-        }
+        //            return result;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return result;
+        //    }
+        //}
 
         public static string GetAntennasWithoutTech(string siteID)
         {

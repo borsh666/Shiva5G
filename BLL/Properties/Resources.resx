@@ -178,9 +178,6 @@
   <data name="SA_Template_v1_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SA_Template_v1_3.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="QueryAsset10_5G" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\QueryAsset10_5G.sql.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
-  </data>
   <data name="SA_Template_v1_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SA_Template_v1_4.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -195,5 +192,17 @@
   </data>
   <data name="PSK__Template_v1_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PSK__Template_v1_4.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SiteInfoAsset2G.sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SiteInfoAsset2G.sql.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="SiteInfoAsset3G.sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SiteInfoAsset3G.sql.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="SiteInfoAsset4G.sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SiteInfoAsset4G.sql.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="SiteInfoAsset5G.sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SiteInfoAsset5G.sql.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
 </root>

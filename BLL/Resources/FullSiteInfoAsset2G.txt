@@ -1,0 +1,116 @@
+﻿  select  	distinct
+                        b.GSMID as CellID, a.idname as CellName,la.INDEXNO as LOGINDEX,	
+                        substr(a.IDNAME,5, 1) as Sector	,
+                        d.idname as SiteID,
+                        substr(d.IDNAME,11, 1) as Candidate,
+                        d.TOWN as SiteAddress,
+                        d.ADDRESS1 as SiteAddress1,
+                        d.ADDRESS2 as SiteAddress2,
+                        cn.NAME as SiteName,
+                        g.TOTALTRXALLOC as GSM_TRX,
+                        g.OUTPUTPOWER as GSM_Pwr_per_TRX ,
+                        0 as UMTS_TRX ,
+                        0 as UMTS_Pwr_per_TRX,
+                        0 as LTE_TRX,
+                        0 as LTE_Pwr_per_TRX ,
+                        0 as NR_TRX ,
+                        0 as NR_Pwr_per_TRX,
+                       'G' as LAYER_TECHNOLOGY,
+                        dn.idname  as Controler,
+
+                        CASE 
+                        WHEN i.IDNAME like  '%900%'  THEN '900' 
+                        ELSE '1800'
+                        END as Band,
+
+                        pa.PHYINDEX as PHYINDEX,
+                        pa.AZIMUTH as Azimuth,
+                        pa.HEIGHT as AGL,
+                        pa.HEIGHTOFFSET as ARTL,
+                        ad.IDNAME as AntennaType,
+                        k.FEEDERLEN as FEEDERLENGTH,
+                        fe.IDNAME as FEEDERTYPE,
+                        pa.TILT as MECHANICAL_TILT,
+
+                        CASE WHEN la.INHERITMASTERPATTERN=0 THEN ap.downtilt
+                        WHEN la.INHERITMASTERPATTERN=1 THEN ap1.downtilt 
+                        WHEN la.INHERITMASTERPATTERN=2 THEN ap2.downtilt
+                        WHEN la.INHERITMASTERPATTERN=3 THEN ap3.downtilt
+                        WHEN la.INHERITMASTERPATTERN=4 THEN ap4.downtilt
+                        END AS Etilt, 
+                        
+                        la.PORTS as PortNumber,
+
+                        (SELECT flg.FLAGID 
+                        FROM FLAGS flg
+                        JOIN FLAGVALUES flgv ON flgv.OBJECTKEY = b.LOGCELLFK AND flg.FLAGKEY = flgv.FLAGKEY AND flgv.PROJECTNO = 1
+                        JOIN FLAGGROUPS flgg ON flgg.FLAGGROUPKEY = flgv.FLAGGROUPKEY AND flgg.PROJECTNO = 1
+                        WHERE flgg.FLAGGROUPID = 'RRU type') AS RRU_Type,
+
+                        (SELECT flg.FLAGID 
+                        FROM FLAGS flg
+                        JOIN FLAGVALUES flgv ON flgv.OBJECTKEY = b.LOGCELLFK AND flg.FLAGKEY = flgv.FLAGKEY AND flgv.PROJECTNO = 1
+                        JOIN FLAGGROUPS flgg ON flgg.FLAGGROUPKEY = flgv.FLAGGROUPKEY AND flgg.PROJECTNO = 1
+                        WHERE flgg.FLAGGROUPID = 'TMA') AS TMA,
+
+                        (SELECT flg.FLAGID 
+                        FROM FLAGS flg
+                        JOIN FLAGVALUES flgv ON flgv.OBJECTKEY = b.LOGCELLFK AND flg.FLAGKEY = flgv.FLAGKEY AND flgv.PROJECTNO = 1
+                        JOIN FLAGGROUPS flgg ON flgg.FLAGGROUPKEY = flgv.FLAGGROUPKEY AND flgg.PROJECTNO = 1
+                        WHERE flgg.FLAGGROUPID = 'Combiner/Splitter') AS COMBINER_SPLITTER,
+
+                        (SELECT flg.FLAGID 
+                        FROM FLAGS flg
+                        JOIN FLAGVALUES flgv ON flgv.OBJECTKEY = b.LOGCELLFK AND flg.FLAGKEY = flgv.FLAGKEY AND flgv.PROJECTNO = 1
+                        JOIN FLAGGROUPS flgg ON flgg.FLAGGROUPKEY = flgv.FLAGGROUPKEY AND flgg.PROJECTNO = 1
+                        WHERE flgg.FLAGGROUPID = '2nd Combiner') AS SEC_COMBINER_SPLITTER,
+
+                        (SELECT flg.FLAGID 
+                        FROM FLAGS flg
+                        JOIN FLAGVALUES flgv ON flgv.OBJECTKEY = cn.LOGNODEPK AND flg.FLAGKEY = flgv.FLAGKEY AND flgv.PROJECTNO = 1
+                        JOIN FLAGGROUPS flgg ON flgg.FLAGGROUPKEY = flgv.FLAGGROUPKEY AND flgg.PROJECTNO = 1
+                        WHERE flgg.FLAGGROUPID = 'Co-Location') AS CoLocation,
+
+                        (SELECT flg.FLAGID 
+                        FROM FLAGS flg
+                        JOIN FLAGVALUES flgv ON flgv.OBJECTKEY = b.LOGCELLFK AND flg.FLAGKEY = flgv.FLAGKEY AND flgv.PROJECTNO = 1
+                        JOIN FLAGGROUPS flgg ON flgg.FLAGGROUPKEY = flgv.FLAGGROUPKEY AND flgg.PROJECTNO = 1
+                        WHERE flgg.FLAGGROUPID = 'Antenna Mounting') AS ANTENNA_MOUNT
+
+ FROM network_planning.GSMCELL b 															
+                        INNER JOIN  network_planning.LOGCELL a ON b.PROJECTNO = a.PROJECTNO AND a.LOGCELLPK=b.LOGCELLfK 															
+                        INNER JOIN  network_planning.munode c ON a.PROJECTNO = c.PROJECTNO AND a.LOGNODEFK = c.LOGNODEPK 															
+                        INNER JOIN  network_planning.LOGNODE cn ON c.PROJECTNO = cn.PROJECTNO AND c.LOGNODEPK = cn.LOGNODEPK 															
+                        INNER JOIN  network_planning.SITEADDRESS d ON cn.projectno = d.projectno AND cn.addressfk = d.addresskey 															
+                        INNER JOIN network_planning.CELLAYDATA g ON b.projectno = g.projectno AND b.LOGCELLfK = g.cellkey 															
+                        INNER JOIN network_planning.CELLAY i ON g.CELLAYKEY = i.CELLAYKEY AND g.PROJECTNO = i.PROJECTNO 															
+                        INNER JOIN network_planning.LOGCELLFEEDER k ON a.projectno = k.projectno AND a.LOGCELLPK = k.logcellfk and g.CELLAYKEY=k.GSM1CELLLAYERFK 															
+						INNER JOIN network_planning.FEEDER fe on k.FEEDERFK = fe.FEEDERKEY
+                        INNER JOIN  network_planning.LOGCONNECTION cnn ON cnn.PROJECTNO = cnn.PROJECTNO and cnn.LOGNODEBFK = cn.LOGNODEPK
+                        INNER JOIN network_planning.BSC d  ON cnn.PROJECTNO =d.PROJECTNO AND cnn.LOGNODEAFK = d.LOGNODEPK
+                        INNER JOIN  network_planning.LOGNODE dn ON d.PROJECTNO = dn.PROJECTNO and d.LOGNODEPK = dn.LOGNODEPK
+                        INNER JOIN logicalantenna la on la.PROJECTno=k.PROJECTno and la.LOGANTENNAPK =k.LOGANTENNAFK       															
+                        INNER JOIN phyantenna pa ON pa.projectno = la.projectno and pa.PHYANTENNApK = la.PHYANTENNAfk															
+						INNER JOIN antennadevice ad on ad.PROJECTNO = pa.PROJECTNO and ad.DEVICEPK = pa.DEVICEFK 															
+                        INNER JOIN  ANTENNAPATTERN ap ON la.PROJECTno = ap.PROJECTno and la.anttypefk = ap.patternpk   															
+                        INNER JOIN ANTENNAPATTERN ap1 on ap1.PROJECTNO = pa.PROJECTNO and ap1.PATTERNPK = pa.MASTERPATTERN1FK															
+                        INNER JOIN ANTENNAPATTERN ap2 on ap2.PROJECTNO = pa.PROJECTNO and ap2.PATTERNPK = pa.MASTERPATTERN2FK															
+                        INNER JOIN ANTENNAPATTERN ap3 on ap3.PROJECTNO = pa.PROJECTNO and ap3.PATTERNPK = pa.MASTERPATTERN3FK															
+                        INNER JOIN ANTENNAPATTERN ap4 on ap4.PROJECTNO = pa.PROJECTNO and ap4.PATTERNPK = pa.MASTERPATTERN4FK				
+                        INNER JOIN network_planning.FLAGVALUES z ON cn.projectno = z.projectno AND cn.lognodepk = z.objectkey 
+                        INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 
+                        INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY
+                        INNER JOIN network_planning.FLAGVALUES z1 ON a.projectno = z1.projectno AND a.logcellpk = z1.objectkey 
+                        INNER JOIN network_planning.FLAGS y1 ON y1.PROJECTNO = z.PROJECTNO AND y1.FLAGGROUPKEY = z1.FLAGGROUPKEY AND y1.FLAGKEY = z1.FLAGKEY 
+                        INNER JOIN network_planning.FLAGGROUPS x1 ON x1.PROJECTNO = y1.PROJECTNO AND x1.FLAGGROUPKEY = y1.FLAGGROUPKEY
+
+where 
+                        (x.flaggroupid = 'Candidate')  AND (y.flagid ='Accepted') 
+                        AND (x1.flaggroupid = 'Site Progress') AND (y1.flagid ='On Air') 
+                        AND (a.PROJECTNO = 1) 
+                        and cn.idname like '%@@@@@@%'
+
+
+
+
+

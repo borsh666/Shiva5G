@@ -1,4 +1,5 @@
 ﻿using BLL.DTO;
+using OfficeOpenXml.FormulaParsing.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -323,6 +324,9 @@ namespace BLL
                 objTech.Combiner_Splitter = tech.COMBINER_SPLITTER;
                 objTech.Sec_Combiner_Splitter = tech.SEC_COMBINER_SPLITTER;
 
+          
+                if (decimal.TryParse(objTech.Feeder_Length, out decimal feederLength))
+                    objTech.Feeder_Length = Decimal.ToInt16(feederLength).ToString();
 
                 var forComp = objTech.Technology + objTech.Band + " " + objTech.Feeder_Length + " " + objTech.Feeder_Type;
                 var reference = SupportFunc.InitialPowerCalc(Properties.Resources.JumperAttdB);

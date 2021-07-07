@@ -39,6 +39,6 @@
         public decimal? UMTS_TRX { get;  set; }
         public decimal? NR_Pwr_per_TRX { get; set; }
         public decimal? NR_TRX { get; set; }
-        public decimal? Bandwidth { get; internal set; }
+        public decimal? Bandwidth { get; set; }
     }
 }

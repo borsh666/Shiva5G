@@ -418,28 +418,6 @@ namespace BLL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to select  distinct 
-        ///SUBSTR(sa.IDNAME, 5, 6) AS SiteID,
-        ///ln.NAME AS SiteName, 
-        ///&apos;NR&apos; as LAYER_TECHNOLOGY,
-        ///sa.ADDRESS1 AS SiteAddress,
-        ///SUBSTR(sa.IDNAME, -1) AS Candidate,
-        ///antdev.IDNAME AS AntennaType,
-        ///CAST ((CASE WHEN la.INHERITMASTERPATTERN = 0 THEN ap.DOWNTILT
-        ///WHEN la.INHERITMASTERPATTERN = 1 THEN ap1.DOWNTILT
-        ///WHEN la.INHERITMASTERPATTERN = 2 THEN ap2.DOWNTILT
-        ///WHEN la.INHERITMASTERPATTERN = 3 THEN ap3.DOWNTILT
-        ///WHEN la.INHERITMASTERPATTERN = 4 THEN ap4.DOWNTILT
-        ///END) AS INTEGER) AS Etilt,
-        ///CAST (pa.PH [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string QueryAsset10_5G {
-            get {
-                return ResourceManager.GetString("QueryAsset10_5G", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] RRU_TRX_Huawei_Pwr_Map {
@@ -522,6 +500,83 @@ namespace BLL.Properties {
             get {
                 object obj = ResourceManager.GetObject("SA_Template_v1_4", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to   select  	distinct
+        ///                        b.GSMID as CellID, a.idname as CellName,la.INDEXNO as LOGINDEX,	
+        ///                        substr(a.IDNAME,5, 1) as Sector	,
+        ///                        d.idname as SiteID,
+        ///                        substr(d.IDNAME,11, 1) as Candidate,
+        ///                        d.TOWN as SiteAddress,
+        ///                        d.ADDRESS1 as SiteAddress1,
+        ///                        d.ADDRESS2 as SiteAddress2,
+        ///                        cn.NAME as SiteName,
+        ///                        g.TOTALTRXA [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SiteInfoAsset2G_sql {
+            get {
+                return ResourceManager.GetString("SiteInfoAsset2G.sql", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to   select  
+        ///                        b1.umtscellid as CellID, c2.IDNAME AS CellName, la.INDEXNO as LOGINDEX,substr(c2.IDNAME,5, 1) as Sector	,
+        ///                        c1.idname as SiteID,
+        ///                        substr(h.IDNAME,11, 1) as Candidate,
+        ///                        h.TOWN as SiteAddress,
+        ///                        h.ADDRESS1 as SiteAddress1,
+        ///                        h.ADDRESS2 as SiteAddress2,
+        ///                        c1.NAME as SiteName,
+        ///                        0 as GSM_TRX,
+        ///                       [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SiteInfoAsset3G_sql {
+            get {
+                return ResourceManager.GetString("SiteInfoAsset3G.sql", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to   select  
+        ///                        a.cellid as CellID, b4.idname as CellName,la.INDEXNO as LOGINDEX,	
+        ///                        substr(b4.IDNAME,5, 1) as Sector	,
+        ///                        b5.idname as SiteID,
+        ///                        substr(h.IDNAME,11, 1) as Candidate,
+        ///                        h.TOWN as SiteAddress,
+        ///                        h.ADDRESS1 as SiteAddress1,
+        ///                        h.ADDRESS2 as SiteAddress2,
+        ///                        b5.NAME as SiteName,
+        ///                        0 as GSM_TRX,
+        ///  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SiteInfoAsset4G_sql {
+            get {
+                return ResourceManager.GetString("SiteInfoAsset4G.sql", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select  distinct 
+        ///SUBSTR(sa.IDNAME, 5, 6) AS SiteID,
+        ///ln.NAME AS SiteName, 
+        ///&apos;NR&apos; as LAYER_TECHNOLOGY,
+        ///sa.ADDRESS1 AS SiteAddress,
+        ///SUBSTR(sa.IDNAME, -1) AS Candidate,
+        ///antdev.IDNAME AS AntennaType,
+        ///CAST ((CASE WHEN la.INHERITMASTERPATTERN = 0 THEN ap.DOWNTILT
+        ///WHEN la.INHERITMASTERPATTERN = 1 THEN ap1.DOWNTILT
+        ///WHEN la.INHERITMASTERPATTERN = 2 THEN ap2.DOWNTILT
+        ///WHEN la.INHERITMASTERPATTERN = 3 THEN ap3.DOWNTILT
+        ///WHEN la.INHERITMASTERPATTERN = 4 THEN ap4.DOWNTILT
+        ///END) AS INTEGER) AS Etilt,
+        ///CAST (pa.PH [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SiteInfoAsset5G_sql {
+            get {
+                return ResourceManager.GetString("SiteInfoAsset5G.sql", resourceCulture);
             }
         }
         

@@ -175,6 +175,10 @@
   <ItemGroup>
     <None Include="Resources\QueryAsset10_5G.sql.txt" />
     <None Include="Resources\RruList.txt" />
+    <None Include="Resources\SiteInfoAsset2G.sql.txt" />
+    <None Include="Resources\SiteInfoAsset3G.sql.txt" />
+    <None Include="Resources\SiteInfoAsset4G.sql.txt" />
+    <None Include="Resources\SiteInfoAsset5G.sql.txt" />
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
