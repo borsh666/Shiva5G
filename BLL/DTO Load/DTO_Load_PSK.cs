@@ -86,6 +86,7 @@ namespace BLL
 
                 item.ModelRRUs.RemoveAll(n => n.Band == "3500");
 
+                //Here only for 2G sum TRXs. For 3G,4G,5G TRX=1
                 var groupByCellName = item.ModelRRUs.GroupBy(n => n.CellName)
                     .Select(n => new ModelRRU
                     {

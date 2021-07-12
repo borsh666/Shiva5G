@@ -48,13 +48,13 @@ namespace BLL
 
                 sector.LTE_2600 = (int)filterLstTech
                   .Where(n => n.LAYER_TECHNOLOGY == "L" && n.Band == "2600").Select(n => n.CellName).Distinct().Count();
-                
+
                 sector.NR_1800 = (int)filterLstTech
                   .Where(n => n.LAYER_TECHNOLOGY == "NR" && n.Band == "1800").Select(n => n.CellName).Distinct().Count();
 
                 sector.NR_2100 = (int)filterLstTech
                   .Where(n => n.LAYER_TECHNOLOGY == "NR" && n.Band == "2100").Select(n => n.CellName).Distinct().Count();
-                
+
                 sector.NR_3500 = (int)filterLstTech
                  .Where(n => n.LAYER_TECHNOLOGY == "NR" && n.Band == "3500").Select(n => n.CellName).Distinct().Count();
 
@@ -65,7 +65,7 @@ namespace BLL
 
         public override List<Port> PortLoad(string sector, string antennaType, decimal phyIndex)
         {
-           
+
             var allTech = TechLoad(sector, antennaType, phyIndex);
             //BS3831
             var portGrouping = new PortGrouping(allTech);
@@ -76,9 +76,6 @@ namespace BLL
             {
                 if (port.Status == "Free")
                     continue;
-
-                //if (port.Band == "2100" && sector=="1")
-                //    Console.WriteLine(); 
 
                 double getCalcPower = 0;
 
@@ -106,9 +103,15 @@ namespace BLL
                     port.RRU_Total = port.ModelRRUs.Select(n => n.RRU_Type).Count().ToString();
                 }
 
-                //New 15.03.2017
                 foreach (var rru in port.ModelRRUs)
+                {
+                    //Temporary solution 12.07.2121
+                    if (rru.UMTS_TRX > 1)
+                        rru.UMTS_TRX = 1;
+
                     getCalcPower += SupportFunc.GetPortCalcPowerIRFC(rru);
+
+                }
 
 
 
@@ -134,16 +137,16 @@ namespace BLL
 
 
         }
-     
+
         public override List<Port> TechLoad(string sector, string antennaType, decimal phyIndex)
         {
             var technologies = new List<Port>();
 
-            var filterTechnology = this.lstTechnology.Where(n => n.Sector == sector 
+            var filterTechnology = this.lstTechnology.Where(n => n.Sector == sector
                 && n.AntennaType == antennaType && n.PHYINDEX == phyIndex).ToList();
 
             return base.ViewModelTechnologyToPort(filterTechnology);
-          
+
         }
     }
 }
