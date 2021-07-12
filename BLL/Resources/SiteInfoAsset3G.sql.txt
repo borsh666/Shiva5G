@@ -104,7 +104,8 @@
 
                         where 
                         (x.flaggroupid = 'Candidate')  AND (y.flagid ='Accepted') 
-                        AND (x1.flaggroupid = 'Site Progress') AND (y1.flagid ='On Air') 
+                        AND (x1.flaggroupid = 'Site Progress') 
+                        --AND (y1.flagid ='On Air') 
                         AND (b1.PROJECTNO = 1) 
                         and c1.idname like '%@@@@@@%'
 

@@ -16,6 +16,7 @@ namespace BLL
     public class Queries
     {
         private string siteID;
+        private string pythonQueryOkStatus = "OK\r\n";
 
         private HWI_DB hwi_db = new HWI_DB();
 
@@ -764,6 +765,9 @@ namespace BLL
                     tech.GSM_TRX = 0;
             }
 
+            if (queryStatus != pythonQueryOkStatus)
+                throw new Exception($"Error in query Get2GSiteAsset_Python: {queryStatus}");
+
             return tech2G;
         }
 
@@ -773,7 +777,9 @@ namespace BLL
 
             var tech3G = GetAssetQuerie_Python(query_path, out string queryStatus).ToList();
 
-         
+            if (queryStatus != pythonQueryOkStatus)
+                throw new Exception($"Error in query Get3GSiteAsset_Python: {queryStatus}");
+
             return tech3G;
         }
 
@@ -786,6 +792,9 @@ namespace BLL
             foreach (var lte in tech4G)
                 if (lte.Bandwidth != null && lte.LTE_Pwr_per_TRX != null)
                     lte.LTE_Pwr_per_TRX = (decimal?)SupportFunc.ConvertW_dBm((SupportFunc.ConvertdBm_W((double)lte.LTE_Pwr_per_TRX) * 5 * (double)lte.Bandwidth * 12));
+
+            if (queryStatus != pythonQueryOkStatus)
+                throw new Exception($"Error in query Get4GSiteAsset_Python: {queryStatus}");
 
             return tech4G;
         }
@@ -802,6 +811,9 @@ namespace BLL
                 if (item.Band == "1800" || item.Band == "2100")
                     item.NR_TRX = 0;
             }
+
+            if (queryStatus != pythonQueryOkStatus)
+                throw new Exception($"Error in query Get5GSiteAsset_Python: {queryStatus}");
 
             return tech5G;
 

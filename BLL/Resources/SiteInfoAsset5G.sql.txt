@@ -90,4 +90,17 @@ JOIN ANTENNADEVICE antdev ON pa.DEVICEFK=antdev.DEVICEPK AND antdev.PROJECTNO = 
 JOIN FIVEGNODECAR fnode ON  fc.CARRIERFK=fnode.CARRIERPK AND fnode.PROJECTNO = 1	
 JOIN fivegcarrier fcarrier ON fnode.CONFIGCARRIERFK=fcarrier.CARRIERKEY AND fcarrier.PROJECTNO = 1
 
-where SUBSTR(sa.IDNAME, 1, 20) like '%@@@@@@%'
+INNER JOIN network_planning.FLAGVALUES z ON ln.projectno = z.projectno AND ln.lognodepk = z.objectkey 
+INNER JOIN network_planning.FLAGS y ON y.PROJECTNO = z.PROJECTNO AND y.FLAGGROUPKEY = z.FLAGGROUPKEY AND y.FLAGKEY = z.FLAGKEY 
+INNER JOIN network_planning.FLAGGROUPS x ON x.PROJECTNO = y.PROJECTNO AND x.FLAGGROUPKEY = y.FLAGGROUPKEY
+INNER JOIN network_planning.FLAGVALUES z1 ON lc.projectno = z1.projectno AND lc.logcellpk = z1.objectkey 
+INNER JOIN network_planning.FLAGS y1 ON y1.PROJECTNO = z.PROJECTNO AND y1.FLAGGROUPKEY = z1.FLAGGROUPKEY AND y1.FLAGKEY = z1.FLAGKEY 
+INNER JOIN network_planning.FLAGGROUPS x1 ON x1.PROJECTNO = y1.PROJECTNO AND x1.FLAGGROUPKEY = y1.FLAGGROUPKEY
+
+where 
+
+(x.flaggroupid = 'Candidate')  AND (y.flagid ='Accepted') 
+AND (x1.flaggroupid = 'Site Progress') 
+--AND (y1.flagid ='On Air') 
+AND (ln.PROJECTNO = 1) 
+AND SUBSTR(sa.IDNAME, 1, 20) like '%@@@@@@%'
