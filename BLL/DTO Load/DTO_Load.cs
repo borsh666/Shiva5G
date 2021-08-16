@@ -1,4 +1,5 @@
 ﻿using BLL.DTO;
+using BLL.Enums;
 using OfficeOpenXml.FormulaParsing.Utilities;
 using System;
 using System.Collections.Generic;
@@ -17,25 +18,32 @@ namespace BLL
         protected decimal latitude;
         protected decimal longitude;
         protected string siteID;
-        protected bool isSiteSRAN;
         protected Queries query;
 
         public Dictionary<string, string> Info { get; set; }
         public bool IsRrusFromOss { get; set; }
-        public List<ModelRRU> LstLoadPowerTRX_CM;
-        public List<ModelRRU> LstLoadRRU_CM;
+        public List<ModelRRU> LstLoadPowerTRX_CM { get; set; }
+        public List<ModelRRU> LstLoadRRU_CM { get; set; }
 
+        public readonly Dictionary<string, string[]> rruCombination = new Dictionary<string, string[]>
+                {
+                    { ((int)Band.B9).ToString(), new string[]  { "CD", "AB", } }   ,
+                    { ((int)Band.B18).ToString(), new string[] { "AC", "DB", } }   ,
+                    { ((int)Band.B21).ToString(), new string[] { "AC", "DB", } }   ,
+                    { ((int)Band.B26).ToString(), new string[] { "AC", "DB", } }   ,
+                };
 
-        public DTO_Load(string siteID, bool isSiteSRAN)
+        //Only for PSK is True
+        public bool IsGroupByBand { get; set; }
+
+        public DTO_Load(string siteID)
         {
             Info = new Dictionary<string, string>();
 
             this.siteID = siteID;
 
             CheckForMoreThanOneCandidate();
-
-            this.isSiteSRAN = isSiteSRAN;
-
+            
             QueryMaterialize();
         }
 
@@ -65,13 +73,13 @@ namespace BLL
                 .Union(query.Get5GSiteCM()).ToList();
             Info.Add("lstLoadPowerTRX_CM()", watch.Elapsed.TotalSeconds.ToString());
 
-            for (int i = 0; i < lstLoadPowerTRX_CM.Where(n => n.Technology == "G").Count(); i++)
+            for (int i = 0; i < lstLoadPowerTRX_CM.Where(n => n.Technology == Technology.G.ToString()).Count(); i++)
             {
                 var intBand = int.Parse(lstLoadPowerTRX_CM[i].Band);
                 if (intBand < 660 || intBand > 770)
-                    lstLoadPowerTRX_CM[i].Band = "900";
+                    lstLoadPowerTRX_CM[i].Band = ((int)Band.B9).ToString();
                 else
-                    lstLoadPowerTRX_CM[i].Band = "1800";
+                    lstLoadPowerTRX_CM[i].Band = ((int)Band.B18).ToString();
             }
 
             watch.Stop();
@@ -225,10 +233,7 @@ namespace BLL
 
             }).ToList();
 
-
-
             return antennaGroup;
-
         }
 
         public abstract List<Port> PortLoad(string sector, string antennaType, decimal phyIndex);
@@ -241,34 +246,34 @@ namespace BLL
 
             foreach (var tech in viewModelTech)
             {
-                var objTech = new Port();
-                objTech.SectorNumber = tech.Sector;
-                objTech.AntennaType = tech.AntennaType;
-                objTech.PhyIndex = (decimal)tech.PHYINDEX;
-                objTech.Band = tech.Band;
-                objTech.Technology = tech.LAYER_TECHNOLOGY;
-                objTech.CellName = tech.CellName;
-                objTech.Etilt = tech.Etilt != null ? tech.Etilt.ToString() : "";
-                objTech.Feeder_Length = tech.FEEDERLENGTH.ToString();
-                objTech.RET = "Yes";
-                objTech.RRU_Type = tech.RRU_Type;
+                var port = new Port();
+                port.SectorNumber = tech.Sector;
+                port.AntennaType = tech.AntennaType;
+                port.PhyIndex = (decimal)tech.PHYINDEX;
+                port.Band = tech.Band;
+                port.Technology = tech.LAYER_TECHNOLOGY;
+                port.CellName = tech.CellName;
+                port.Etilt = tech.Etilt != null ? tech.Etilt.ToString() : "";
+                port.Feeder_Length = tech.FEEDERLENGTH.ToString();
+                port.RET = "Yes";
+                port.RRU_Type = tech.RRU_Type;
 
-                objTech.ModelRRUs = new List<ModelRRU>();
+                port.ModelRRUs = new List<ModelRRU>();
 
                 if (this.IsRrusFromOss)
                 {
                     var filterLoadPowerTRX_CM = this.LstLoadPowerTRX_CM
-                    .Where(n => n.Sector == objTech.SectorNumber && n.Technology == objTech.Technology
-                        && objTech.Band == n.Band && n.CellName == objTech.CellName);
+                    .Where(n => n.Sector == port.SectorNumber && n.Technology == port.Technology
+                        && port.Band == n.Band && n.CellName == port.CellName);
 
 
                     var filterLoadRRU_CM = this.LstLoadRRU_CM
-                        .Where(n => n.Technology == objTech.Technology && objTech.Band == n.Band.ToString() && n.CellName.ToString() == objTech.CellName);
+                        .Where(n => n.Technology == port.Technology && port.Band == n.Band.ToString() && n.CellName.ToString() == port.CellName);
 
                     foreach (var rru in filterLoadRRU_CM)
                     {
                         if (string.IsNullOrEmpty(rru.RRU_Type))
-                            objTech.Request_Remarks += $"For tech {objTech.Technology} , band {objTech.Band} there is no RRU_Type in table RRUsPerNodes";
+                            port.Request_Remarks += $"For tech {port.Technology} , band {port.Band} there is no RRU_Type in table RRUsPerNodes";
 
                         var rruObj = new ModelRRU()
                         {
@@ -285,15 +290,14 @@ namespace BLL
                             UMTS_Pwr_per_TRX = filterLoadPowerTRX_CM.Select(n => n.UMTS_Pwr_per_TRX).FirstOrDefault(),
                             LTE_Pwr_per_TRX = filterLoadPowerTRX_CM.Select(n => n.LTE_Pwr_per_TRX).FirstOrDefault(),
                             NR_Pwr_per_TRX = filterLoadPowerTRX_CM.Select(n => n.NR_Pwr_per_TRX).FirstOrDefault(),
-
                         };
 
-                        objTech.ModelRRUs.Add(rruObj);
+                        port.ModelRRUs.Add(rruObj);
                     }
                 }
                 else
                 {
-                    objTech.ModelRRUs.Add(
+                    port.ModelRRUs.Add(
 
                   new ModelRRU
                   {
@@ -311,44 +315,59 @@ namespace BLL
                       NR_Pwr_per_TRX = tech.NR_Pwr_per_TRX != null ? tech.NR_Pwr_per_TRX.ToString() : "",
                   }
                   );
-                    
+
                 }
 
-
                 if (!string.IsNullOrEmpty(tech.TMA))
-                    objTech.TMA = tech.TMA;
-                objTech.Collocation = tech.CoLocation;
+                    port.TMA = tech.TMA;
+                port.Collocation = tech.CoLocation;
 
-                objTech.Feeder_Type = SupportFunc.FeederTypeMap(tech.FEEDERTYPE);
+                port.Feeder_Type = SupportFunc.FeederTypeMap(tech.FEEDERTYPE);
 
-                objTech.Combiner_Splitter = tech.COMBINER_SPLITTER;
-                objTech.Sec_Combiner_Splitter = tech.SEC_COMBINER_SPLITTER;
-
-          
-                if (decimal.TryParse(objTech.Feeder_Length, out decimal feederLength))
-                    objTech.Feeder_Length = Decimal.ToInt16(feederLength).ToString();
-
-                var forComp = objTech.Technology + objTech.Band + " " + objTech.Feeder_Length + " " + objTech.Feeder_Type;
-                var reference = SupportFunc.InitialPowerCalc(Properties.Resources.JumperAttdB);
-
-                //Jumper_Att_dB
-                if (reference.ContainsKey(forComp))
-                    objTech.Feeder_Att_dB = reference[forComp];
-
-                //Combiner_Splitter_Loss
-                reference = SupportFunc.InitialPowerCalc(Properties.Resources.Combiner_Splitter_Loss);
-                if (reference.ContainsKey(objTech.Combiner_Splitter))
-                    objTech.Combiner_Splitter_Loss = reference[objTech.Combiner_Splitter];
-
-                //Second_Combiner_Splitter_Loss
-                if (reference.ContainsKey(objTech.Sec_Combiner_Splitter))
-                    objTech.Second_Combiner_Splitter_Loss = reference[objTech.Sec_Combiner_Splitter];
+                port.Combiner_Splitter = tech.COMBINER_SPLITTER;
+                port.Sec_Combiner_Splitter = tech.SEC_COMBINER_SPLITTER;
 
 
-                //One Tech  for more than one port!!!!
-                var addedPorts = SplitIfNeedTechWhenBelongToMoreThanOnePort(tech, objTech);
-                ports.AddRange(addedPorts);
+                if (decimal.TryParse(port.Feeder_Length, out decimal feederLength))
+                    port.Feeder_Length = Decimal.ToInt16(feederLength).ToString();
 
+                port.Feeder_Att_dB = SupportFunc.GetFeeder_Att_dB(new[] { port.Band, port.Feeder_Length, port.Feeder_Type });
+
+                void SetRemarkForZeroLoss(string portElement)
+                {
+                    port.Request_Remarks += $"{portElement} = 0!. There is no map in feeders map for {port.Band}, {port.Feeder_Length} " +
+                        $"and {port.Feeder_Type}{Environment.NewLine}";
+                }
+
+                if (port.Feeder_Att_dB == 0)
+                    SetRemarkForZeroLoss("Feeder_Att_dB");
+
+                var combinersLoss = SupportFunc.GetCombiner_Splitter_Loss(new[] { port.Combiner_Splitter, port.Sec_Combiner_Splitter });
+
+                port.Combiner_Splitter_Loss = combinersLoss.First();
+
+                if (!string.IsNullOrEmpty(port.Combiner_Splitter) && port.Combiner_Splitter_Loss == 0)
+                    SetRemarkForZeroLoss("Combiner_Splitter");
+
+
+                port.Second_Combiner_Splitter_Loss = combinersLoss.Last();
+
+                if (!string.IsNullOrEmpty(port.Sec_Combiner_Splitter) && port.Second_Combiner_Splitter_Loss == 0)
+                    SetRemarkForZeroLoss("Sec_Combiner_Splitter");
+
+
+                foreach (var rru in port.ModelRRUs)
+                    rru.Feeder_Att_dB = port.Feeder_Att_dB;
+
+                if (!this.IsGroupByBand)
+                {
+                    //One Tech  for more than one port!!!!
+                    var addedPorts = SplitIfNeedTechWhenBelongToMoreThanOnePort(tech, port);
+                    ports.AddRange(addedPorts);
+                }
+                else
+                    ports.Add(port);
+               
             };
 
             return ports;
@@ -367,17 +386,6 @@ namespace BLL
             var isTechsForMoreThanOnePort = tech.PortNumber.Contains(",");
             if (isTechsForMoreThanOnePort)
             {
-
-                var rruCombination = new Dictionary<string, string[]>
-                {
-                    { "900", new string[]  { "CD", "AB", } }   ,
-                    { "1800", new string[] { "AC", "DB", } }   ,
-                    { "2100", new string[] { "AC", "DB", } }   ,
-                    { "2600", new string[] { "AC", "DB", } }   ,
-                };
-
-
-
                 int currentInput = 0;
                 var orderedPorts = tech.PortNumber.Split(',').OrderBy(n => n.Trim());
 

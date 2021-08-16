@@ -1,4 +1,5 @@
 ﻿using BLL.DTO;
+using BLL.Enums;
 using OfficeOpenXml.FormulaParsing.Utilities;
 using System;
 using System.Collections.Generic;
@@ -194,55 +195,7 @@ namespace BLL
 
             return group;
         }
-
-        public List<Port> GropingBySecAntPhBand()
-        {
-            
-            var groupPorts = ports.GroupBy(n => new
-            {
-                SectorNumber = n.SectorNumber,
-                AntennaType = n.AntennaType,
-                PhyIndex = n.PhyIndex,
-                Band = n.Band
-            })
-            .Select(n => new Port
-            {
-                SectorNumber = n.Key.SectorNumber,
-                AntennaType = n.Key.AntennaType,
-                PhyIndex = n.Key.PhyIndex,
-                Band = n.Key.Band,
-                Technology = String.Join("", n.Select(k => k.Technology).Distinct()),
-                Etilt = String.Join(" ", n.Select(k => k.Etilt).Distinct()),
-                ModelRRUs = n.SelectMany(k => k.ModelRRUs).ToList(),
-                TMA = String.Join(" ", n.Select(k => k.TMA).Distinct()),
-                Feeder_Type = String.Join(" ", n.Select(k => k.Feeder_Type).Distinct()),
-                Feeder_Length = String.Join(" ", n.Select(k => k.Feeder_Length).Distinct()),
-                Feeder_Att_dB = n.Max(k => k.Feeder_Att_dB),
-                Combiner_Splitter = String.Join(" ", n.Select(k => k.Combiner_Splitter).Distinct()),
-                Sec_Combiner_Splitter = String.Join(" ", n.Select(k => k.Sec_Combiner_Splitter).Distinct()),
-                Combiner_Splitter_Loss = n.Max(k => k.Combiner_Splitter_Loss),
-                Second_Combiner_Splitter_Loss = n.Max(k => k.Second_Combiner_Splitter_Loss),
-                Collocation = String.Join(" ", n.Select(k => k.Collocation).Distinct()),
-
-            }).ToList();
-
-            foreach (var port in groupPorts)
-            {
-                if (port.Band == "900")
-                    port.BandPosition = 1;
-                else if (port.Band == "1800")
-                    port.BandPosition = 2;
-                else if (port.Band == "2100")
-                    port.BandPosition = 3;
-                else if (port.Band == "2600")
-                    port.BandPosition = 4;
-                else if (port.Band == "3500")
-                    port.BandPosition = 5;
-            }
-
-            return groupPorts;
-        }
-
+               
         private List<Port> GroupByPort()
         {
             var group = this.ports.GroupBy(n => new
@@ -282,6 +235,54 @@ namespace BLL
             else
                 return PortArrangeWithValidPortsFromAsset(siteID);
 
+        }
+
+        public List<Port> GropingBySecAntPhBand()
+        {
+
+            var groupPorts = ports.GroupBy(n => new
+            {
+                SectorNumber = n.SectorNumber,
+                AntennaType = n.AntennaType,
+                PhyIndex = n.PhyIndex,
+                Band = n.Band
+            })
+            .Select(n => new Port
+            {
+                SectorNumber = n.Key.SectorNumber,
+                AntennaType = n.Key.AntennaType,
+                PhyIndex = n.Key.PhyIndex,
+                Band = n.Key.Band,
+                Technology = String.Join("", n.Select(k => k.Technology).Distinct()),
+                Etilt = String.Join(" ", n.Select(k => k.Etilt).Distinct()),
+                ModelRRUs = n.SelectMany(k => k.ModelRRUs).ToList(),
+                TMA = String.Join(" ", n.Select(k => k.TMA).Distinct()),
+                Feeder_Type = String.Join(" ", n.Select(k => k.Feeder_Type).Distinct()),
+                Feeder_Length = String.Join(" ", n.Select(k => k.Feeder_Length).Distinct()),
+                Feeder_Att_dB = n.Max(k => k.Feeder_Att_dB),
+                Combiner_Splitter = String.Join(" ", n.Select(k => k.Combiner_Splitter).Distinct()),
+                Sec_Combiner_Splitter = String.Join(" ", n.Select(k => k.Sec_Combiner_Splitter).Distinct()),
+                Combiner_Splitter_Loss = n.Max(k => k.Combiner_Splitter_Loss),
+                Second_Combiner_Splitter_Loss = n.Max(k => k.Second_Combiner_Splitter_Loss),
+                Collocation = String.Join(" ", n.Select(k => k.Collocation).Distinct()),
+
+            }).ToList();
+
+            foreach (var port in groupPorts)
+            {
+                if (port.Band == ((int)Band.B9).ToString())
+                    port.BandPosition = 1;
+                else if (port.Band == ((int)Band.B18).ToString())
+                    port.BandPosition = 2;
+                else if (port.Band == ((int)Band.B21).ToString())
+                    port.BandPosition = 3;
+                else if (port.Band == ((int)Band.B26).ToString())
+                    port.BandPosition = 4;
+                else if (port.Band == ((int)Band.B35).ToString())
+                    port.BandPosition = 5;
+            }
+
+            return groupPorts;
         }
 
     }

@@ -3,32 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using static BLL.SupportFunc;
+
 
 namespace BLL
 {
     public class DTO_Load_PSK : DTO_Load
     {
-        public DTO_Load_PSK(string siteID, bool isSiteSRAN) : base(siteID, isSiteSRAN)
+        public DTO_Load_PSK(string siteID) : base(siteID)
         {
+            this.IsGroupByBand = true;
         }
-
-        //public override void QueryMaterialize()
-        //{
-        //    base.QueryMaterialize();
-
-        //    this.LstLoadRRU_CM = base.LoadRRU_Oss();
-
-        //    var mapTechnoly = SupportFunc.MapAssetTechWithCmTech(this.lstTechnology, this.LstLoadRRU_CM.Select(n => n.CellName));
-
-        //    if (mapTechnoly.Count != 0)
-        //    {
-        //        this.IsRrusFromOss = true;
-
-        //        this.LstLoadPowerTRX_CM = base.LoadPowerTRX_Oss();
-
-        //        this.lstTechnology = mapTechnoly;
-        //    }
-        //}
 
 
         public override List<Port> TechLoad(string sector, string antennaType, decimal phyIndex)
@@ -73,21 +58,21 @@ namespace BLL
 
         public List<Port> BandLoad(string sector, string antennaType, decimal phyIndex)
         {
-           
+
             var allTech = this.TechLoad(sector, antennaType, phyIndex);
 
             var portGrouping = new PortGrouping(allTech);
 
             var groupByBand = portGrouping.GropingBySecAntPhBand();
 
-            foreach (var item in groupByBand)
+            foreach (var port in groupByBand)
             {
                 double getCalcPower = 0;
 
-                item.ModelRRUs.RemoveAll(n => n.Band == "3500");
+                port.ModelRRUs.RemoveAll(n => n.Band == "3500");
 
                 //Here only for 2G sum TRXs. For 3G,4G,5G TRX=1
-                var groupByCellName = item.ModelRRUs.GroupBy(n => n.CellName)
+                var groupByCellName = port.ModelRRUs.GroupBy(n => n.CellName)
                     .Select(n => new ModelRRU
                     {
                         GSM_TRX = n.Select(k => k.GSM_TRX).Sum(),
@@ -100,31 +85,41 @@ namespace BLL
                         NR_Pwr_per_TRX = n.Select(k => k.NR_Pwr_per_TRX).First(),
                     });
 
-             
-                //getCalcPower = 0;
                 foreach (var rru in groupByCellName)
-                    getCalcPower += SupportFunc.GetPortCalcPowerIRFC(rru);
+                    getCalcPower += GetPortCalcPower(rru);
 
+                //SF1862
+                //if (sector == "1" && antennaType == "AQU4518R25v18" && item.Band == "900")
+                //    Console.WriteLine();
 
-                //Convert All Power in W and do mapping.
-                //Calculate Antenna_IN_Total_Power in W
-                if (item.Feeder_Att_dB > 0)
-                {
-                    item.Antenna_IN_Total_Power = SupportFunc.ConvertW_dBm(getCalcPower)
-                       - item.Combiner_Splitter_Loss
-                       - item.Second_Combiner_Splitter_Loss
-                       - item.Feeder_Att_dB;
-
-                    item.Antenna_IN_Total_Power = SupportFunc.ConvertdBm_W(item.Antenna_IN_Total_Power);
-
-                }
-                else
-                    item.Request_Remarks += $"Antenna_IN_Total_Power=0. Моля проверете дали са въведени стойности за JumperType и дължина на фидера{Environment.NewLine}";
+                port.Antenna_IN_Total_Power = CalcAntennaInTotalPower(port, getCalcPower);
             }
 
             return groupByBand;
         }
 
+        private double GetPortCalcPower(ModelRRU rru)
+        {
+            if (rru == null)
+                return 0;
 
+            return (rru.GSM_TRX * ConvertdBm_W(double.Parse(rru.GSM_Pwr_per_TRX))) +
+                    (rru.UMTS_TRX * ConvertdBm_W(double.Parse(rru.UMTS_Pwr_per_TRX))) +
+                    (rru.LTE_TRX * ConvertdBm_W(double.Parse(rru.LTE_Pwr_per_TRX))) +
+                    (rru.NR_TRX * ConvertdBm_W(double.Parse(rru.NR_Pwr_per_TRX)));
+
+        }
+
+        private double CalcAntennaInTotalPower(Port port, double portPower)
+        {
+            var antenna_IN_Total_Power = ConvertW_dBm(portPower)
+                        - port.Combiner_Splitter_Loss
+                        - port.Second_Combiner_Splitter_Loss
+                        - port.Feeder_Att_dB;
+
+            antenna_IN_Total_Power = ConvertdBm_W(antenna_IN_Total_Power);
+
+            return antenna_IN_Total_Power;
+        }
     }
 }

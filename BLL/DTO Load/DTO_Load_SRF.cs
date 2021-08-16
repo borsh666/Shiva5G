@@ -1,4 +1,5 @@
 ﻿using BLL.DTO;
+using BLL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +9,7 @@ namespace BLL
 {
     public class DTO_Load_SRF : DTO_Load
     {
-        public DTO_Load_SRF(string siteID, bool isSiteSRAN) : base(siteID, isSiteSRAN)
+        public DTO_Load_SRF(string siteID) : base(siteID)
         {
             this.IsRrusFromOss = true;
         }
@@ -41,37 +42,37 @@ namespace BLL
             foreach (var sector in sectors)
             {
                 sector.GSM_900 = LstLoadPowerTRX_CM
-                      .Where(n => n.Sector == sector.SectorNumb && n.Technology == "G" && n.Band == "900")
+                      .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.G.ToString() && n.Band == ((int)Band.B9).ToString())
                       .Sum(n => (n.GSM_TRX));
                 sector.GSM_1800 = LstLoadPowerTRX_CM
-                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == "G" && n.Band == "1800")
+                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.G.ToString() && n.Band == ((int)Band.B18).ToString())
                     .Sum(n => (n.GSM_TRX));
                 sector.UMTS_900 = LstLoadPowerTRX_CM
-                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == "U" && n.Band == "900")
+                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.U.ToString() && n.Band == ((int)Band.B9).ToString())
                     .Select(n => n.CellName).Distinct().Count();
                 sector.UMTS_2100 = LstLoadPowerTRX_CM
-                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == "U" && n.Band == "2100")
+                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.U.ToString() && n.Band == ((int)Band.B21).ToString())
                     .Select(n => n.CellName).Distinct().Count();
                 sector.LTE_900 = LstLoadPowerTRX_CM
-                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == "L" && n.Band == "900")
+                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.L.ToString() && n.Band == ((int)Band.B9).ToString())
                     .Select(n => n.CellName).Distinct().Count();
                 sector.LTE_1800 = LstLoadPowerTRX_CM
-                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == "L" && n.Band == "1800")
+                    .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.L.ToString() && n.Band == ((int)Band.B18).ToString())
                     .Select(n => n.CellName).Distinct().Count();
                 sector.LTE_2100 = LstLoadPowerTRX_CM
-                  .Where(n => n.Sector == sector.SectorNumb && n.Technology == "L" && n.Band == "2100")
+                  .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.L.ToString() && n.Band == ((int)Band.B21).ToString())
                   .Select(n => n.CellName).Distinct().Count();
                 sector.LTE_2600 = LstLoadPowerTRX_CM
-                 .Where(n => n.Sector == sector.SectorNumb && n.Technology == "L" && n.Band == "2600")
+                 .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.L.ToString() && n.Band == ((int)Band.B26).ToString())
                  .Select(n => n.CellName).Distinct().Count();
                 sector.NR_1800 = LstLoadPowerTRX_CM
-                   .Where(n => n.Sector == sector.SectorNumb && n.Technology == "NR" && n.Band == "1800")
+                   .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.NR.ToString() && n.Band == ((int)Band.B18).ToString())
                    .Select(n => n.CellName).Distinct().Count();
                 sector.NR_2100 = LstLoadPowerTRX_CM
-                  .Where(n => n.Sector == sector.SectorNumb && n.Technology == "NR" && n.Band == "2100")
+                  .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.NR.ToString() && n.Band == ((int)Band.B21).ToString())
                   .Select(n => n.CellName).Distinct().Count();
                 sector.NR_3500 = LstLoadPowerTRX_CM
-                 .Where(n => n.Sector == sector.SectorNumb && n.Technology == "NR" && n.Band == "3500")
+                 .Where(n => n.Sector == sector.SectorNumb && n.Technology == Technology.NR.ToString() && n.Band == ((int)Band.B35).ToString())
                  .Select(n => n.CellName).Distinct().Count();
 
             }

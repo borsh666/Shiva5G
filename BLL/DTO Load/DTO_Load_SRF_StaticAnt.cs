@@ -7,7 +7,7 @@ namespace BLL
 {
     public class DTO_Load_SRF_StaticAnt : DTO_Load_SRF
     {
-        public DTO_Load_SRF_StaticAnt(string siteID, bool isSiteSRAN) : base(siteID, isSiteSRAN)
+        public DTO_Load_SRF_StaticAnt(string siteID) : base(siteID)
         {
         }
 

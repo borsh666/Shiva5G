@@ -13,6 +13,11 @@ using DAL_Asset10;
 
 namespace TestConsole
 {
+    enum Band
+    {
+        B9=900,
+        B1800=1800
+    }
     class Program
     {
 
@@ -626,6 +631,9 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
+
+            var op = ((int)Band.B9).ToString();
+
             var db = new Entities();
             var queries = new Queries("SF1044");
             var m = queries.Get5GSiteAsset_Python();

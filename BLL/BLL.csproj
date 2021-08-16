@@ -90,6 +90,8 @@
     <Compile Include="DTO Load\DTO_Load_IRFC.cs" />
     <Compile Include="DTO Load\DTO_Load_SRF.cs" />
     <Compile Include="DTO Model\ReportSRF_StaticAnt.cs" />
+    <Compile Include="Enums\Band.cs" />
+    <Compile Include="Enums\Technology.cs" />
     <Compile Include="ExcelOutput.cs" />
     <Compile Include="Interfaces\IAntenna.cs" />
     <Compile Include="DTO Model\Port.cs" />

@@ -75,26 +75,13 @@ namespace BLL.DTO
         public double Second_Combiner_Splitter_Loss { get; set; }
         [ForPrint]
         public double Antenna_IN_Total_Power { get; set; }
-
-        //PSK
-        [ForPrint]
-        public string GSM_Pwr_ToC { get; internal set; }
-        [ForPrint]
-        public string UMTS_Pwr_ToC { get; internal set; }
-        [ForPrint]
-        public string LTE_Pwr_ToC { get; internal set; }
-        //[ForPrint]
-        public string NR_Pwr_ToC { get; internal set; }
+               
         [ForPrint]
         public string PortName { get; internal set; }
 
         public Port DeepCopy()
         {
             return this.DeepCopyByExpressionTree();
-
-            //Port other = (Port)this.MemberwiseClone();
-
-            //return other;
         }
     }
 }

@@ -42,7 +42,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.label4 = new System.Windows.Forms.Label();
             this.labelCurrentLoading = new System.Windows.Forms.Label();
-            this.checkBoxIsSRAN = new System.Windows.Forms.CheckBox();
             this.buttonAntennaTest = new System.Windows.Forms.Button();
             this.buttonManySA = new System.Windows.Forms.Button();
             this.openFileDialogManySA = new System.Windows.Forms.OpenFileDialog();
@@ -93,7 +92,7 @@
             this.label3.Font = new System.Drawing.Font("Monotype Corsiva", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(147, 383);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 20);
+            this.label3.Size = new System.Drawing.Size(177, 33);
             this.label3.TabIndex = 5;
             this.label3.Text = "New Delhi Team";
             this.label3.UseMnemonic = false;
@@ -111,7 +110,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 312);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 15);
+            this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "SiteID:";
             // 
@@ -120,7 +119,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(51, 332);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 15);
+            this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "ex. SО1513";
             // 
@@ -162,7 +161,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(315, 50);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 15);
+            this.label4.Size = new System.Drawing.Size(0, 13);
             this.label4.TabIndex = 13;
             this.label4.Visible = false;
             // 
@@ -173,22 +172,10 @@
             this.labelCurrentLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelCurrentLoading.Location = new System.Drawing.Point(239, 37);
             this.labelCurrentLoading.Name = "labelCurrentLoading";
-            this.labelCurrentLoading.Size = new System.Drawing.Size(11, 16);
+            this.labelCurrentLoading.Size = new System.Drawing.Size(17, 25);
             this.labelCurrentLoading.TabIndex = 14;
             this.labelCurrentLoading.Text = ".";
             this.labelCurrentLoading.Visible = false;
-            // 
-            // checkBoxIsSRAN
-            // 
-            this.checkBoxIsSRAN.AutoSize = true;
-            this.checkBoxIsSRAN.Checked = true;
-            this.checkBoxIsSRAN.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIsSRAN.Location = new System.Drawing.Point(54, 286);
-            this.checkBoxIsSRAN.Name = "checkBoxIsSRAN";
-            this.checkBoxIsSRAN.Size = new System.Drawing.Size(62, 19);
-            this.checkBoxIsSRAN.TabIndex = 15;
-            this.checkBoxIsSRAN.Text = "SRAN";
-            this.checkBoxIsSRAN.UseVisualStyleBackColor = true;
             // 
             // buttonAntennaTest
             // 
@@ -220,7 +207,7 @@
             this.labelManySA.AutoSize = true;
             this.labelManySA.Location = new System.Drawing.Point(14, 80);
             this.labelManySA.Name = "labelManySA";
-            this.labelManySA.Size = new System.Drawing.Size(360, 15);
+            this.labelManySA.Size = new System.Drawing.Size(320, 13);
             this.labelManySA.TabIndex = 18;
             this.labelManySA.Text = "Create txt file with list of sites and copy it to Debug/ManySA folder.";
             this.labelManySA.Visible = false;
@@ -307,7 +294,6 @@
             this.Controls.Add(this.labelManySA);
             this.Controls.Add(this.buttonManySA);
             this.Controls.Add(this.buttonAntennaTest);
-            this.Controls.Add(this.checkBoxIsSRAN);
             this.Controls.Add(this.labelCurrentLoading);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonAntiInterferin);
@@ -345,7 +331,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelCurrentLoading;
-        private System.Windows.Forms.CheckBox checkBoxIsSRAN;
         private System.Windows.Forms.Button buttonAntennaTest;
         private System.Windows.Forms.Button buttonManySA;
         private System.Windows.Forms.OpenFileDialog openFileDialogManySA;

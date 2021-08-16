@@ -10,6 +10,7 @@ using System.IO;
 using Newtonsoft.Json;
 using DAL_HWI;
 using OfficeOpenXml.FormulaParsing.Utilities;
+using BLL.Enums;
 
 namespace BLL
 {
@@ -759,9 +760,9 @@ namespace BLL
                       
             foreach (var tech in tech2G)
             {
-                if (tech.Band == "900")
+                if (tech.Band == ((int)Band.B9).ToString())
                     tech.GSM_TRX = 1;
-                else if (tech.Band == "1800")
+                else if (tech.Band == ((int)Band.B18).ToString())
                     tech.GSM_TRX = 0;
             }
 
@@ -808,7 +809,7 @@ namespace BLL
             foreach (var item in tech5G)
             {
                 //DSS
-                if (item.Band == "1800" || item.Band == "2100")
+                if (item.Band == ((int)Band.B18).ToString()  || item.Band == ((int)Band.B21).ToString())
                     item.NR_TRX = 0;
             }
 
@@ -930,13 +931,13 @@ namespace BLL
         private string LteBandMap(string lteBand)
         {
             if (lteBand == "3")
-                return "1800";
+                return ((int)Band.B18).ToString();
             else if (lteBand == "8")
-                return "900";
+                return ((int)Band.B9).ToString();
             else if (lteBand == "1")
-                return "2100";
+                return ((int)Band.B21).ToString();
             else if (lteBand == "7")
-                return "2600";
+                return ((int)Band.B26).ToString();
 
             return string.Empty;
         }
@@ -1077,7 +1078,7 @@ namespace BLL
                && trxInfo.Active_Status == "ACTIVATED"
                select new ModelRRU
                {
-                   Technology = "G",
+                   Technology = Technology.G.ToString(),
                    Band = trxInfo.Frequency,
                    SiteID = siteID,
                    Sector = power.Cell_Name.Substring(4, 1),
@@ -1112,8 +1113,8 @@ namespace BLL
                && power.NodeBName.Contains(siteID) && power.Validationindication == "ACTIVATED"
                select new ModelRRU
                {
-                   Technology = "U",
-                   Band = power.BandIndicator == "Band8" ? "900" : "2100",
+                   Technology = Technology.U.ToString(),
+                   Band = power.BandIndicator == "Band8" ? ((int)Band.B9).ToString() : ((int)Band.B21).ToString(),
                    SiteID = siteID,
                    Sector = power.CellName.Substring(4, 1),
                    CellName = power.CellName,
@@ -1147,7 +1148,7 @@ namespace BLL
             && power.Cell_active_state == "CELL_ACTIVE"
             select new
             {
-                Technology = "L",
+                Technology = Technology.L.ToString(),
                 Band = power.Frequency_band,
                 SiteID = siteID,
                 Sector = power.Cell_Name.Substring(4, 1),
@@ -1215,13 +1216,13 @@ namespace BLL
                   && power.Cell_Activate_State == "CELL_ACTIVE"
             select new ModelRRU
             {
-                Technology = "NR",
+                Technology = Technology.NR.ToString(),
                 Band =
-                    (power.Frequency_Band == "N1") ? "2100" :
-                    (power.Frequency_Band == "N3") ? "1800" :
-                    (power.Frequency_Band == "N78") ? "3500" :
-                    (power.Frequency_Band == "N28") ? "700" :
-                    (power.Frequency_Band == "N20") ? "800" : null,
+                    (power.Frequency_Band == "N1") ? ((int)Band.B21).ToString() :
+                    (power.Frequency_Band == "N3") ? ((int)Band.B18).ToString() :
+                    (power.Frequency_Band == "N78") ? ((int)Band.B35).ToString() :
+                    (power.Frequency_Band == "N28") ? ((int)Band.B7).ToString() :
+                    (power.Frequency_Band == "N20") ? ((int)Band.B8).ToString() : null,
                 SiteID = siteID,
                 Sector = power.NR_DU_Cell_Name.Substring(4, 1),
                 CellName = power.NR_DU_Cell_Name,
@@ -1245,7 +1246,7 @@ namespace BLL
                     item.NR_Pwr_per_TRX = "";
 
                 //DSS
-                if (item.Band == "1800" || item.Band == "2100")
+                if (item.Band == ((int)Band.B18).ToString() || item.Band == ((int)Band.B21).ToString())
                     item.NR_TRX = 0;
             }
 
@@ -1270,13 +1271,13 @@ namespace BLL
             foreach (var item in result)
             {
                 if (item.Technology == "GSM")
-                    item.Technology = "G";
+                    item.Technology = Technology.G.ToString();
                 else if (item.Technology == "UMTS")
-                    item.Technology = "U";
+                    item.Technology = Technology.U.ToString();
                 else if (item.Technology == "LTE")
-                    item.Technology = "L";
-                else if (item.Technology == "NR")
-                    item.Technology = "NR";
+                    item.Technology = Technology.L.ToString();
+                //else if (item.Technology == Technology.NR.ToString())
+                //    item.Technology = Technology.NR.ToString();
             }
 
             return result;

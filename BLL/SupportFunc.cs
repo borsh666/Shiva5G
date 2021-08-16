@@ -1,4 +1,5 @@
 ﻿using BLL.DTO;
+using BLL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -40,7 +41,6 @@ namespace BLL
 
         }
 
-
         private static string CorrectAntennaVersionLetterV(string antennaType)
         {
             if (antennaType.Contains("v"))
@@ -50,15 +50,15 @@ namespace BLL
 
         }
 
-        private static string ConcatRruWithBand(string rruType, string band)
+        public static string ConcatRruWithBand(string rruType, string band)
         {
-            if (band == "900")
+            if (band == ((int)Band.B9).ToString())
                 return rruType + "-9";
-            else if (band == "1800")
+            else if (band == ((int)Band.B18).ToString())
                 return rruType + "-18";
-            else if (band == "2100")
+            else if (band == ((int)Band.B21).ToString())
                 return rruType + "-21";
-            else if (band == "2600")
+            else if (band == ((int)Band.B26).ToString())
                 return rruType + "-26";
 
             return string.Empty;
@@ -83,31 +83,55 @@ namespace BLL
             return cleanedTechs;
         }
 
-        public static Dictionary<string, double> InitialPowerCalc(string pathFileTxt)
+        public static double GetFeeder_Att_dB(string[] jumpParam)
         {
-            var stringFile = pathFileTxt;
-            string[] arrLine = stringFile.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            var resultDict = new Dictionary<string, double>();
+            //Tech meters Feedertype  att_dB
+            var jumperAttdB = Properties.Resources.JumperAttdB
+                .Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
-            for (int i = 1; i < arrLine.Length; i++)
+
+            for (int i = 1; i < jumperAttdB.Length; i++)
             {
-                var parts = arrLine[i].Split('|').ToList();
-                parts.RemoveAt(parts.Count - 1);
-                var stringPart = String.Join(" ", parts);
-                double decimalPart;
-                try
-                {
-                    decimalPart = double.Parse(arrLine[i].Split('|').Last());
-                }
-                catch
-                {
-                    throw new ArgumentException("В регионалните сетинги разделителя трябва да бъре точка");
-                }
+                var fileDelimeter = '|';
+                var parts = jumperAttdB[i].Split(fileDelimeter).ToList();
+                var techMetersFeedertype = parts.Take(3);
+                var att_DbStr = parts.Last();
+                bool isEqual = Enumerable.SequenceEqual(jumpParam, techMetersFeedertype);
 
-                if (!resultDict.ContainsKey(stringPart))
-                    resultDict.Add(stringPart, decimalPart);
+                if (isEqual && double.TryParse(att_DbStr, out double att_Db))
+                    return att_Db;
+
             }
-            return resultDict;
+            return 0;
+        }
+
+        public static List<double> GetCombiner_Splitter_Loss(string[] combiner_Splitters )
+        {
+            //Combiner_Splitter|Loss
+            var combiner_Splitter_Loss = Properties.Resources.Combiner_Splitter_Loss
+                .Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+
+            var combiner_Splitters_Loss = new List<double>();
+
+            for (int i = 1; i < combiner_Splitter_Loss.Length; i++)
+            {
+                var fileDelimeter = '|';
+                var parts = combiner_Splitter_Loss[i].Split(fileDelimeter).ToList();
+                var combiner_SplitterPart = parts.First();
+                var lossPart = parts.Last();
+                var isMach = combiner_Splitters.Any(n => n == combiner_SplitterPart);
+
+
+                if (isMach && double.TryParse(lossPart, out double loss))
+                    combiner_Splitters_Loss.Add(loss);
+
+            }
+
+            //Add  combiners with Loss = 0 in case combiner_Splitters_Loss remains empty
+            for (int i = 0; i < 10; i++)
+                combiner_Splitters_Loss.Add(0);
+
+            return combiner_Splitters_Loss;
         }
 
         public static List<ModelRRU> GetMapPower()
@@ -144,81 +168,7 @@ namespace BLL
             }
             return lstMap;
         }
-
-        public static double GetPortCalcPower(string modelRRU, int GSM_TRX, int UMTS_TRX, int LTE_TRX, int NR_TRX)
-        {
-
-            modelRRU = modelRRU.Replace("AC", "");
-            modelRRU = modelRRU.Replace("DB", "");
-
-            if (LTE_TRX > 1)
-                LTE_TRX = 1;
-
-            var getMapPower = GetMapPower();
-
-            var mapingInW = getMapPower.Select(n => new
-            {
-                RRU_Type = n.RRU_Type,
-                Band = n.Band.ToString(),
-
-                GSM_TRX = n.GSM_TRX,
-                //Watt
-                GSM_Pwr_per_TRX = double.Parse(n.GSM_Pwr_per_TRX),
-
-                UMTS_TRX = n.UMTS_TRX,
-                //Watt
-                UMTS_Pwr_per_TRX = double.Parse(n.UMTS_Pwr_per_TRX),
-
-                LTE_TRX = n.LTE_TRX,
-                //Watt
-                LTE_Pwr_per_TRX = double.Parse(n.LTE_Pwr_per_TRX),
-
-                NR_TRX = n.NR_TRX,
-                //Watt
-                NR_Pwr_per_TRX = double.Parse(n.NR_Pwr_per_TRX),
-
-            });
-
-            double powerInW = 0;
-
-
-            foreach (var map in mapingInW)
-            {
-                //if (map.RRU_Type == modelRRU && GSM_TRX == map.GSM_TRX && UMTS_TRX == map.UMTS_TRX && LTE_TRX == map.LTE_TRX)
-                //{
-                //    powerInW = (map.GSM_TRX * map.GSM_Pwr_per_TRX) + (map.UMTS_TRX * map.UMTS_Pwr_per_TRX) + (map.LTE_Pwr_per_TRX * map.LTE_TRX);
-
-                //    //16.03.2017 Power Correction for SA/SRF
-                //    //powerInW = map.GSM_Pwr_per_TRX + map.UMTS_Pwr_per_TRX + map.LTE_Pwr_per_TRX;
-                //    break;
-                //}
-                if (map.RRU_Type == modelRRU && GSM_TRX == map.GSM_TRX && UMTS_TRX == map.UMTS_TRX 
-                    && LTE_TRX == map.LTE_TRX && NR_TRX == map.NR_TRX)
-                {
-                    powerInW = (map.GSM_TRX * map.GSM_Pwr_per_TRX) + (map.UMTS_TRX * map.UMTS_Pwr_per_TRX) + (map.LTE_Pwr_per_TRX * map.LTE_TRX) + (map.NR_Pwr_per_TRX * map.NR_TRX);
-
-                    //16.03.2017 Power Correction for SA/SRF
-                    //powerInW = map.GSM_Pwr_per_TRX + map.UMTS_Pwr_per_TRX + map.LTE_Pwr_per_TRX;
-                    break;
-                }
-            }
-
-            return powerInW;
-        }
-
-        //New 15.03.2017
-        public static double GetPortCalcPowerIRFC(ModelRRU rru)
-        {
-            if (rru == null)
-                return 0;
-                                 
-            return (rru.GSM_TRX * ConvertdBm_W(double.Parse(rru.GSM_Pwr_per_TRX))) +
-                    (rru.UMTS_TRX * ConvertdBm_W(double.Parse(rru.UMTS_Pwr_per_TRX))) +
-                    (rru.LTE_TRX * ConvertdBm_W(double.Parse(rru.LTE_Pwr_per_TRX))) +
-                    (rru.NR_TRX * ConvertdBm_W(double.Parse(rru.NR_Pwr_per_TRX)));
-
-        }
-
+   
         public static double ConvertW_dBm(double w)
         {
             return 10 * Math.Log10(1000 * w);
@@ -229,6 +179,22 @@ namespace BLL
             return Math.Pow(10, (dBm - 30) / 10);
         }
 
+        public static string CalcPowerPerTrx(List<string> powers, int trx)
+        {
+            double watts = 0;
+            var default_value = "0";
+
+            foreach (var power in powers)
+            {
+                if (power != default_value)
+                    watts += SupportFunc.ConvertdBm_W(double.Parse(power));
+            }
+
+            if (watts > 0)
+                return Math.Round(SupportFunc.ConvertW_dBm(watts / trx), 2).ToString();
+
+            return default_value;
+        }
 
         //OLD!!!!! not used any more
         //Info! Dictionary<int,string[]>   Key: 1 Band position in Excel Value[]:Band[0] "790-960" [1] "Free"
@@ -268,6 +234,15 @@ namespace BLL
             var hiFreq = int.Parse(portBandRange.Split('-').Last().Trim());
             var intPortBand = int.Parse(portBand);
             if (intPortBand >= lowFreq && intPortBand <= hiFreq)
+                return true;
+
+            return false;
+        }
+
+        public static bool IsBandHigh(string portBand)
+        {
+            var band = int.Parse(portBand);
+            if (band > 900)
                 return true;
 
             return false;

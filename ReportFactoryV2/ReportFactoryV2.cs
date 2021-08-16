@@ -18,10 +18,7 @@ namespace ReportFactoryV2
 
         private string siteID;
 
-        private bool isSiteSRAN;
-
-
-
+        
         public ReportFactoryV2()
         {
             this.BackgroundImage = Properties.Resources.shiva391x480;
@@ -32,10 +29,6 @@ namespace ReportFactoryV2
 
             progressBar1.Visible = true;
             progressBar1.Value = 0;
-
-            isSiteSRAN = checkBoxIsSRAN.Checked;
-
-
         }
 
 
@@ -56,7 +49,7 @@ namespace ReportFactoryV2
                 labelCurrentLoading.Visible = true;
 
                 labelCurrentLoading.Text = "DTO_Load";
-                var dto = new DTO_Load_IRFC(siteID, isSiteSRAN);
+                var dto = new DTO_Load_IRFC(siteID);
                 progressBar1.Value = 30;
 
                 foreach (var item in dto.Info)
@@ -122,7 +115,7 @@ namespace ReportFactoryV2
                 labelCurrentLoading.Visible = true;
 
                 labelCurrentLoading.Text = "DTO_Load";
-                var dto = new DTO_Load_SA(siteID, isSiteSRAN);
+                var dto = new DTO_Load_SA(siteID);
                 progressBar1.Value = 30;
 
                 labelCurrentLoading.Text = "Site_Load";
@@ -198,7 +191,7 @@ namespace ReportFactoryV2
                 labelCurrentLoading.Visible = true;
 
                 labelCurrentLoading.Text = "DTO_Load";
-                var dto = new DTO_Load_SRF(siteID, isSiteSRAN);
+                var dto = new DTO_Load_SRF(siteID);
                 progressBar1.Value = 30;
 
                 labelCurrentLoading.Text = "Site_Load";
@@ -278,7 +271,7 @@ namespace ReportFactoryV2
                 labelCurrentLoading.Visible = true;
 
                 labelCurrentLoading.Text = "DTO_Load";
-                var dto = new DTO_Load_PSK(siteID, isSiteSRAN);
+                var dto = new DTO_Load_PSK(siteID);
                 progressBar1.Value = 30;
 
                 foreach (var item in dto.Info)
@@ -317,7 +310,6 @@ namespace ReportFactoryV2
             progressBar1.Visible = false;
             labelCurrentLoading.Visible = false;
         }
-
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -389,12 +381,10 @@ namespace ReportFactoryV2
         }
 
 
-
         private void textBoxPerformance_TextChanged(object sender, EventArgs e)
         {
 
         }
-
 
 
         private void buttonManyIRFC_Click(object sender, EventArgs e)
@@ -416,7 +406,7 @@ namespace ReportFactoryV2
                     labelCurrentLoading.Visible = true;
 
                     labelCurrentLoading.Text = "DTO_Load";
-                    var dto = new DTO_Load_IRFC(siteID, isSiteSRAN);
+                    var dto = new DTO_Load_IRFC(siteID);
                     progressBar1.Value = 30;
 
                     labelCurrentLoading.Text = "Site_Load";
@@ -480,7 +470,7 @@ namespace ReportFactoryV2
                     labelCurrentLoading.Visible = true;
 
                     labelCurrentLoading.Text = "DTO_Load";
-                    var dto = new DTO_Load_SA(siteID, isSiteSRAN);
+                    var dto = new DTO_Load_SA(siteID);
                     progressBar1.Value = 30;
 
                     labelCurrentLoading.Text = "Site_Load";
@@ -545,7 +535,7 @@ namespace ReportFactoryV2
                     labelCurrentLoading.Visible = true;
 
                     labelCurrentLoading.Text = "DTO_Load";
-                    var dto = new DTO_Load_PSK(siteID, isSiteSRAN);
+                    var dto = new DTO_Load_PSK(siteID);
                     progressBar1.Value = 30;
 
                     foreach (var item in dto.Info)
@@ -605,7 +595,7 @@ namespace ReportFactoryV2
                     labelCurrentLoading.Visible = true;
 
                     labelCurrentLoading.Text = "DTO_Load";
-                    var dto = new DTO_Load_SRF(siteID, isSiteSRAN);
+                    var dto = new DTO_Load_SRF(siteID);
                     progressBar1.Value = 30;
 
                     labelCurrentLoading.Text = "Site_Load";
@@ -674,7 +664,7 @@ namespace ReportFactoryV2
                 labelCurrentLoading.Visible = true;
 
                 labelCurrentLoading.Text = "DTO_Load";
-                var dto = new DTO_Load_SRF(siteID, isSiteSRAN);
+                var dto = new DTO_Load_SRF(siteID);
                 progressBar1.Value = 30;
 
                 labelCurrentLoading.Text = "Site_Load";
@@ -682,7 +672,7 @@ namespace ReportFactoryV2
                 progressBar1.Value = 50;
                                             
 
-                var dto_static_ant = new DTO_Load_SRF_StaticAnt(siteID, isSiteSRAN);
+                var dto_static_ant = new DTO_Load_SRF_StaticAnt(siteID);
                 var site_static_ant = dto_static_ant.LoadNewSiteAntenna();
                 progressBar1.Value = 70;
 
@@ -742,7 +732,7 @@ namespace ReportFactoryV2
                     labelCurrentLoading.Visible = true;
 
                     labelCurrentLoading.Text = "DTO_Load";
-                    var dto = new DTO_Load_SRF(siteID, isSiteSRAN);
+                    var dto = new DTO_Load_SRF(siteID);
                     progressBar1.Value = 30;
 
                     labelCurrentLoading.Text = "Site_Load";
@@ -750,7 +740,7 @@ namespace ReportFactoryV2
                     progressBar1.Value = 50;
 
 
-                    var dto_static_ant = new DTO_Load_SRF_StaticAnt(siteID, isSiteSRAN);
+                    var dto_static_ant = new DTO_Load_SRF_StaticAnt(siteID);
                     var site_static_ant = dto_static_ant.LoadNewSiteAntenna();
                     progressBar1.Value = 70;
 

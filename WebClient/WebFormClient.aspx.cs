@@ -12,7 +12,6 @@ namespace WebClient
     public partial class WebFormClient : System.Web.UI.Page
     {
         public string siteID;
-        public const bool isSiteSRAN = true;
         private string resultFilePath;
         private string resultFileName;
         private string valueFromCookie;
@@ -76,7 +75,7 @@ namespace WebClient
 
                 var resultFile = new FileInfo(resultFilePath);
 
-                var dto = new DTO_Load_IRFC(ViewState["SiteID"].ToString(), isSiteSRAN);
+                var dto = new DTO_Load_IRFC(ViewState["SiteID"].ToString());
 
                 var site = dto.Site();
 
@@ -113,7 +112,7 @@ namespace WebClient
 
                 var resultFile = new FileInfo(resultFilePath);
 
-                var dto = new DTO_Load_SA(ViewState["SiteID"].ToString(), isSiteSRAN);
+                var dto = new DTO_Load_SA(ViewState["SiteID"].ToString());
 
                 var site = dto.Site();
 
@@ -162,7 +161,7 @@ namespace WebClient
 
                 var resultFile = new FileInfo(resultFilePath);
 
-                var dto = new DTO_Load_SRF(ViewState["SiteID"].ToString(), isSiteSRAN);
+                var dto = new DTO_Load_SRF(ViewState["SiteID"].ToString());
 
                 var site = dto.Site();
 
@@ -206,7 +205,7 @@ namespace WebClient
 
                 var resultFile = new FileInfo(resultFilePath);
 
-                var dto = new DTO_Load_PSK(ViewState["SiteID"].ToString(), isSiteSRAN);
+                var dto = new DTO_Load_PSK(ViewState["SiteID"].ToString());
 
                 var site = dto.Site();
 
@@ -296,7 +295,7 @@ namespace WebClient
 
                 var resultFile = new FileInfo(resultFilePath);
 
-                var dto = new DTO_Load_SRF(ViewState["SiteID"].ToString(), isSiteSRAN);
+                var dto = new DTO_Load_SRF(ViewState["SiteID"].ToString());
               
                 
                 var report = new ReportSRF(resultFilePath, valueFromCookie);
@@ -305,7 +304,7 @@ namespace WebClient
                 var oldSite = dto.Site();
                 var excelOutput = new ExcelOutput(oldSite, report);
 
-                var dto_static_ant = new DTO_Load_SRF_StaticAnt(siteID, isSiteSRAN);
+                var dto_static_ant = new DTO_Load_SRF_StaticAnt(siteID);
                 var site_static_ant = dto_static_ant.LoadNewSiteAntenna();
 
                 excelOutput.PopulateExcelWithStaticAnt(site_static_ant, reportStaticAnt);

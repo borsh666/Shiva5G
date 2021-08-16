@@ -17,6 +17,7 @@
         public int LTE_TRX { get; internal set; }
         public string NR_Pwr_per_TRX { get; internal set; }
         public int NR_TRX { get; internal set; }
+        public double Feeder_Att_dB { get; internal set; }
 
         public ModelRRU DeepCopy()
         {
