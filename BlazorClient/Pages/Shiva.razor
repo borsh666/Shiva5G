@@ -1,0 +1,125 @@
+﻿@page "/shiva"
+@using BLL_Atoll
+@using BLL_Atoll.Enums
+@using BlazorClient.Models
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using System.Text.RegularExpressions
+@inject IJSRuntime JS
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using static BLL_Atoll.SupportFunc;
+
+<PageTitle>Shiva</PageTitle>
+
+<EditForm Model="@reportInfo" class="row p-3" OnValidSubmit=@HandleValidSubmit>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="col-md-12 mb-3">
+        <label for="Name">Enter one or many SiteIds! For example: SF1001 BS3001 BS3711</label>
+        <InputText id="Name" @bind-Value="reportInfo.SiteId" class="form-control" />
+    </div>
+    <label>
+        Report type:
+        <InputSelect @bind-Value="reportInfo.ReportType">
+            <option value=@ReportType.IRFC>IRFC</option>
+            <option value=@ReportType.SRF>SRF</option>
+            <option value=@ReportType.SA>SA</option>
+            <option value=@ReportType.PSK>PSK</option>
+        </InputSelect>
+    </label>
+    <div class="col-12 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+<img src="progress_bar.gif" height="100" class="@ccsStyle" />
+<style>
+    .displayBlock {
+        display: block;
+    }
+
+    .displayNone {
+        display: none;
+    }
+</style>
+
+<label>@status</label>
+
+@code {
+    private ReportInfo reportInfo = new ReportInfo();
+    string user = String.Empty;
+    string status = String.Empty;
+    string ccsStyle = "displayNone";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        user = authState.User.Identity.Name.Replace("AD\\", "");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        status = String.Empty;
+
+        var reportType = reportInfo.ReportType.ToString();
+
+        var sites = reportInfo.SiteId.Split(',');
+
+        string pattern = @"([A-Z]{2}[\d]{4})+";
+
+        var matches = Regex.Matches(reportInfo.SiteId.Trim(), pattern);
+
+        if (matches.Any())
+        {
+            ccsStyle = "displayBlock";
+
+            foreach (Match siteID in matches)
+            {
+                await Task.Delay(1);
+                await StartEngine(reportType, siteID.Value);
+            }
+
+            ccsStyle = "displayNone";
+
+        }
+        else
+        {
+            status = "Моля въведете правилно SiteID. Пример: SF1001";
+        }
+    }
+
+    private async Task StartEngine(string reportType, string site)
+    {
+        var fileExtension = reportType == "SRF" ? "xlsm" : "xlsx";
+
+        var fileName = $"{reportType}_{site}.{fileExtension}";
+
+        var assemblyQualifiedName = $"BLL_Atoll.Report{reportType}, BLL_Atoll, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null";
+
+        var typeReport = Type.GetType(assemblyQualifiedName);
+        Object[] param = { fileName };
+
+        var reportObj = (Report)Activator.CreateInstance(typeReport, param);
+
+        reportObj.RF_Engineer = user;
+        var userPrincipal = TrackerExtensions.ActiveDirectoryAdds.GetAdUser(user);
+        reportObj.Email = userPrincipal.EmailAddress;
+        reportObj.Mobile = TrackerExtensions.ActiveDirectoryAdds.GetProperty(userPrincipal, "mobile");
+
+        var engine = new Engine(site, reportObj);
+
+        var fileStream = engine.Start(out string critError);
+
+        if (fileStream.Length == 0)
+            status = $@"The excel file is empty!.Possible reasons: {Environment.NewLine}
+1.Check for ports in Atoll for each technology.{Environment.NewLine}
+2.Check flags: PARAMETERS_PLAN = Planned and CANDIDATE = Accepted on Site and Transmitter Level.
+3.Mail to stefan.velinov@vivacom.bg";
+
+        if (!string.IsNullOrEmpty(critError))
+            status = critError;
+
+        await JS.InvokeVoidAsync("saveAsFile", fileName, Convert.ToBase64String(fileStream.ToArray()));
+
+    }
+}

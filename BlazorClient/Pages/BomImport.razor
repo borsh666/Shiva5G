@@ -1,0 +1,66 @@
+﻿@page "/bomImport"
+@using System
+@using System.IO
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Logging
+@inject ILogger<BomImport> Logger
+@inject IWebHostEnvironment Environment
+@using BLL_Atoll
+
+
+<h3>Upload Equipment BOM</h3>
+
+
+<p>
+    <label>
+        Import sheet name:
+        <input @bind="importSheetName" />
+    </label>
+</p>
+
+<p>
+    <label>
+        Upload to @(maxFileSize/1024)  kbytes:
+        <InputFile OnChange="@LoadFiles" />
+    </label>
+</p>
+
+@if (isLoading)
+{
+    <p>Uploading...</p>
+}
+else
+{
+    <p>Sheet has been imported succesfully in SRF form!</p>
+}
+
+@code {
+    private long maxFileSize = 500 * 1024;
+    private bool isLoading;
+    private string importSheetName = "Equipment BOM";
+
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        isLoading = true;
+
+        try
+        {
+            using MemoryStream inputFile = new MemoryStream();
+
+            await e.File.OpenReadStream(maxFileSize).CopyToAsync(inputFile);
+
+            var destSheetName = "Equipment BOM";
+            var destinationFilePath = Path.Combine(Report.TEMPLATE_DIRECTORY, ReportSRF.TEMPLATE_FILE_NAME);
+            ExcelOutput.CopySheetToAnotherExcel(importSheetName, destSheetName, inputFile, destinationFilePath);
+            
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError("File: {Filename} Error: {Error}",
+                e.File.Name, ex.Message);
+        }
+
+        isLoading = false;
+    }
+
+}

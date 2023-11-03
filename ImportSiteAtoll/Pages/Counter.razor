@@ -1,0 +1,28 @@
+﻿@page "/counter"
+@inject Service Service
+
+<h3>Upload Files</h3>
+
+<p>
+    <label>
+         <InputFile OnChange="@LoadFiles" multiple />
+    </label>
+    @if(x is not null)
+    {
+    <label>@x.Length</label>
+        
+    }
+</p>
+
+
+
+@code {
+
+    byte[]? x;
+
+
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        x = await Service.InputFileToBytes(e);
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TestConsoleNet6": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

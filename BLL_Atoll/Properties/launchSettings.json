@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BLL_Atoll": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

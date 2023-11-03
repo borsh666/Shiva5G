@@ -1,0 +1,57 @@
+﻿@page "/shiva"
+@using BLL_Atoll
+@using BLL_Atoll.Enums
+@using BlazorClientWinAuth.Models
+@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IJSRuntime JS
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Shiva</PageTitle>
+
+
+<EditForm Model="@reportInfo" class="row p-3" OnValidSubmit=@HandleValidSubmit>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="col-md-12 mb-3">
+        <label for="Name">Enter SiteId! For example: SF1001</label>
+        <InputText id="Name" @bind-Value="reportInfo.SiteId" class="form-control" />
+    </div>
+    <label>
+        Report type:
+        <InputSelect @bind-Value="reportInfo.ReportType">
+            <option value=@ReportType.IRFC>IRFC</option>
+            <option value=@ReportType.SRF>SRF</option>
+            <option value=@ReportType.SA>SA</option>
+            <option value=@ReportType.PSK>PSK</option>
+        </InputSelect>
+    </label>
+    <div class="col-12 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+@code {
+    private ReportInfo reportInfo = new ReportInfo();
+    //string user;
+
+    private async Task HandleValidSubmit()
+    {
+        var reportType = reportInfo.ReportType.ToString();
+
+        var fileName = $"{reportType}_{reportInfo.SiteId}.xlsx";
+
+        var assemblyQualifiedName = $"BLL_Atoll.Report{reportType}, BLL_Atoll, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null";
+
+        var typeReport = Type.GetType(assemblyQualifiedName);
+        Object[] param = { fileName };
+
+        var reportObj = (Report)Activator.CreateInstance(typeReport, param);
+
+        var engine = new Engine(reportInfo.SiteId, reportObj);
+
+        var fileStream = engine.Start();
+
+        await JS.InvokeVoidAsync("saveAsFile", fileName, Convert.ToBase64String(fileStream.ToArray()));
+    }
+    }
