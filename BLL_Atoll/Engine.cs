@@ -1,5 +1,4 @@
 ﻿using BLL_Atoll.Enums;
-using BLL_Atoll.Interfaces;
 using BLL_Atoll.Models.Site;
 using static BLL_Atoll.SupportFunc;
 
@@ -313,7 +312,6 @@ namespace BLL_Atoll
             var remarks = new List<string>();
             var remarksStr = String.Empty;
             critErrors = string.Empty;
-
 
             try
             {

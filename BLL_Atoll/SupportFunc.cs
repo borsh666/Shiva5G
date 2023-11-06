@@ -2,6 +2,7 @@
 using BLL_Atoll.Models.Site;
 using Dapper;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -11,6 +12,21 @@ namespace BLL_Atoll
 {
     public static class SupportFunc
     {
+        public static string ReadSetting(string key)
+        {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                string result = appSettings[key] ?? 
+                    throw new ConfigurationErrorsException($"Not Found such {key} key");
+               return result;
+            }
+            catch (ConfigurationErrorsException)
+            {
+                throw new ConfigurationErrorsException("Error reading app settings");
+            }
+        }
+
         public static List<string> EnumDisplayNameAttToList<T>()
         {
 

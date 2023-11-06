@@ -31,7 +31,7 @@ namespace BLL_Atoll
             this.ReportPath = reportPath;
         }
 
-        public const string TEMPLATE_DIRECTORY =  @$"{Global.WORKING_DIRECTORY}Templates\";
+        public static string TEMPLATE_DIRECTORY =  @$"{Global.WORKING_DIRECTORY}Templates\";
         
         public string ReportPath { get; init; }
         public virtual string RangeFrom { get; set; }

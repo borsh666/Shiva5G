@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="App.config" />
+    <Content Remove="AppDev.config" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="progress_bar.gif" />
   </ItemGroup>
 
@@ -17,6 +22,11 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="AppDev.config" />
   </ItemGroup>
 
   <ItemGroup>
